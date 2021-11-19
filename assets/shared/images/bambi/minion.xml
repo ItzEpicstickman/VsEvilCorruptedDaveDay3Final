@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<SubTexture name="poip0000" x="0" y="0" width="673" height="902"/>
+    <SubTexture name="poip0001" x="673" y="0" width="673" height="902"/>
+    <SubTexture name="poip0002" x="1346" y="0" width="673" height="902"/>
+    <SubTexture name="poip0003" x="0" y="902" width="673" height="902"/>
+    <SubTexture name="poip0004" x="673" y="902" width="673" height="902"/>
+    <SubTexture name="poip0005" x="0" y="902" width="673" height="902"/>
+    <SubTexture name="poip0006" x="1346" y="0" width="673" height="902"/>
+    <SubTexture name="poip0007" x="673" y="0" width="673" height="902"/>
+</TextureAtlas>

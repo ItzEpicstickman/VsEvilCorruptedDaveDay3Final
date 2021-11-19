@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas>
+    <SubTexture name="down0000" x="0" y="0" width="932" height="1033"/>
+    <SubTexture name="down0001" x="1864" y="2066" width="932" height="1033"/>
+    <SubTexture name="down0002" x="2796" y="2066" width="932" height="1033"/>
+    <SubTexture name="right0000" x="0" y="0" width="932" height="1033"/>
+    <SubTexture name="right0001" x="932" y="0" width="932" height="1033"/>
+    <SubTexture name="right0002" x="1864" y="0" width="932" height="1033"/>
+    <SubTexture name="INHALE0000" x="0" y="1033" width="932" height="1033"/>
+    <SubTexture name="INHALE0001" x="932" y="1033" width="932" height="1033"/>
+    <SubTexture name="INHALE0002" x="1864" y="1033" width="932" height="1033"/>
+    <SubTexture name="left0000" x="2796" y="1033" width="932" height="1033"/>
+    <SubTexture name="left0001" x="0" y="2066" width="932" height="1033"/>
+    <SubTexture name="left0002" x="932" y="2066" width="932" height="1033"/>
+    <SubTexture name="idle0000" x="2796" y="3099" width="932" height="1033"/>
+    <SubTexture name="idle0001" x="1864" y="3099" width="932" height="1033"/>
+    <SubTexture name="idle0002" x="932" y="3099" width="932" height="1033"/>
+    <SubTexture name="idle0003" x="0" y="3099" width="932" height="1033"/>
+    <SubTexture name="up0000" x="3728" y="0" width="932" height="1033"/>
+    <SubTexture name="up0001" x="3728" y="1033" width="932" height="1033"/>
+    <SubTexture name="up0002" x="3728" y="2066" width="932" height="1033"/>
+</TextureAtlas>

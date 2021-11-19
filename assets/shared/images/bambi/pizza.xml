@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="p0000" x="0" y="0" width="478" height="415"/>
+    <SubTexture name="p0001" x="478" y="0" width="478" height="415"/>
+    <SubTexture name="p0002" x="956" y="0" width="435" height="415"/>
+    <SubTexture name="p0003" x="1391" y="0" width="478" height="415"/>
+    <SubTexture name="p0004" x="0" y="415" width="478" height="415"/>
+    <SubTexture name="p0005" x="478" y="415" width="478" height="415"/>
+    <SubTexture name="p0006" x="956" y="415" width="478" height="415"/>
+    <SubTexture name="p0007" x="1434" y="415" width="478" height="415"/>
+    <SubTexture name="p0008" x="0" y="830" width="478" height="415"/>
+    <SubTexture name="p0009" x="478" y="830" width="478" height="415"/>
+    <SubTexture name="p0010" x="956" y="830" width="478" height="415"/>
+    <SubTexture name="p0011" x="1434" y="830" width="478" height="415"/>
+    <SubTexture name="p0012" x="0" y="1245" width="478" height="415"/>
+    <SubTexture name="p0013" x="478" y="1245" width="478" height="415"/>
+    <SubTexture name="p0014" x="956" y="1245" width="478" height="415"/>
+    <SubTexture name="p0015" x="1434" y="1245" width="478" height="415"/>
+    <SubTexture name="p0016" x="1869" y="0" width="478" height="415"/>
+    <SubTexture name="p0017" x="1912" y="415" width="478" height="415"/>
+    <SubTexture name="p0018" x="1912" y="830" width="478" height="415"/>
+    <SubTexture name="p0019" x="1912" y="1245" width="478" height="415"/>
+</TextureAtlas>
