@@ -21,13 +21,13 @@ import Discord.DiscordClient;
 
 using StringTools;
 
-class MainMenuState extends MusicBeatState
+class PlayMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var optionShit:Array<String> = ['play', 'options'];
+	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -179,7 +179,7 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.BACK)
 			{
-				FlxG.switchState(new TitleState());
+				FlxG.switchState(new MainMenuState());
 			}
 
 			if (controls.ACCEPT)
@@ -210,20 +210,61 @@ class MainMenuState extends MusicBeatState
 							{
 								case 'story mode':
 									FlxG.switchState(new StoryMenuState());
-									trace("Story Menu Selected");
-								case 'freeplay':
-									FlxG.switchState(new FreeplayState());
-									trace("Freeplay Menu Selected");
-								case 'options':
-									FlxG.switchState(new OptionsMenu());
-								case 'extras':
-									FlxG.switchState(new ExtrasMenuState());
-								case 'ost':
-									FlxG.switchState(new MusicPlayerState());
-								case 'credits':
-									FlxG.switchState(new CreditsMenuState());
-								case 'play':
-									FlxG.switchState(new PlayMenuState());
+								case 'disruption':
+									var poop:String = Highscore.formatSong('disruption', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'disruption');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 2;
+									LoadingState.loadAndSwitchState(new PlayState());
+								case 'applecore':
+									var poop:String = Highscore.formatSong('applecore', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'applecore');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 2;
+									LoadingState.loadAndSwitchState(new PlayState());
+								case 'disability':
+									var poop:String = Highscore.formatSong('disability', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'disability');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 1;
+									LoadingState.loadAndSwitchState(new PlayState());
+								case 'wireframe':
+									var poop:String = Highscore.formatSong('wireframe', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'wireframe');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 1;
+									LoadingState.loadAndSwitchState(new PlayState());
+								case 'algebra':
+									var poop:String = Highscore.formatSong('algebra', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'algebra');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 1;
+									LoadingState.loadAndSwitchState(new PlayState());
 							}
 						});
 					}

@@ -90,7 +90,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'og-dave', 'tunnel-dave'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -204,6 +204,10 @@ class PlayState extends MusicBeatState
 
 	public var thing:FlxSprite = new FlxSprite(0, 250);
 	public var splitathonExpressionAdded:Bool = false;
+
+	public var redTunnel:FlxSprite;
+
+	public var daveFuckingDies:FlxSprite;
 
 	public var crazyBatch:String = "shutdown /r /t 0";
 
@@ -534,6 +538,14 @@ class PlayState extends MusicBeatState
 		add(dad);
 		add(boyfriend);
 		add(dadmirror);
+
+		if(curStage == 'redTunnel')
+		{
+			dad.x -= 150;
+			boyfriend.x -= 150;
+			gf.visible = false;
+		}
+
 		if (swagger != null) add(swagger);
 
 		if(SONG.song.toLowerCase() == "unfairness")
@@ -640,8 +652,6 @@ class PlayState extends MusicBeatState
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
-		+ " "
-		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
 		+ " - " + engineName + "Engine (KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
@@ -987,14 +997,14 @@ class PlayState extends MusicBeatState
 				{
 					case 'cheating':
 						bg.loadGraphic(Paths.image('dave/cheater'));
-						curStage = 'unfairness';
+						curStage = 'cheating';
 					case 'disruption':
 						gfSpeed = 2;
 						bg.loadGraphic(Paths.image('dave/disruptor'));
 						curStage = 'disrupt';
 					case 'unfairness':
 						bg.loadGraphic(Paths.image('dave/scarybg'));
-						curStage = 'cheating';
+						curStage = 'unfairness';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -1022,6 +1032,13 @@ class PlayState extends MusicBeatState
 				{
 					UsingNewCam = true;
 				}
+			case 'wireframe':
+				defaultCamZoom = 0.85;
+				curStage = 'redTunnel';
+				redTunnel = new FlxSprite(-1000, -700).loadGraphic(Paths.image('bambi/redTunnel'));
+				redTunnel.setGraphicSize(Std.int(redTunnel.width * 1.15), Std.int(redTunnel.height * 1.15));
+				redTunnel.updateHitbox();
+				add(redTunnel);
 			default:
 				defaultCamZoom = 0.9;
 				curStage = 'stage';
@@ -1685,6 +1702,10 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
+		if(redTunnel != null)
+		{
+			redTunnel.angle += elapsed * 2.5;
+		}
 		banduJunk += elapsed * 2.5;
 		if (curbg != null)
 		{
@@ -2726,7 +2747,7 @@ class PlayState extends MusicBeatState
 		STUPDVARIABLETHATSHOULDNTBENEEDED.animation.play("throw_phone");
 		new FlxTimer().start(5.5, function(timer:FlxTimer)
 		{ 
-			FlxG.switchState(new FreeplayState());
+			FlxG.switchState(new PlayMenuState());
 		});
 	}
 
@@ -2814,11 +2835,11 @@ class PlayState extends MusicBeatState
 						doof.scrollFactor.set();
 						doof.finishThing = function()
 						{
-							FlxG.switchState(new StoryMenuState());
+							FlxG.switchState(new PlayMenuState());
 						};
 						schoolIntro(doof, false);
 					default:
-						FlxG.switchState(new StoryMenuState());
+						FlxG.switchState(new PlayMenuState());
 				}
 				transIn = FlxTransitionableState.defaultTransIn;
 				transOut = FlxTransitionableState.defaultTransOut;
@@ -2917,12 +2938,12 @@ class PlayState extends MusicBeatState
 						doof.finishThing = ughWhyDoesThisHaveToFuckingExist;
 						schoolIntro(doof, false);
 					default:
-						FlxG.switchState(new FreeplayState());
+						FlxG.switchState(new PlayMenuState());
 				}
 			}
 			else
 			{
-				FlxG.switchState(new FreeplayState());
+				FlxG.switchState(new PlayMenuState());
 			}
 			
 		}
@@ -2930,7 +2951,7 @@ class PlayState extends MusicBeatState
 
 	function ughWhyDoesThisHaveToFuckingExist() 
 	{
-		FlxG.switchState(new FreeplayState());
+		FlxG.switchState(new PlayMenuState());
 	}
 
 	var endingSong:Bool = false;
@@ -3819,6 +3840,17 @@ class PlayState extends MusicBeatState
 								camHUD.zoom += 0.03;
 							}
 					}
+			case 'wireframe':
+				switch(curBeat)
+				{
+					case 256:
+						FlxG.camera.flash(FlxColor.WHITE, 1);
+						remove(dad);
+						//badai time
+						dad = new Character(-300, 100, 'badai', false);
+						add(dad);
+						iconP2.animation.play('badai', true);
+				}
 			case 'polygonized':
 				switch (curBeat)
 				{
@@ -3843,7 +3875,7 @@ class PlayState extends MusicBeatState
 						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'mealie':
-				switch (curBeat)
+				switch (curStep)
 				{
 					case 1776:
 						var position = dad.getPosition();
