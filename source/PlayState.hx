@@ -1926,9 +1926,8 @@ class PlayState extends MusicBeatState
 					dadmirror.visible = dadFront;
 					dad.visible = !dadFront;
 				case 'badai':
-					dad.angle += elapsedtime * 1.5;
+					dad.angle += elapsed * 5;
 					dad.y += (Math.sin(elapsedtime) * 0.6);
-					dad.x += (Math.sin(elapsedtime) * 0.3);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}

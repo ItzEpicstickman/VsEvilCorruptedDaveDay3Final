@@ -149,6 +149,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN");
 				addOffset("stand");
 
+				furiosityScale = 0.55;
+
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
@@ -169,10 +171,10 @@ class Character extends FlxSprite
 		
 				addOffset('idle');
 				addOffset("singUP");
-				addOffset("singRIGHT");
+				addOffset("singRIGHT", -45, 3);
 				addOffset("singLEFT");
-				addOffset("singDOWN");
-				addOffset("stand");
+				addOffset("singDOWN", -48, -46);
+				addOffset("stand", 20);
 				addOffset("shocked");
 
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
