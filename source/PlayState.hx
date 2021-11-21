@@ -90,7 +90,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'og-dave', 'tunnel-dave'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -207,7 +207,7 @@ class PlayState extends MusicBeatState
 
 	public var redTunnel:FlxSprite;
 
-	public var daveFuckingDies:FlxSprite;
+	public var daveFuckingDies:PissBoy;
 
 	public var crazyBatch:String = "shutdown /r /t 0";
 
@@ -1040,7 +1040,12 @@ class PlayState extends MusicBeatState
 				redTunnel = new FlxSprite(-1000, -700).loadGraphic(Paths.image('bambi/redTunnel'));
 				redTunnel.setGraphicSize(Std.int(redTunnel.width * 1.15), Std.int(redTunnel.height * 1.15));
 				redTunnel.updateHitbox();
+				sprites.add(redTunnel);
 				add(redTunnel);
+				daveFuckingDies = new PissBoy(0, 0);
+				daveFuckingDies.screenCenter();
+				add(daveFuckingDies);
+				daveFuckingDies.visible = false;
 			default:
 				defaultCamZoom = 0.9;
 				curStage = 'stage';
@@ -1871,7 +1876,8 @@ class PlayState extends MusicBeatState
 		//welcome to 3d sinning avenue
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat && orbit)
 		{
-			switch(dad.curCharacter) {
+			switch(dad.curCharacter) 
+			{
 				case 'bandu':
 					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
@@ -1896,6 +1902,10 @@ class PlayState extends MusicBeatState
 
 					dadmirror.visible = dadFront;
 					dad.visible = !dadFront;
+				case 'badai':
+					dad.angle += elapsedtime * 1.5;
+					dad.y += (Math.sin(elapsedtime) * 0.6);
+					dad.x += (Math.sin(elapsedtime) * 0.3);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}

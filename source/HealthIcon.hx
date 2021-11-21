@@ -41,6 +41,8 @@ class HealthIcon extends FlxSprite
 
 		animation.add('bf', [0, 1], 0, false, isPlayer);
 
+		animation.add('tunnel-bf', [0, 1], 0, false, isPlayer);
+
 		animation.add('bf-old', [2, 3], 0, false, isPlayer);
 
 		animation.add('gf', [57], 0, false, isPlayer);
@@ -48,10 +50,14 @@ class HealthIcon extends FlxSprite
 		animation.add('bambi-unfair', [4, 5], 0, false, isPlayer);
 
 		animation.add('bambi-piss-3d', [6, 7], 0, false, isPlayer);
+		
+		animation.add('split-dave-3d', [16, 17], 0, false, isPlayer);
+
+		animation.add('garrett', [20, 21], 0, false, isPlayer);
+
+		animation.add('badai', [18, 19], 0, false, isPlayer);
 
 		animation.add('bandu', [8, 9], 0, false, isPlayer);
-
-		animation.add('badai', [8, 9], 0, false, isPlayer);
 
 		animation.add('tunnel-dave', [12, 13], 0, false, isPlayer);
 
