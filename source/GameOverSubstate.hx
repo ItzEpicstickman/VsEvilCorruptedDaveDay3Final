@@ -75,10 +75,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-			PlayState.characteroverride = 'none';
-			PlayState.formoverride = 'none';
-			PlayState.hasUsedCpu = false;
-			PlayState.cpuControlled = false;
+				
 			FlxG.switchState(new MainMenuState());
 		}
 
