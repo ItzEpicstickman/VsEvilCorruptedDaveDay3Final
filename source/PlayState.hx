@@ -3774,6 +3774,8 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
+		cpuControlled = false;
+
 		if (!UsingNewCam)
 		{
 			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
