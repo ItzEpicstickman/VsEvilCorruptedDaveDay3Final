@@ -673,6 +673,8 @@ class PlayState extends MusicBeatState
 			case 'insanity':
 				preload('dave/redsky');
 				preload('dave/redsky_insanity');
+			case 'wireframe':
+				preload('bambi/badai');
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
