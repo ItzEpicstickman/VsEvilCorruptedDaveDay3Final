@@ -3720,6 +3720,10 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+		if(curBeat % 2 == 0 && daveFuckingDies != null)
+		{
+			daveFuckingDies.dance();
+		}
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, FlxSort.DESCENDING);
