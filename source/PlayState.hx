@@ -1723,6 +1723,29 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		//dvd screensaver lookin ass
+		if(daveFuckingDies != null && redTunnel != null)
+		{
+			if(daveFuckingDies.x >= (redTunnel.x + 100) || daveFuckingDies.y >= (redTunnel.y + 100))
+			{
+				daveFuckingDies.bounceAnimState = 1;
+				daveFuckingDies.bounceMultiplier = FlxG.random.float(-0.75, -1.15);
+				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
+				daveFuckingDies.dance();
+			}
+			else if(daveFuckingDies.x <= (redTunnel.width - 100) || daveFuckingDies.y <= (redTunnel.height - 100))
+			{
+				daveFuckingDies.bounceAnimState = 2;
+				daveFuckingDies.bounceMultiplier = FlxG.random.float(0.75, 1.15);
+				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
+				daveFuckingDies.dance();
+			}
+			else
+			{
+				daveFuckingDies.bounceAnimState = 0;
+			}
+		}
+
 		if (SONG.song.toLowerCase() == 'applecore') {
 
 			if (poiping) {
@@ -3863,6 +3886,7 @@ class PlayState extends MusicBeatState
 						dad = new Character(-300, 100, 'badai', false);
 						add(dad);
 						iconP2.animation.play('badai', true);
+						daveFuckingDies.visible = true;
 				}
 			case 'polygonized':
 				switch (curBeat)
