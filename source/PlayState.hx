@@ -3853,6 +3853,7 @@ class PlayState extends MusicBeatState
 							}
 					}
 			case 'wireframe':
+				FlxG.camera.shake(0.005, Conductor.crochet / 1000);
 				switch(curBeat)
 				{
 					case 256:
