@@ -88,6 +88,12 @@ class PlayState extends MusicBeatState
 
 	public var elapsedtime:Float = 0;
 
+	var timeTxt:FlxText;
+	var scoreTxtTween:FlxTween;
+
+	public static var STRUM_X = 42;
+	public static var STRUM_X_MIDDLESCROLL = -278;
+
 	var focusOnDadGlobal:Bool = true;
 
 	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf'];
@@ -160,6 +166,10 @@ class PlayState extends MusicBeatState
 
 	public var TwentySixKey:Bool = false;
 
+	public static var cpuControlled:Bool = false;
+
+	public static var hasUsedCpu:Bool = false;
+
 	public static var amogus:Int = 0;
 
 	private var iconP1:HealthIcon;
@@ -206,6 +216,9 @@ class PlayState extends MusicBeatState
 	public var splitathonExpressionAdded:Bool = false;
 
 	public var redTunnel:FlxSprite;
+
+	private var timeBarBG:AttachedSprite;
+	public var timeBar:FlxBar;
 
 	public var daveFuckingDies:PissBoy;
 
@@ -349,6 +362,19 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
 			case 'splitathon':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
+		}
+
+		switch (curSong.toLowerCase())
+		{
+			case 'splitathon':
+				preload('splitathon/Bambi_WaitWhatNow');
+				preload('splitathon/Bambi_ChillingWithTheCorn');
+			case 'insanity':
+				preload('dave/redsky');
+				preload('dave/redsky_insanity');
+			case 'wireframe':
+				preload('bambi/badai');
+				preload('dave/pissBoy');
 		}
 
 		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
@@ -603,6 +629,30 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 20, 400, "", 32);
+		timeTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.scrollFactor.set();
+		timeTxt.borderSize = 2;
+		if(FlxG.save.data.downscroll) timeTxt.y = FlxG.height - 45;
+
+		timeBarBG = new AttachedSprite('healthBar');
+		timeBarBG.x = timeTxt.x;
+		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+		timeBarBG.scrollFactor.set();
+		timeBarBG.color = FlxColor.BLACK;
+		timeBarBG.xAdd = -4;
+		timeBarBG.yAdd = -4;
+		add(timeBarBG);
+
+		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+			'songPercent', 0, 1);
+		timeBar.scrollFactor.set();
+		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+		add(timeBar);
+		add(timeTxt);
+		timeBarBG.sprTracker = timeBar;
+
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		if (FlxG.save.data.downscroll)
 			healthBarBG.y = 50;
@@ -665,18 +715,6 @@ class PlayState extends MusicBeatState
 		add(creditsWatermark);
 		creditsWatermark.cameras = [camHUD];
 
-		switch (curSong.toLowerCase())
-		{
-			case 'splitathon':
-				preload('splitathon/Bambi_WaitWhatNow');
-				preload('splitathon/Bambi_ChillingWithTheCorn');
-			case 'insanity':
-				preload('dave/redsky');
-				preload('dave/redsky_insanity');
-			case 'wireframe':
-				preload('bambi/badai');
-		}
-
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
@@ -693,6 +731,17 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.scrollFactor.set();
+		botplayTxt.borderSize = 1.25;
+		botplayTxt.visible = cpuControlled;
+		add(botplayTxt);
+		if(FlxG.save.data.downscroll) 
+		{
+			botplayTxt.y = timeBarBG.y - 78;
+		}
+
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
@@ -700,6 +749,10 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		botplayTxt.cameras = [camHUD];
+		timeBarBG.cameras = [camHUD];
+		timeBar.cameras = [camHUD];
+		timeTxt.cameras = [camHUD];
 		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
@@ -1706,6 +1759,9 @@ class PlayState extends MusicBeatState
 	private var lanceyLovesWow2:Array<Bool> = [false, false];
 	private var whatDidRubyJustSay:Int = 0;
 
+	var botplaySine:Float = 0;
+	var botplayTxt:FlxText;
+
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
@@ -1722,6 +1778,13 @@ class PlayState extends MusicBeatState
 				shad.uTime.value[0] += elapsed;
 			}
 		}
+
+		if(cpuControlled)
+		{
+			botplaySine += 180 * elapsed;
+			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+		}
+		botplayTxt.visible = cpuControlled;
 
 		//dvd screensaver lookin ass
 		if(daveFuckingDies != null && redTunnel != null)
@@ -1926,7 +1989,7 @@ class PlayState extends MusicBeatState
 					dadmirror.visible = dadFront;
 					dad.visible = !dadFront;
 				case 'badai':
-					dad.angle += elapsed * 5;
+					dad.angle += elapsed * 15;
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
@@ -2649,7 +2712,7 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						if(daNote.mustPress && daNote.finishedGenerating)
+						if(daNote.mustPress && daNote.finishedGenerating && !cpuControlled)
 							noteMiss(daNote.noteData);
 							health -= 0.075;
 							trace("miss note");
@@ -2791,7 +2854,7 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
-		if (SONG.validScore)
+		if (SONG.validScore && !hasUsedCpu)
 		{
 			trace("score is valid");
 			#if !switch
@@ -2807,7 +2870,8 @@ class PlayState extends MusicBeatState
 
 		if (isStoryMode)
 		{
-			campaignScore += songScore;
+			if(!hasUsedCpu)
+				campaignScore += songScore;
 
 			var completedSongs:Array<String> = [];
 			var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Polygonized', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon'];
@@ -2835,7 +2899,7 @@ class PlayState extends MusicBeatState
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
-			if (storyPlaylist.length <= 0)
+			if (storyPlaylist.length <= 0 && !hasUsedCpu)
 			{
 				switch (curSong.toLowerCase())
 				{
@@ -2848,15 +2912,21 @@ class PlayState extends MusicBeatState
 							{
 								FlxG.save.data.unlockedcharacters[5] = true;
 							}
+							cpuControlled = false;
+							hasUsedCpu = false;
 							FlxG.switchState(new EndingState('goodEnding', 'goodEnding'));
 						}
 						else if (health < 0.1)
 						{
+							cpuControlled = false;
+							hasUsedCpu = false;
 							FlxG.save.data.unlockedcharacters[4] = true;
 							FlxG.switchState(new EndingState('vomit_ending', 'badEnding'));
 						}
 						else
 						{
+							cpuControlled = false;
+							hasUsedCpu = false;
 							FlxG.switchState(new EndingState('badEnding', 'badEnding'));
 						}
 					case 'maze':
@@ -2869,10 +2939,14 @@ class PlayState extends MusicBeatState
 						doof.scrollFactor.set();
 						doof.finishThing = function()
 						{
+							cpuControlled = false;
+							hasUsedCpu = false;
 							FlxG.switchState(new PlayMenuState());
 						};
 						schoolIntro(doof, false);
 					default:
+						cpuControlled = false;
+						hasUsedCpu = false;
 						FlxG.switchState(new PlayMenuState());
 				}
 				transIn = FlxTransitionableState.defaultTransIn;
@@ -2881,7 +2955,7 @@ class PlayState extends MusicBeatState
 				// if ()
 				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
-				if (SONG.validScore)
+				if (SONG.validScore && !hasUsedCpu)
 				{
 					NGio.unlockMedal(60961);
 					Highscore.saveWeekScore(storyWeek, campaignScore,
@@ -2985,6 +3059,8 @@ class PlayState extends MusicBeatState
 
 	function ughWhyDoesThisHaveToFuckingExist() 
 	{
+		cpuControlled = false;
+		hasUsedCpu = false;
 		FlxG.switchState(new PlayMenuState());
 	}
 
@@ -3097,7 +3173,18 @@ class PlayState extends MusicBeatState
 					daRating = 'good'
 				else if (combo > 4)
 					daRating = 'bad';
-			 */
+			*/
+
+			if(scoreTxtTween != null) {
+				scoreTxtTween.cancel();
+			}
+			scoreTxt.scale.x = 1.1;
+			scoreTxt.scale.y = 1.1;
+			scoreTxtTween = FlxTween.tween(scoreTxt.scale, {x: 1, y: 1}, 0.2, {
+				onComplete: function(twn:FlxTween) {
+					scoreTxtTween = null;
+				}
+			});
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';
@@ -3248,7 +3335,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
+		if (((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic && !cpuControlled) || cpuControlled)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -3281,7 +3368,7 @@ class PlayState extends MusicBeatState
 			{
 				var daNote = possibleNotes[0];
 
-				if (perfectMode)
+				if (perfectMode || cpuControlled)
 					noteCheck(true, daNote);
 
 				// Jump notes
@@ -3290,7 +3377,7 @@ class PlayState extends MusicBeatState
 
 				for (note in possibleNotes) 
 				{
-					if (controlArray[note.noteData % 4])
+					if (controlArray[note.noteData % 4] || cpuControlled)
 					{
 						if (lasthitnotetime > Conductor.songPosition - Conductor.safeZoneOffset
 							&& lasthitnotetime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.2)) //reduce the past allowed barrier just so notes close together that aren't jacks dont cause missed inputs
@@ -3313,7 +3400,7 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-			else if (!theFunne)
+			else if (!theFunne && !cpuControlled)
 			{
 				badNoteCheck(null);
 			}
@@ -3329,16 +3416,16 @@ class PlayState extends MusicBeatState
 					{
 						// NOTES YOU ARE HOLDING
 						case 2:
-							if (up || upHold)
+							if (up || upHold || cpuControlled)
 								goodNoteHit(daNote);
 						case 3:
-							if (right || rightHold)
+							if (right || rightHold || cpuControlled)
 								goodNoteHit(daNote);
 						case 1:
-							if (down || downHold)
+							if (down || downHold || cpuControlled)
 								goodNoteHit(daNote);
 						case 0:
-							if (left || leftHold)
+							if (left || leftHold || cpuControlled)
 								goodNoteHit(daNote);
 					}
 				}
@@ -3464,7 +3551,7 @@ class PlayState extends MusicBeatState
 		// REDO THIS SYSTEM!
 		if (note != null)
 		{
-			if(note.mustPress && note.finishedGenerating)
+			if(note.mustPress && note.finishedGenerating && !cpuControlled)
 			{
 				noteMiss(note.noteData);
 			}
@@ -3475,13 +3562,13 @@ class PlayState extends MusicBeatState
 		var downP = controls.DOWN_P;
 		var leftP = controls.LEFT_P;
 
-		if (leftP)
+		if (leftP && !cpuControlled)
 			noteMiss(0);
-		if (upP)
+		if (upP && !cpuControlled)
 			noteMiss(2);
-		if (rightP)
+		if (rightP && !cpuControlled)
 			noteMiss(3);
-		if (downP)
+		if (downP && !cpuControlled)
 			noteMiss(1);
 		updateAccuracy();
 	}
@@ -3498,11 +3585,11 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void // sorry lol
 	{
-		if (keyP)
+		if (keyP || cpuControlled)
 		{
 			goodNoteHit(note);
 		}
-		else if (!theFunne)
+		else if (!theFunne && !cpuControlled)
 		{
 			badNoteCheck(note);
 		}

@@ -154,6 +154,9 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				globaloffset[0] = -500;
+				globaloffset[1] = -350;
 		
 				playAnim('idle');
 
@@ -412,7 +415,8 @@ class Character extends FlxSprite
 	{
 		if (animation.getByName(AnimName) == null)
 		{
-			trace(AnimName);
+			//WHY THE FUCK WAS THIS TRACE HERE
+			//trace(AnimName);
 			return; //why wasn't this a thing in the first place
 		}
 		if(AnimName.toLowerCase().startsWith('idle') && !canDance)

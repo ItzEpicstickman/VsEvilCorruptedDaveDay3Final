@@ -75,11 +75,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-
-			if (PlayState.isStoryMode)
-				FlxG.switchState(new StoryMenuState());
-			else
-				FlxG.switchState(new FreeplayState());
+			PlayState.characteroverride = 'none';
+			PlayState.formoverride = 'none';
+			PlayState.hasUsedCpu = false;
+			PlayState.cpuControlled = false;
+			FlxG.switchState(new MainMenuState());
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
