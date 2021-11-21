@@ -1706,7 +1706,7 @@ class PlayState extends MusicBeatState
 		elapsedtime += elapsed;
 		if(redTunnel != null)
 		{
-			redTunnel.angle += elapsed * 2.5;
+			redTunnel.angle += elapsed * 3.5;
 		}
 		banduJunk += elapsed * 2.5;
 		if (curbg != null)
