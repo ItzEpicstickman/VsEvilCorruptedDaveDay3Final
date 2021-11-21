@@ -27,7 +27,9 @@ class MainMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var optionShit:Array<String> = ['play', 'options'];
+	var realMenuItems:Int = 2;
+
+	var optionShit:Array<String> = ['play', 'options', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'hi'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -115,9 +117,16 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
-			menuItem.frames = tex;
-			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
+			if (optionShit[i] == 'hi') {
+				menuItem.frames = Paths.getSparrowAtlas('hi');
+				menuItem.animation.addByPrefix('idle', 'HI', 24);
+			}
+			else {
+				menuItem.frames = tex;
+				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
+				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
+			}
+			if (optionShit[i] == '') menuItem.visible = false;
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			menuItem.screenCenter(X);
@@ -224,6 +233,17 @@ class MainMenuState extends MusicBeatState
 									FlxG.switchState(new CreditsMenuState());
 								case 'play':
 									FlxG.switchState(new PlayMenuState());
+								case 'hi':
+									var poop:String = Highscore.formatSong('dave-x-bambi-shipping-cute', 1);
+
+									trace(poop);
+						
+									PlayState.SONG = Song.loadFromJson(poop, 'dave-x-bambi-shipping-cute');
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+						
+									PlayState.storyWeek = 1;
+									LoadingState.loadAndSwitchState(new PlayState());
 							}
 						});
 					}
@@ -255,7 +275,7 @@ class MainMenuState extends MusicBeatState
 			if (curSelected >= menuItems.length)
 				curSelected = 0;
 			if (curSelected < 0)
-				curSelected = menuItems.length - 1;	
+				curSelected = realMenuItems - 1;	
 		}
 
 		menuItems.forEach(function(spr:FlxSprite)

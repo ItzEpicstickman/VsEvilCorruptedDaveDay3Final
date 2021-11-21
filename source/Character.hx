@@ -269,6 +269,39 @@ class Character extends FlxSprite
 				antialiasing = false;
 		
 				playAnim('idle');
+			case 'bambi-good':
+				// PLACEHOLDER! !  ! !
+				frames = Paths.getSparrowAtlas('bambi/PLACEHOLDER_BAMBI');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 54, 3);
+				addOffset("singRIGHT", -50, 0);
+				addOffset("singLEFT", 20, -7);
+				addOffset("singDOWN", -5, -43);
+
+				playAnim('idle');
+			case 'dave-good':
+				// allso uh placeholder
+				tex = Paths.getSparrowAtlas('dave/PLACEHOLDER_DAVE');
+				frames = tex;
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+	
+				addOffset('idle');
+				addOffset("singUP", -18, 12);
+				addOffset("singRIGHT", -5, -2);
+				addOffset("singLEFT", -29, 2);
+				addOffset("singDOWN", -5, 2);
+
+				playAnim('idle');
 			case 'unfair-junker':
 				frames = Paths.getSparrowAtlas('bambi/UNFAIR_GUY_FAICNG_FORWARD');
 				animation.addByPrefix('idle', 'idle', 24, false);

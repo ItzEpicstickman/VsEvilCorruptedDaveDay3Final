@@ -210,56 +210,12 @@ class PlayMenuState extends MusicBeatState
 							{
 								case 'story mode':
 									FlxG.switchState(new StoryMenuState());
-								case 'disruption':
-									var poop:String = Highscore.formatSong('disruption', 1);
+								default:
+									var poop:String = Highscore.formatSong(daChoice, 1);
 
 									trace(poop);
 						
-									PlayState.SONG = Song.loadFromJson(poop, 'disruption');
-									PlayState.isStoryMode = false;
-									PlayState.storyDifficulty = 1;
-						
-									PlayState.storyWeek = 2;
-									LoadingState.loadAndSwitchState(new PlayState());
-								case 'applecore':
-									var poop:String = Highscore.formatSong('applecore', 1);
-
-									trace(poop);
-						
-									PlayState.SONG = Song.loadFromJson(poop, 'applecore');
-									PlayState.isStoryMode = false;
-									PlayState.storyDifficulty = 1;
-						
-									PlayState.storyWeek = 2;
-									LoadingState.loadAndSwitchState(new PlayState());
-								case 'disability':
-									var poop:String = Highscore.formatSong('disability', 1);
-
-									trace(poop);
-						
-									PlayState.SONG = Song.loadFromJson(poop, 'disability');
-									PlayState.isStoryMode = false;
-									PlayState.storyDifficulty = 1;
-						
-									PlayState.storyWeek = 1;
-									LoadingState.loadAndSwitchState(new PlayState());
-								case 'wireframe':
-									var poop:String = Highscore.formatSong('wireframe', 1);
-
-									trace(poop);
-						
-									PlayState.SONG = Song.loadFromJson(poop, 'wireframe');
-									PlayState.isStoryMode = false;
-									PlayState.storyDifficulty = 1;
-						
-									PlayState.storyWeek = 1;
-									LoadingState.loadAndSwitchState(new PlayState());
-								case 'algebra':
-									var poop:String = Highscore.formatSong('algebra', 1);
-
-									trace(poop);
-						
-									PlayState.SONG = Song.loadFromJson(poop, 'algebra');
+									PlayState.SONG = Song.loadFromJson(poop, daChoice);
 									PlayState.isStoryMode = false;
 									PlayState.storyDifficulty = 1;
 						

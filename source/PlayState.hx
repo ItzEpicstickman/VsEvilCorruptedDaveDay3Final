@@ -469,7 +469,7 @@ class PlayState extends MusicBeatState
 					dad.y += 100;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
 				}
-			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
+			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-good':
 				{
 					dad.y += 400;
 				}
@@ -508,7 +508,7 @@ class PlayState extends MusicBeatState
 			case "tristan" | 'tristan-beta' | 'tristan-golden':
 				boyfriend.y = 100 + 325;
 				boyfriendOldIcon = 'tristan-beta';
-			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
+			case 'dave' | 'dave-annoyed' | 'dave-splitathon' | 'dave-good':
 				boyfriend.y = 100 + 160;
 				boyfriendOldIcon = 'dave-old';
 			case 'dave-old':
@@ -652,6 +652,8 @@ class PlayState extends MusicBeatState
 		add(timeBar);
 		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
+
+		timeBar.visible = timeBarBG.visible = false;
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		if (FlxG.save.data.downscroll)
@@ -1789,14 +1791,15 @@ class PlayState extends MusicBeatState
 		//dvd screensaver lookin ass
 		if(daveFuckingDies != null && redTunnel != null)
 		{
-			if(daveFuckingDies.x >= (redTunnel.x + 100) || daveFuckingDies.y >= (redTunnel.y + 100))
+			FlxG.watch.addQuick("DAVE JUNK!!?!?!", [daveFuckingDies.x, daveFuckingDies.y]);
+			if(daveFuckingDies.x >= (redTunnel.width - 1000) || daveFuckingDies.y >= (redTunnel.height - 1000))
 			{
 				daveFuckingDies.bounceAnimState = 1;
 				daveFuckingDies.bounceMultiplier = FlxG.random.float(-0.75, -1.15);
 				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
 				daveFuckingDies.dance();
 			}
-			else if(daveFuckingDies.x <= (redTunnel.width - 100) || daveFuckingDies.y <= (redTunnel.height - 100))
+			else if(daveFuckingDies.x <= (redTunnel.x - 100) || daveFuckingDies.y <= (redTunnel.y - 100))
 			{
 				daveFuckingDies.bounceAnimState = 2;
 				daveFuckingDies.bounceMultiplier = FlxG.random.float(0.75, 1.15);
@@ -3335,7 +3338,7 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if (((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic && !cpuControlled) || cpuControlled)
+		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
 			boyfriend.holdTimer = 0;
 
@@ -3368,7 +3371,7 @@ class PlayState extends MusicBeatState
 			{
 				var daNote = possibleNotes[0];
 
-				if (perfectMode || cpuControlled)
+				if (perfectMode)
 					noteCheck(true, daNote);
 
 				// Jump notes
@@ -3377,7 +3380,7 @@ class PlayState extends MusicBeatState
 
 				for (note in possibleNotes) 
 				{
-					if (controlArray[note.noteData % 4] || cpuControlled)
+					if (controlArray[note.noteData % 4])
 					{
 						if (lasthitnotetime > Conductor.songPosition - Conductor.safeZoneOffset
 							&& lasthitnotetime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.2)) //reduce the past allowed barrier just so notes close together that aren't jacks dont cause missed inputs
@@ -3400,7 +3403,7 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-			else if (!theFunne && !cpuControlled)
+			else if (!theFunne)
 			{
 				badNoteCheck(null);
 			}
@@ -3416,16 +3419,16 @@ class PlayState extends MusicBeatState
 					{
 						// NOTES YOU ARE HOLDING
 						case 2:
-							if (up || upHold || cpuControlled)
+							if (up || upHold)
 								goodNoteHit(daNote);
 						case 3:
-							if (right || rightHold || cpuControlled)
+							if (right || rightHold)
 								goodNoteHit(daNote);
 						case 1:
-							if (down || downHold || cpuControlled)
+							if (down || downHold)
 								goodNoteHit(daNote);
 						case 0:
-							if (left || leftHold || cpuControlled)
+							if (left || leftHold)
 								goodNoteHit(daNote);
 					}
 				}
@@ -3585,11 +3588,11 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void // sorry lol
 	{
-		if (keyP || cpuControlled)
+		if (keyP)
 		{
 			goodNoteHit(note);
 		}
-		else if (!theFunne && !cpuControlled)
+		else if (!theFunne)
 		{
 			badNoteCheck(note);
 		}

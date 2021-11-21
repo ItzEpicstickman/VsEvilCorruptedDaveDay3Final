@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="hi.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="HI0000" x="0" y="0" width="160" height="117" frameX="-1" frameY="-1" frameWidth="164" frameHeight="119"/>
+	<SubTexture name="HI0001" x="0" y="122" width="164" height="117" frameX="0" frameY="-1" frameWidth="164" frameHeight="119"/>
+	<SubTexture name="HI0002" x="0" y="244" width="163" height="119" frameX="0" frameY="0" frameWidth="164" frameHeight="119"/>
+</TextureAtlas>
