@@ -1929,7 +1929,7 @@ class PlayState extends MusicBeatState
 					dadmirror.visible = dadFront;
 					dad.visible = !dadFront;
 				case 'badai':
-					dad.angle += elapsed * 5;
+					dad.angle += elapsed * 10;
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
@@ -3893,6 +3893,8 @@ class PlayState extends MusicBeatState
 				switch(curBeat)
 				{
 					case 256:
+						creditsWatermark.text = 'Screw you!';
+						kadeEngineWatermark.y -= 20;
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						remove(dad);
 						//badai time
