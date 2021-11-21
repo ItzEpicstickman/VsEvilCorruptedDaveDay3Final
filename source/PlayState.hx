@@ -70,7 +70,7 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
-	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness'];
+	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
 	var howManyPlayerNotes:Int = 0;
@@ -325,32 +325,16 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.song.toLowerCase())
 		{
-			case 'tutorial':
-				dialogue = ["Hey, you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
-			case 'house':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('house/houseDialogue'));
-			case 'insanity':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('insanity/insanityDialogue'));
-			case 'furiosity':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('furiosity/furiosityDialogue'));
-			case 'polygonized':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('polygonized/polyDialogue'));
-			case 'supernovae':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('supernovae/supernovaeDialogue'));
-			case 'glitch':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('glitch/glitchDialogue'));
-			case 'blocked':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('blocked/retardedDialogue'));
-			case 'corn-theft':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
-			case 'cheating':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('cheating/cheaterDialogue'));
-			case 'unfairness':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('unfairness/unfairDialogue'));
-			case 'maze':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
-			case 'splitathon':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
+			case 'disruption':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('disruption/disruptDialogue'));
+			case 'applecore':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('applecore/coreDialogue'));
+			case 'disability':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('disability/disableDialogue'));
+			case 'wireframe':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('wireframe/wireDialogue'));
+			case 'algebra':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('algebra/algebraDialogue'));
 		}
 
 		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
@@ -487,6 +471,8 @@ class PlayState extends MusicBeatState
 			case 'dave' | 'dave-annoyed' | 'dave-splitathon' | 'dave-good':
 				boyfriend.y = 100 + 160;
 				boyfriendOldIcon = 'dave-old';
+			case 'tunnel-bf':
+				boyfriend.y = 100;
 			case 'dave-old':
 				boyfriend.y = 100 + 270;
 				boyfriendOldIcon = 'dave';
@@ -634,16 +620,12 @@ class PlayState extends MusicBeatState
 			default:
 				credits = '';
 		}
-		var randomThingy:Int = FlxG.random.int(0, 2);
+		var randomThingy:Int = FlxG.random.int(0, 0);
 		var engineName:String = 'stupid';
 		switch(randomThingy)
 	    {
 			case 0:
-				engineName = 'Dave ';
-			case 1:
-				engineName = 'Bambi ';
-			case 2:
-				engineName = 'Tristan ';
+				engineName = 'Golden Apple ';
 		}
 		var creditsText:Bool = credits != '';
 		var textYPos:Float = healthBarBG.y + 50;
@@ -687,7 +669,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.5;
 		add(scoreTxt);
 
-		iconP1 = new HealthIcon((formoverride == "none" || formoverride == "bf") ? SONG.player1 : formoverride, true);
+		var iconP1IsPlayer:Bool = true;
+		if(SONG.song.toLowerCase() == 'wireframe')
+		{
+			iconP1IsPlayer = false;
+		}
+		iconP1 = new HealthIcon((formoverride == "none" || formoverride == "bf") ? SONG.player1 : formoverride, iconP1IsPlayer);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
 
@@ -716,7 +703,7 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
-				case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'cheating' | 'unfairness':
+				case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -738,197 +725,6 @@ class PlayState extends MusicBeatState
 		var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		switch (song)
 		{
-			case 'house' | 'insanity' | 'supernovae' | 'old-insanity':
-				defaultCamZoom = 0.9;
-				curStage = 'daveHouse';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.75, 0.75);
-				bg.active = false;
-
-				sprites.add(bg);
-				add(bg);
-	
-				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills'));
-				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
-				stageHills.updateHitbox();
-				stageHills.antialiasing = true;
-				stageHills.scrollFactor.set(0.8, 0.8);
-				stageHills.active = false;
-				
-				sprites.add(stageHills);
-				add(stageHills);
-	
-				var gate:FlxSprite = new FlxSprite(-200, -125).loadGraphic(Paths.image('dave/gate'));
-				gate.setGraphicSize(Std.int(gate.width * 1.2));
-				gate.updateHitbox();
-				gate.antialiasing = true;
-				gate.scrollFactor.set(0.9, 0.9);
-				gate.active = false;
-
-				sprites.add(gate);
-				add(gate);
-	
-				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.active = false;
-				
-				sprites.add(stageFront);
-				add(stageFront);
-
-				UsingNewCam = true;
-				if (SONG.song.toLowerCase() == 'insanity')
-				{
-					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky_insanity'));
-					bg.alpha = 0.75;
-					bg.active = true;
-					bg.visible = false;
-					add(bg);
-					// below code assumes shaders are always enabled which is bad
-					var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-					testshader.waveAmplitude = 0.1;
-					testshader.waveFrequency = 5;
-					testshader.waveSpeed = 2;
-					bg.shader = testshader.shader;
-					curbg = bg;
-				}
-			case 'blocked' | 'corn-theft' | 'maze' | 'old-corn-theft' | 'old-maze' | 'mealie' | 'splitathon':
-				defaultCamZoom = 0.9;
-
-				switch (SONG.song.toLowerCase())
-				{
-					case 'splitathon' | 'mealie':
-						curStage = 'bambiFarmNight';
-					case 'maze' | 'old-maze':
-						curStage = 'bambiFarmSunset';
-					default:
-						curStage = 'bambiFarm';
-				}
-	
-				var skyType:String = curStage == 'bambiFarmNight' ? 'dave/sky_night' : 'dave/sky';
-				if(curStage == 'bambiFarmSunset')
-				{
-					skyType = 'dave/sky_sunset';
-				}
-	
-				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				sprites.add(bg);
-	
-				var hills:FlxSprite = new FlxSprite(-250, 200).loadGraphic(Paths.image('bambi/orangey hills'));
-				hills.antialiasing = true;
-				hills.scrollFactor.set(0.9, 0.7);
-				hills.active = false;
-				sprites.add(hills);
-	
-				var farm:FlxSprite = new FlxSprite(150, 250).loadGraphic(Paths.image('bambi/funfarmhouse'));
-				farm.antialiasing = true;
-				farm.scrollFactor.set(1.1, 0.9);
-				farm.active = false;
-				sprites.add(farm);
-				
-				var foreground:FlxSprite = new FlxSprite(-400, 600).loadGraphic(Paths.image('bambi/grass lands'));
-				foreground.antialiasing = true;
-				foreground.active = false;
-				sprites.add(foreground);
-				
-				var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('bambi/Cornys'));
-				cornSet.antialiasing = true;
-				cornSet.active = false;
-				sprites.add(cornSet);
-				
-				var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('bambi/Cornys'));
-				cornSet2.antialiasing = true;
-				cornSet2.active = false;
-				sprites.add(cornSet2);
-				
-				var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('bambi/crazy fences'));
-				fence.antialiasing = true;
-				fence.active = false;
-				sprites.add(fence);
-	
-				var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/Sign'));
-				sign.antialiasing = true;
-				sign.active = false;
-				sprites.add(sign);
-
-				if (curStage == 'bambiFarmNight')
-				{
-					hills.color = nightColor;
-					farm.color = nightColor;
-					foreground.color = nightColor;
-					cornSet.color = nightColor;
-					cornSet2.color = nightColor;
-					fence.color = nightColor;
-					sign.color = nightColor;
-				}
-
-				if (curStage == 'bambiFarmSunset')
-				{
-					hills.color = sunsetColor;
-					farm.color = sunsetColor;
-					foreground.color = sunsetColor;
-					cornSet.color = sunsetColor;
-					cornSet2.color = sunsetColor;
-					fence.color = sunsetColor;
-					sign.color = sunsetColor;
-				}
-				
-				add(bg);
-				add(hills);
-				add(farm);
-				add(foreground);
-				add(cornSet);
-				add(cornSet2);
-				add(fence);
-				add(sign);
-	
-				UsingNewCam = true;
-			case 'bonus-song' | 'glitch' | 'secret':
-				defaultCamZoom = 0.9;
-				curStage = 'daveHouse_night';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.75, 0.75);
-				bg.active = false;
-				
-				sprites.add(bg);
-				add(bg);
-	
-				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills_night'));
-				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
-				stageHills.updateHitbox();
-				stageHills.antialiasing = true;
-				stageHills.scrollFactor.set(0.8, 0.8);
-				stageHills.active = false;
-
-				sprites.add(stageHills);
-				add(stageHills);
-	
-				var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate_night'));
-				gate.setGraphicSize(Std.int(gate.width * 1.2));
-				gate.updateHitbox();
-				gate.antialiasing = true;
-				gate.scrollFactor.set(0.9, 0.9);
-				gate.active = false;
-
-				sprites.add(gate);
-				add(gate);
-	
-				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass_night'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.active = false;
-
-				sprites.add(stageFront);
-				add(stageFront);
-
-				UsingNewCam = true;
 			case 'applecore':
 				defaultCamZoom = 0.5;
 				curStage = 'POOP';
@@ -992,7 +788,7 @@ class PlayState extends MusicBeatState
 					what.add(pizza);
 				}
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption':
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
@@ -1009,6 +805,9 @@ class PlayState extends MusicBeatState
 					case 'unfairness':
 						bg.loadGraphic(Paths.image('dave/scarybg'));
 						curStage = 'unfairness';
+					case 'disability':
+						bg.loadGraphic(Paths.image('dave/disabled'));
+						curStage = 'disabled';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -1032,10 +831,6 @@ class PlayState extends MusicBeatState
 				testshader.waveSpeed = 2;
 				bg.shader = testshader.shader;
 				curbg = bg;
-				if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'unfairness')
-				{
-					UsingNewCam = true;
-				}
 			case 'wireframe':
 				defaultCamZoom = 0.85;
 				curStage = 'redTunnel';
@@ -1405,7 +1200,7 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 
-			if (funnyFloatyBoys.contains(dad.curCharacter) && player == 0 || funnyFloatyBoys.contains(boyfriend.curCharacter) && player == 1)
+			if (Note.CharactersWith3D.contains(dad.curCharacter) && player == 0 || Note.CharactersWith3D.contains(boyfriend.curCharacter) && player == 1)
 			{
 				babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -2655,7 +2450,7 @@ class PlayState extends MusicBeatState
 						if(daNote.mustPress && daNote.finishedGenerating)
 							noteMiss(daNote.noteData);
 							health -= 0.075;
-							trace("miss note");
+							//trace("miss note");
 							vocals.volume = 0;
 					}
 
@@ -3419,7 +3214,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			health -= 0.04;
-			trace("note miss");
+			//trace("note miss");
 			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');

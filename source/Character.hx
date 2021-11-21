@@ -365,6 +365,26 @@ class Character extends FlxSprite
 				nativelyPlayable = true;
 
 				flipX = true;
+
+			case 'tunnel-bf':
+				var tex = Paths.getSparrowAtlas('dave/tunnel_bf');
+				frames = tex;
+
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+
+				playAnim('idle');
+
+				nativelyPlayable = true;
 		}
 		dance();
 

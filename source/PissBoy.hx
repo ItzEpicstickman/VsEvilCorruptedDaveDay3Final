@@ -36,7 +36,7 @@ class PissBoy extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-        angle += elapsed * 1.25;
+        angle += elapsed * 20;
         x += 1 * bounceMultiplier;
         y += 1 * (bounceMultiplier * yBullshit);
 		super.update(elapsed);

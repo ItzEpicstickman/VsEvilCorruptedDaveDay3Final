@@ -1,0 +1,5 @@
+:dave:Heya! How'd you get here?
+:bf:brey
+:dave:Alright! Would you like to sing?
+:bf:breep
+:dave:Great! Let's go!

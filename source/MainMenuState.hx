@@ -29,7 +29,7 @@ class MainMenuState extends MusicBeatState
 
 	var realMenuItems:Int = 2;
 
-	var optionShit:Array<String> = ['play', 'options', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'hi'];
+	var optionShit:Array<String> = ['play', 'options', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -41,7 +41,7 @@ class MainMenuState extends MusicBeatState
 
 	public static var daRealEngineVer:String = 'Dave';
 
-	public static var engineVers:Array<String> = ['Dave', 'Bambi', 'Tristan'];
+	public static var engineVers:Array<String> = ['Golden Apple'];
 
 	public static var kadeEngineVer:String = "DAVE";
 	public static var gameVer:String = "0.2.7.1";
@@ -82,7 +82,7 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
 
-		daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
+		daRealEngineVer = engineVers[FlxG.random.int(0, 0)];
 		
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
 		bg.scrollFactor.set();
@@ -117,11 +117,14 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
-			if (optionShit[i] == 'hi') {
+			if (optionShit[i] == 'dave x bambi shipping cute')
+			{
 				menuItem.frames = Paths.getSparrowAtlas('hi');
-				menuItem.animation.addByPrefix('idle', 'HI', 24);
+				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
+				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			}
-			else {
+			else 
+			{
 				menuItem.frames = tex;
 				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -233,7 +236,7 @@ class MainMenuState extends MusicBeatState
 									FlxG.switchState(new CreditsMenuState());
 								case 'play':
 									FlxG.switchState(new PlayMenuState());
-								case 'hi':
+								case 'dave x bambi shipping cute':
 									var poop:String = Highscore.formatSong('dave-x-bambi-shipping-cute', 1);
 
 									trace(poop);

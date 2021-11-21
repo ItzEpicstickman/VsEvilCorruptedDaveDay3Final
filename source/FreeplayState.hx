@@ -95,11 +95,9 @@ class FreeplayState extends MusicBeatState
 	{
 		switch (AllPossibleSongs[CurrentPack].toLowerCase())
 		{
-			case 'base':
-				addWeek(['Tutorial'], 0, ['gf']);
 			default:
-				addWeek(['Disruption'], 2, ['bambi-piss-3d']);
-				addWeek(['AppleCore'], 2,['bandu']);
+				addWeek(['Disruption', 'AppleCore'], 2, ['bambi-piss-3d', 'bandu']);
+				addWeek(['Disability', 'Wireframe', 'Algebra'], 1,['split-dave-3d', 'tunnel-dave', 'og-dave']);
 		}
 	}
 

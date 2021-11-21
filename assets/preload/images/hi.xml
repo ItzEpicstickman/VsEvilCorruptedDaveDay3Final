@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="hi.png">
-	<!-- Created with Adobe Animate version 19.0.0.326 -->
+<TextureAtlas imagePath="dave x bambi shipping cute menu text.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="HI0000" x="0" y="0" width="160" height="117" frameX="-1" frameY="-1" frameWidth="164" frameHeight="119"/>
-	<SubTexture name="HI0001" x="0" y="122" width="164" height="117" frameX="0" frameY="-1" frameWidth="164" frameHeight="119"/>
-	<SubTexture name="HI0002" x="0" y="244" width="163" height="119" frameX="0" frameY="0" frameWidth="164" frameHeight="119"/>
+	<SubTexture name="dave x bambi shipping cute basic0000" x="5" y="5" width="772" height="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0001" x="5" y="5" width="772" height="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0002" x="5" y="5" width="772" height="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0003" x="782" y="5" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0004" x="782" y="5" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0005" x="782" y="5" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0006" x="5" y="291" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0007" x="5" y="291" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute basic0008" x="5" y="291" width="771" height="281" frameX="-1" frameY="0" frameWidth="772" frameHeight="281"/>
+	<SubTexture name="dave x bambi shipping cute white0000" x="781" y="291" width="890" height="330" frameX="0" frameY="-1" frameWidth="890" frameHeight="331"/>
+	<SubTexture name="dave x bambi shipping cute white0001" x="5" y="626" width="887" height="331" frameX="-2" frameY="0" frameWidth="890" frameHeight="331"/>
+	<SubTexture name="dave x bambi shipping cute white0002" x="897" y="626" width="886" height="328" frameX="-3" frameY="-1" frameWidth="890" frameHeight="331"/>
 </TextureAtlas>
