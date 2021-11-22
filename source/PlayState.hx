@@ -1531,11 +1531,21 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
 				daveFuckingDies.dance();
 			}
-			else if(daveFuckingDies.x <= (redTunnel.x - 100) || daveFuckingDies.y <= (redTunnel.y - 100))
+			else if(daveFuckingDies.x <= (redTunnel.x + 100) || daveFuckingDies.y <= (redTunnel.y + 100))
 			{
 				daveFuckingDies.bounceAnimState = 2;
 				daveFuckingDies.bounceMultiplier = FlxG.random.float(0.75, 1.15);
 				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
+				daveFuckingDies.dance();
+			}
+			else if(daveFuckingDies.x >= (redTunnel.width - 1150) || daveFuckingDies.y >= (redTunnel.height - 1150))
+			{
+				daveFuckingDies.bounceAnimState = 1;
+				daveFuckingDies.dance();
+			}
+			else if(daveFuckingDies.x <= (redTunnel.x + 250) || daveFuckingDies.y <= (redTunnel.y + 250))
+			{
+				daveFuckingDies.bounceAnimState = 2;
 				daveFuckingDies.dance();
 			}
 			else
