@@ -536,6 +536,7 @@ class PlayState extends MusicBeatState
 		if(curStage == 'redTunnel')
 		{
 			dad.x -= 150;
+			dad.y -= 100;
 			boyfriend.x -= 150;
 			gf.visible = false;
 		}
@@ -1547,12 +1548,10 @@ class PlayState extends MusicBeatState
 			else if(daveFuckingDies.x >= (redTunnel.width - 1150) || daveFuckingDies.y >= (redTunnel.height - 1150))
 			{
 				daveFuckingDies.bounceAnimState = 1;
-				daveFuckingDies.dance();
 			}
 			else if(daveFuckingDies.x <= (redTunnel.x + 250) || daveFuckingDies.y <= (redTunnel.y + 250))
 			{
 				daveFuckingDies.bounceAnimState = 2;
-				daveFuckingDies.dance();
 			}
 			else
 			{
@@ -1855,7 +1854,7 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		//cheating modchart is temp, replace it with custom one later
+		/*//cheating modchart is temp, replace it with custom one later
 		if(badaiModchart)
 		{
 			playerStrums.forEach(function(spr:FlxSprite)
@@ -1868,7 +1867,7 @@ class PlayState extends MusicBeatState
 				spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
 				spr.x += Math.sin(elapsedtime) * 1.5;
 			});
-		}
+		}*/
 			
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
