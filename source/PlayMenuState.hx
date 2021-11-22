@@ -44,6 +44,8 @@ class PlayMenuState extends MusicBeatState
 	public static var kadeEngineVer:String = "DAVE";
 	public static var gameVer:String = "0.2.7.1";
 
+	var bg:FlxSprite;
+
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	public static var bgPaths:Array<String> = 
@@ -82,7 +84,7 @@ class PlayMenuState extends MusicBeatState
 
 		daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
 		
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
+		bg = new FlxSprite(-80).loadGraphic(Paths.image('menu/${optionShit[0]}'));
 		bg.scrollFactor.set();
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
@@ -185,6 +187,12 @@ class PlayMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				selectedSomethin = true;
+
+				magenta.loadGraphic(Paths.image('menu/${optionShit[curSelected]}'));
+				magenta.setGraphicSize(1280);
+				magenta.updateHitbox();
+				magenta.screenCenter();
+
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				FlxFlicker.flicker(magenta, 1.1, 0.15, false);
@@ -267,6 +275,11 @@ class PlayMenuState extends MusicBeatState
 
 			spr.updateHitbox();
 		});
+
+		bg.loadGraphic(Paths.image('menu/${optionShit[curSelected]}'));
+		bg.setGraphicSize(1280);
+		bg.updateHitbox();
+		bg.screenCenter();
 	}
 	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
 	{
