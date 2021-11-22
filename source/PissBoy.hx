@@ -28,9 +28,9 @@ class PissBoy extends FlxSprite
             case 0:
                 animation.play('idle', true);
             case 1:
-                animation.play('bounceLeft', true);
+                animation.play('bounceLeft');
             case 2:
-                animation.play('bounceRight', true);
+                animation.play('bounceRight');
         }
     }
 
