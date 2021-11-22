@@ -198,6 +198,8 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
+		createCoolText(['Created by people like:']);
+
 		// credGroup.add(credTextShit);
 	}
 
@@ -343,20 +345,18 @@ class TitleState extends MusicBeatState
 
 		switch (curBeat)
 		{
-			case 1:
-			createCoolText(['Created by people like:']);
 			case 2:
-				addMoreText('MoldyGH\nMissingTextureMan101\nRapparep LOL');
+				addMoreText('Grantare\nLancey\nBezieAnims');
 			case 3:
-				addMoreText('TheBuilderXD\nCyndaquilDAC\nErizur');
+				addMoreText('RubysArt_\nCyndaquilDAC');
 			case 4:
-				addMoreText('and our wonderful contributors!');
+				addMoreText('and our wonderful contributors! (we dont have any)');
 			case 5:
 				deleteCoolText();
 			case 6:
-				createCoolText(['Supernovae by ArchWk']);
+				createCoolText(['Hi']);
 			case 7:
-				addMoreText('Glitch by The Boneyard');
+				addMoreText('Hello');
 			case 8:
 				deleteCoolText();
 				ngSpr.visible = false;
@@ -371,7 +371,7 @@ class TitleState extends MusicBeatState
 			case 13:
 				addMoreText('VS. Dave and Bambi');
 			case 14:
-				addMoreText('Mod');
+				addMoreText('Golden Apple');
 			case 15:
 				deleteCoolText();
 			case 16:
