@@ -350,13 +350,13 @@ class TitleState extends MusicBeatState
 			case 3:
 				addMoreText('RubysArt_\nCyndaquilDAC');
 			case 4:
-				addMoreText('and our wonderful contributors! (we dont have any)');
-			case 5:
 				deleteCoolText();
+			case 5:
+				createCoolText(['Special Thanks to:']);
 			case 6:
-				createCoolText(['Hi']);
+				createCoolText(['The VS. Dave and Bambi Team']);
 			case 7:
-				addMoreText('Hello');
+				addMoreText('and you, for playing our mod!');
 			case 8:
 				deleteCoolText();
 				ngSpr.visible = false;
@@ -369,7 +369,7 @@ class TitleState extends MusicBeatState
 			case 12:
 				addMoreText("Friday Night Funkin'");
 			case 13:
-				addMoreText('VS. Dave and Bambi');
+				addMoreText('VS. Dave and Bambi:');
 			case 14:
 				addMoreText('Golden Apple');
 			case 15:
