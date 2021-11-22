@@ -354,7 +354,7 @@ class TitleState extends MusicBeatState
 			case 5:
 				createCoolText(['Special Thanks to:']);
 			case 6:
-				createCoolText(['The VS. Dave and Bambi Team']);
+				addMoreText('The VS. Dave and Bambi Team');
 			case 7:
 				addMoreText('and you, for playing our mod!');
 			case 8:
