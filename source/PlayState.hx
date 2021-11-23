@@ -541,6 +541,8 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
+		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
+
 		if (swagger != null) add(swagger);
 
 		if(SONG.song.toLowerCase() == "unfairness")
