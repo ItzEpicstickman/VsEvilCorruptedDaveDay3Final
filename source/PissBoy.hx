@@ -10,6 +10,8 @@ class PissBoy extends FlxSprite
     public var bounceMultiplier:Float = 1;
     public var yBullshit:Float = 1;
 
+    public var inCutscene:Bool = true;
+
 	public function new(x:Float, y:Float)
 	{
 		super(x,y);
@@ -37,8 +39,9 @@ class PissBoy extends FlxSprite
 	override function update(elapsed:Float)
 	{
         angle += elapsed * 20;
-        x += 1 * bounceMultiplier;
-        y += 1 * (bounceMultiplier * yBullshit);
+        if(!inCutscene)
+            x += 1 * bounceMultiplier;
+            y += 1 * (bounceMultiplier * yBullshit);
 		super.update(elapsed);
 	}
 }
