@@ -43,7 +43,11 @@ class HealthIcon extends FlxSprite
 
 		animation.add('tunnel-bf', [0, 1], 0, false, isPlayer);
 
+		animation.add('tunnel-bf-flipped', [0, 1], 0, false, true);
+
 		animation.add('bf-old', [2, 3], 0, false, isPlayer);
+
+		animation.add('bf-old-flipped', [2, 3], 0, false, true);
 
 		animation.add('gf', [57], 0, false, isPlayer);
 

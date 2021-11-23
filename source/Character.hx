@@ -375,16 +375,40 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('turn', 'TURN', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP");
 				addOffset("singRIGHT");
 				addOffset("singLEFT", 57);
 				addOffset("singDOWN");
+				addOffset('turn');
 
 				playAnim('idle');
 
 				flipX = true;
+
+				nativelyPlayable = true;
+			//tunnel-bf-flipped cuz im STUPID
+			case 'tunnel-bf-flipped':
+				var tex = Paths.getSparrowAtlas('dave/tunnel_bf');
+				frames = tex;
+
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('turn', 'TURN', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT", -57);
+				addOffset("singDOWN");
+				addOffset('turn');
+
+				playAnim('idle');
 
 				nativelyPlayable = true;
 		}

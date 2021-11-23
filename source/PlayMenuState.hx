@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxMath;
 import flixel.math.FlxRandom;
 import flixel.math.FlxPoint;
 import Controls.KeyboardScheme;
@@ -27,6 +28,8 @@ class PlayMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
+	var scoreText:FlxText;
+
 	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra'];
 
 	var newGaming:FlxText;
@@ -37,12 +40,15 @@ class PlayMenuState extends MusicBeatState
 
 	public static var finishedFunnyMove:Bool = false;
 
-	public static var daRealEngineVer:String = 'Dave';
+	public static var daRealEngineVer:String = 'Golden Apple';
 
-	public static var engineVers:Array<String> = ['Dave', 'Bambi', 'Tristan'];
+	public static var engineVers:Array<String> = ['Golden Apple'];
 
-	public static var kadeEngineVer:String = "DAVE";
+	public static var kadeEngineVer:String = "Golden Apple";
 	public static var gameVer:String = "0.2.7.1";
+
+	var lerpScore:Int = 0;
+	var intendedScore:Int = 0;
 
 	var bg:FlxSprite;
 
@@ -82,7 +88,7 @@ class PlayMenuState extends MusicBeatState
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
 
-		daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
+		daRealEngineVer = engineVers[FlxG.random.int(0, 0)];
 		
 		bg = new FlxSprite(-80).loadGraphic(Paths.image('menu/${optionShit[0]}'));
 		bg.scrollFactor.set();
@@ -105,6 +111,18 @@ class PlayMenuState extends MusicBeatState
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
+
+		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+
+		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
+		scoreBG.alpha = 0.6;
+
+		scoreText.scrollFactor.set();
+		scoreBG.scrollFactor.set();
+
+		add(scoreBG);
+		add(scoreText);
 
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
@@ -164,6 +182,13 @@ class PlayMenuState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+
+		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
+
+		if (Math.abs(lerpScore - intendedScore) <= 10)
+			lerpScore = intendedScore;
+
+		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
 		if (!selectedSomethin)
 		{
@@ -275,6 +300,10 @@ class PlayMenuState extends MusicBeatState
 
 			spr.updateHitbox();
 		});
+
+		#if !switch
+		intendedScore = Highscore.getScore(optionShit[curSelected], 1);
+		#end
 
 		bg.loadGraphic(Paths.image('menu/${optionShit[curSelected]}'));
 		bg.setGraphicSize(1280);
