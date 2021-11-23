@@ -460,6 +460,15 @@ class DialogueBox extends FlxSpriteGroup
 			case 'dave':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
+					case 'disability':
+						portrait.portraitPath = 'dialogue/3d_splitathon_dave_port';
+						portrait.portraitPrefix = 'dave 3d splitathon portrait';
+					case 'wireframe':
+						portrait.portraitPath = 'dialogue/3d_dave_wireframe_portrait';
+						portrait.portraitPrefix = 'dave 3d wireframe portrait';
+					case 'algebra':
+						portrait.portraitPath = 'dialogue/3d_dave_og_portrait';
+						portrait.portraitPrefix = 'dave 3d algebra portrait';
 					default:
 						portrait.portraitPath = 'dialogue/dave_house';
 						portrait.portraitPrefix = 'dave house portrait';
@@ -467,7 +476,12 @@ class DialogueBox extends FlxSpriteGroup
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-
+					case 'disruption':
+						portrait.portraitPath = 'dialogue/3d_bambi_disruption_portrait';
+						portrait.portraitPrefix = '3d bambi disruption portrait';
+					case 'applecore':
+						portrait.portraitPath = 'dialogue/bandu_portrait';
+						portrait.portraitPrefix = 'bandu portrait';
 					default:
 						portrait.portraitPath = 'dialogue/bambi_corntheft';
 						portrait.portraitPrefix = 'bambi corntheft portrait';
@@ -475,16 +489,10 @@ class DialogueBox extends FlxSpriteGroup
 			case 'bf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'blocked' | 'maze':
-						portrait.portraitPath = 'dialogue/bf_blocked_maze';
-						portrait.portraitPrefix = 'bf blocked & maze portrait';
-					case 'furiosity' | 'polygonized' | 'corn-theft' | 'cheating' | 'unfairness' | 'supernovae' | 'glitch' | 'disruption':
+					case 'disruption' | 'wireframe':
 						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
 						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
-					case 'house':
-						portrait.portraitPath = 'dialogue/bf_house';
-						portrait.portraitPrefix = 'bf house portrait';
-					case 'insanity' | 'splitathon' | 'applecore' | 'disability' | 'algebra':
+					default:
 						portrait.portraitPath = 'dialogue/bf_insanity_splitathon';
 						portrait.portraitPrefix = 'bf insanity & splitathon portrait';
 				}
@@ -492,16 +500,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'gf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'blocked':
-						portrait.portraitPath = 'dialogue/gf_blocked';
-						portrait.portraitPrefix = 'gf blocked portrait';
-					case 'corn-theft' | 'cheating' | 'unfairness':
-						portrait.portraitPath = 'dialogue/gf_corntheft';
-						portrait.portraitPrefix = 'gf corntheft portrait';
-					case 'maze':
-						portrait.portraitPath = 'dialogue/gf_maze';
-						portrait.portraitPrefix = 'gf maze portrait';
-					case 'splitathon':
+					default:
 						portrait.portraitPath = 'dialogue/gf_splitathon';
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}

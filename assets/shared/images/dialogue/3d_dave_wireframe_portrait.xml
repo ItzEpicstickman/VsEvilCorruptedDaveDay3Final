@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="3d_dave_wireframe_portrait.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="dave 3d wireframe portrait0000" x="10" y="10" width="641" height="361" pivotX="0" pivotY="0" frameX="0" frameY="0" frameWidth="741" frameHeight="361"/>
+	<SubTexture name="dave 3d wireframe portrait0001" x="661" y="10" width="641" height="361" frameX="-25" frameY="0" frameWidth="741" frameHeight="361"/>
+	<SubTexture name="dave 3d wireframe portrait0002" x="1312" y="10" width="641" height="361" frameX="-50" frameY="0" frameWidth="741" frameHeight="361"/>
+	<SubTexture name="dave 3d wireframe portrait0003" x="10" y="381" width="641" height="361" frameX="-75" frameY="0" frameWidth="741" frameHeight="361"/>
+	<SubTexture name="dave 3d wireframe portrait0004" x="661" y="381" width="641" height="361" frameX="-100" frameY="0" frameWidth="741" frameHeight="361"/>
+</TextureAtlas>
