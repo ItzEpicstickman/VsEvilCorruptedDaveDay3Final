@@ -266,14 +266,7 @@ class PlayState extends MusicBeatState
 				iconRPC = 'icon_both';
 		}
 
-		if (isStoryMode)
-		{
-			detailsText = "Story Mode: Week " + storyWeek;
-		}
-		else
-		{
-			detailsText = "Freeplay Mode: ";
-		}
+		detailsText = "";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -282,12 +275,7 @@ class PlayState extends MusicBeatState
 
 		// Updating Discord Rich Presence.
 		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
+		DiscordClient.changePresence(SONG.song,
 			"\nAcc: "
 			+ truncateFloat(accuracy, 2)
 			+ "% | Score: "
