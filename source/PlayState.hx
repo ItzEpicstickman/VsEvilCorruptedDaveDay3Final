@@ -70,6 +70,8 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
+	public var camMoveAllowed:Bool = true;
+
 	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
@@ -264,14 +266,7 @@ class PlayState extends MusicBeatState
 				iconRPC = 'icon_both';
 		}
 
-		if (isStoryMode)
-		{
-			detailsText = "Story Mode: Week " + storyWeek;
-		}
-		else
-		{
-			detailsText = "Freeplay Mode: ";
-		}
+		detailsText = "";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -280,12 +275,7 @@ class PlayState extends MusicBeatState
 
 		// Updating Discord Rich Presence.
 		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
+		DiscordClient.changePresence(SONG.song,
 			"\nAcc: "
 			+ truncateFloat(accuracy, 2)
 			+ "% | Score: "
@@ -387,7 +377,7 @@ class PlayState extends MusicBeatState
 		dad = new Character(100, 100, SONG.player2);
 		if(SONG.song.toLowerCase() == 'wireframe')
 		{
-			badai = new Character(-1000, -1000, 'badai');
+			badai = new Character(-1100, -1100, 'badai');
 		}
 		switch (SONG.song.toLowerCase())
 		{
@@ -849,8 +839,10 @@ class PlayState extends MusicBeatState
 				bg.shader = testshader.shader;
 				curbg = bg;
 			case 'wireframe':
-				defaultCamZoom = 0.85;
+				defaultCamZoom = 0.825;
 				curStage = 'redTunnel';
+				var stupidFuckingRedBg = new FlxSprite().makeGraphic(9999, 9999, FlxColor.fromRGB(42, 0, 0)).screenCenter();
+				add(stupidFuckingRedBg);
 				redTunnel = new FlxSprite(-1000, -700).loadGraphic(Paths.image('bambi/redTunnel'));
 				redTunnel.setGraphicSize(Std.int(redTunnel.width * 1.15), Std.int(redTunnel.height * 1.15));
 				redTunnel.updateHitbox();
@@ -898,7 +890,8 @@ class PlayState extends MusicBeatState
 	function schoolIntro(?dialogueBox:DialogueBox, isStart:Bool = true):Void
 	{
 		camFollow.setPosition(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
-		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 5, FlxG.height * 5, FlxColor.BLACK);
+		var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width * 5, FlxG.height * 5, FlxColor.BLACK);
+		black.screenCenter();
 		black.scrollFactor.set();
 		add(black);
 
@@ -2345,7 +2338,8 @@ class PlayState extends MusicBeatState
 					if (UsingNewCam)
 					{
 						focusOnDadGlobal = true;
-						ZoomCam(true);
+						if(camMoveAllowed)
+							ZoomCam(true);
 					}
 
 					switch (SONG.song.toLowerCase())
@@ -2427,7 +2421,8 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		ZoomCam(focusOnDadGlobal);
+		if(camMoveAllowed)
+			ZoomCam(focusOnDadGlobal);
 
 		if (!inCutscene)
 			keyShit();
@@ -3196,7 +3191,8 @@ class PlayState extends MusicBeatState
 			if (UsingNewCam)
 			{
 				focusOnDadGlobal = false;
-				ZoomCam(false);
+				if(camMoveAllowed)
+					ZoomCam(false);
 			}
 
 			playerStrums.forEach(function(spr:FlxSprite)
@@ -3271,13 +3267,15 @@ class PlayState extends MusicBeatState
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
 					focusOnDadGlobal = true;
-					ZoomCam(true);
+					if(camMoveAllowed)
+						ZoomCam(true);
 				}
 
 				if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
 					focusOnDadGlobal = false;
-					ZoomCam(false);
+					if(camMoveAllowed)
+						ZoomCam(false);
 				}
 			}
 		}
@@ -3326,6 +3324,11 @@ class PlayState extends MusicBeatState
 						dad.dance();
 					if (dadmirror.holdTimer <= 0 && curBeat % 2 == 0)
 						dadmirror.dance();
+					if(badai != null)
+					{
+						if (badai.holdTimer <= 0 && curBeat % 2 == 0)
+							badai.dance();
+					}
 			}
 		}
 		if (swagger != null) {
@@ -3459,24 +3462,27 @@ class PlayState extends MusicBeatState
 						add(dad);
 						iconP2.animation.play('badai', true);
 						daveFuckingDies.visible = true;*/
-						
+						camMoveAllowed = false;
 						badaiTime = true;
-						FlxTween.tween(badai, {x: -300, y: 100}, 0.2, {ease: FlxEase.bounceIn});
-						FlxTween.tween(dad, {x: 1500, y: 1500}, 0.5, {ease: FlxEase.bounceOut});
+						FlxTween.tween(badai, {x: -300, y: 100}, 0.55, {ease: FlxEase.cubeInOut});
+						FlxTween.tween(dad, {x: 1500, y: 1500}, 0.55, {ease: FlxEase.cubeInOut});
 						boyfriend.canDance = false;
 						boyfriend.playAnim('turn', true);
 						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
+							camMoveAllowed = true;
 							var position = boyfriend.getPosition();
 							var width = boyfriend.width;
 							remove(boyfriend);
-							boyfriend = new Boyfriend(position.x, -50, 'tunnel-bf-flipped');
+							boyfriend = new Boyfriend(position.x, position.y, 'tunnel-bf-flipped');
 							add(boyfriend);
+							FlxTween.tween(boyfriend, {y: 450}, 0.5, {ease: FlxEase.cubeInOut});
 							boyfriendOldIcon = 'bf-old-flipped';
 							iconP1.animation.play('tunnel-bf-flipped');
 							iconP2.animation.play('badai');
-							FlxTween.tween(daveFuckingDies, {y: -300}, 1, {ease: FlxEase.circIn});
-							new FlxTimer().start(1, function(tmr:FlxTimer)
+							daveFuckingDies.visible = true;
+							FlxTween.tween(daveFuckingDies, {y: -300}, 1.5, {ease: FlxEase.cubeInOut});
+							new FlxTimer().start(1.5, function(tmr:FlxTimer)
 							{
 								daveFuckingDies.inCutscene = false;
 							});

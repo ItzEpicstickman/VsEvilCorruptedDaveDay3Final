@@ -36,7 +36,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
-	public var noAa:Array<String> = ["dialogue/dave_furiosity", "dialogue/3d_bamb", "dialogue/unfairnessPortrait"];
+	public var noAa:Array<String> = ["dialogue/dave_furiosity", "dialogue/3d_bamb", "dialogue/unfairnessPortrait", 'dialogue/3d_bambi_disruption_portrait', 'dialogue/bandu_portrait', 'dialogue/3d_splitathon_dave_port', 'dialogue/3d_dave_wireframe_portrait', 'dialogue/3d_dave_og_portrait'];
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
