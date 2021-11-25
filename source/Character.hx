@@ -68,6 +68,23 @@ class Character extends FlxSprite
 				addOffset('scared', -2, -17);
 
 				playAnim('danceRight');
+			case '3d-bf':
+				frames = Paths.getSparrowAtlas('dave/3D_BF');
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 6, 10);
+				addOffset("singRIGHT", -3);
+				addOffset("singLEFT", 17);
+				addOffset("singDOWN");
+
+				nativelyPlayable = flipX = true;
+
+				playAnim('idle');
 			case 'split-dave-3d':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/split_dave_3d');
