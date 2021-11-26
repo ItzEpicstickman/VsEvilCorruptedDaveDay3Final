@@ -536,6 +536,7 @@ class PlayState extends MusicBeatState
 			dad.x -= 150;
 			dad.y -= 100;
 			boyfriend.x -= 150;
+			boyfriend.y -= 150
 			gf.visible = false;
 		}
 
@@ -3476,13 +3477,12 @@ class PlayState extends MusicBeatState
 							remove(boyfriend);
 							boyfriend = new Boyfriend(position.x, position.y, 'tunnel-bf-flipped');
 							add(boyfriend);
-							FlxTween.tween(boyfriend, {y: 450}, 0.5, {ease: FlxEase.cubeInOut});
 							boyfriendOldIcon = 'bf-old-flipped';
 							iconP1.animation.play('tunnel-bf-flipped');
 							iconP2.animation.play('badai');
 							daveFuckingDies.visible = true;
-							FlxTween.tween(daveFuckingDies, {y: -300}, 1.5, {ease: FlxEase.cubeInOut});
-							new FlxTimer().start(1.5, function(tmr:FlxTimer)
+							FlxTween.tween(daveFuckingDies, {y: -300}, 2.5, {ease: FlxEase.cubeInOut});
+							new FlxTimer().start(2.5, function(tmr:FlxTimer)
 							{
 								daveFuckingDies.inCutscene = false;
 							});

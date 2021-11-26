@@ -43,6 +43,10 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
+	var titleDude:FlxSprite;
+
+	var altIdle:Bool = false;
+
 	var fun:Int;
 
 	override public function create():Void
@@ -112,8 +116,6 @@ class TitleState extends MusicBeatState
 	}
 
 	var logoBl:FlxSprite;
-	var gfDance:FlxSprite;
-	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 
 	function startIntro()
@@ -143,19 +145,25 @@ class TitleState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		logoBl = new FlxSprite(15, -25);
+		logoBl = new FlxSprite(130, 30);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
-		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
-		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.antialiasing = true;
-		add(gfDance);
+		titleDude = new FlxSprite(-150, -50);
+		titleDude.frames = Paths.getSparrowAtlas('golden_apple_title_guys');
+		var fuckingStupid:Int = FlxG.random.int(0,999);
+		if(fuckingStupid == 0)
+		{
+			altIdle = true;
+		}
+		titleDude.animation.addByPrefix('idle-alt', 'ALT-IDLE', 24, false);
+		titleDude.animation.addByPrefix('idle', 'IDLE', 24, false);
+		if(altIdle){titleDude.animation.play('idle-alt');}else{titleDude.animation.play('idle');}
+		add(titleDude);
+
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
@@ -333,13 +341,12 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 
-		logoBl.animation.play('bump');
-		danceLeft = !danceLeft;
+		logoBl.animation.play('bump', true);
 
-		if (danceLeft)
-			gfDance.animation.play('danceRight');
-		else
-			gfDance.animation.play('danceLeft');
+		if(curBeat % 2 == 0)
+		{
+			if(altIdle){titleDude.animation.play('idle-alt',true);}else{titleDude.animation.play('idle',true);}
+		}
 
 		FlxG.log.add(curBeat);
 

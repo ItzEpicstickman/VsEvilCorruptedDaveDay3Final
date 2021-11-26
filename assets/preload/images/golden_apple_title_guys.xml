@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="golden_apple_title_guys.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="IDLE0000" x="10" y="10" width="1195" height="944" pivotX="0" pivotY="0"/>
+	<SubTexture name="IDLE0001" x="1215" y="10" width="1195" height="944"/>
+	<SubTexture name="IDLE0002" x="1215" y="10" width="1195" height="944"/>
+	<SubTexture name="IDLE0003" x="2420" y="10" width="1195" height="944"/>
+	<SubTexture name="IDLE0004" x="2420" y="10" width="1195" height="944"/>
+	<SubTexture name="IDLE0005" x="10" y="964" width="1195" height="944"/>
+	<SubTexture name="IDLE0006" x="10" y="964" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0000" x="1215" y="964" width="1195" height="944" pivotX="0" pivotY="0"/>
+	<SubTexture name="ALT-IDLE0001" x="2420" y="964" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0002" x="2420" y="964" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0003" x="10" y="1918" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0004" x="10" y="1918" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0005" x="1215" y="1918" width="1195" height="944"/>
+	<SubTexture name="ALT-IDLE0006" x="1215" y="1918" width="1195" height="944"/>
+</TextureAtlas>
