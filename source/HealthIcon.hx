@@ -67,6 +67,8 @@ class HealthIcon extends FlxSprite
 
 		animation.add('og-dave', [14, 15], 0, false, isPlayer);
 
+		animation.add('og-dave-angey', [14, 15], 0, false, isPlayer);
+
 		animation.add('the-two-dunkers', [10, 11], 0, false, isPlayer);
 
 		animation.play('face');

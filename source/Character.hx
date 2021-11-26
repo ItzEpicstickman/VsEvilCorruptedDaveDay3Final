@@ -177,6 +177,35 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+			case 'og-dave-angey':
+				// DAVE SHITE ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('dave/og_dave_angey');
+				frames = tex;
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('stand', 'STAND', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				addOffset("stand");
+
+				furiosityScale = 0.55;
+
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+
+				globaloffset[0] = -500;
+				globaloffset[1] = -350;
+		
+				playAnim('idle');
+
 			case 'garrett':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/garrett_algebra');
