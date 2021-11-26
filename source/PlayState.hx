@@ -536,7 +536,7 @@ class PlayState extends MusicBeatState
 			dad.x -= 150;
 			dad.y -= 100;
 			boyfriend.x -= 150;
-			boyfriend.y -= 150
+			boyfriend.y -= 150;
 			gf.visible = false;
 		}
 
