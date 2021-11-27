@@ -152,7 +152,7 @@ class TitleState extends MusicBeatState
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
-		titleDude = new FlxSprite(-150, -50);
+		titleDude = new FlxSprite(-150, 1000);
 		titleDude.frames = Paths.getSparrowAtlas('golden_apple_title_guys');
 		var fuckingStupid:Int = FlxG.random.int(0,999);
 		if(fuckingStupid == 0)
@@ -396,6 +396,7 @@ class TitleState extends MusicBeatState
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
+			FlxTween.tween(titleDude, {y: -50}, 1, {ease: FlxEase.expoInOut});
 			skippedIntro = true;
 		}
 	}
