@@ -341,10 +341,9 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 
-		logoBl.animation.play('bump', true);
-
 		if(curBeat % 2 == 0)
 		{
+			logoBl.animation.play('bump', true);
 			if(altIdle){titleDude.animation.play('idle-alt',true);}else{titleDude.animation.play('idle',true);}
 		}
 

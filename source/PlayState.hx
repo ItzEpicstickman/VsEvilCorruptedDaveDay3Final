@@ -253,17 +253,22 @@ class PlayState extends MusicBeatState
 		// To avoid having duplicate images in Discord assets
 		switch (SONG.player2)
 		{
-			case 'dave' | 'dave-old':
-				iconRPC = 'icon_dave';
-			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-farmer-beta':
-				iconRPC = 'icon_bambi';
-			default:
-				iconRPC = 'icon_none';
-		}
-		switch (SONG.song.toLowerCase())
-		{
-			case 'splitathon':
-				iconRPC = 'icon_both';
+			case 'og-dave' | 'og-dave-angey':
+				iconRPC = 'icon_og_dave';
+			case 'bambi-piss-3d':
+				iconRPC = 'icon_bambi_piss_3d';
+			case 'bandu':
+				iconRPC = 'icon_bandu';
+			case 'badai':
+				iconRPC = 'icon_badai';
+			case 'garrett':
+				iconRPC = 'icon_garrett';
+			case 'tunnel-dave':
+				iconRPC = 'icon_tunnel_dave';
+			case 'split-dave-3d':
+				iconRPC = 'icon_split_dave_3d';
+			case 'bambi-unfair' | 'unfair-junker':
+				iconRPC = 'icon_unfair_junker';
 		}
 
 		detailsText = "";
@@ -3366,6 +3371,7 @@ class PlayState extends MusicBeatState
 						creditsWatermark.text = 'Screw you!';
 						kadeEngineWatermark.y -= 20;
 						camHUD.flash(FlxColor.WHITE, 1);
+						iconRPC = 'icon_the_two_dunkers';
 						iconP2.animation.play('the-two-dunkers');
 						dad.playAnim('NOOMYPHONES', true);
 						dadmirror.playAnim('NOOMYPHONES', true);
@@ -3381,6 +3387,7 @@ class PlayState extends MusicBeatState
 						curbg =  unswagBG;
 						swagBG.visible = swagBG.active = false;
 					case 636:
+						iconRPC = 'icon_unfair_junker';
 						unfairPart = true;
 						gfSpeed = 1;
 						playerStrums.forEach(function(spr:FlxSprite){
@@ -3480,6 +3487,7 @@ class PlayState extends MusicBeatState
 							boyfriendOldIcon = 'bf-old-flipped';
 							iconP1.animation.play('tunnel-bf-flipped');
 							iconP2.animation.play('badai');
+							iconRPC = 'icon_badai';
 							daveFuckingDies.visible = true;
 							FlxTween.tween(daveFuckingDies, {y: -300}, 2.5, {ease: FlxEase.cubeInOut});
 							new FlxTimer().start(2.5, function(tmr:FlxTimer)
