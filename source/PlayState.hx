@@ -130,13 +130,15 @@ class PlayState extends MusicBeatState
 	private var altStrumLine:FlxSprite;
 	private var curSection:Int = 0;
 
-	private var camFollow:FlxObject;
+	//Handles the new epic mega sexy cam code that i've done
+	private var camFollow:FlxPoint;
+	private var camFollowPos:FlxObject;
+	private static var prevCamFollow:FlxPoint;
+	private static var prevCamFollowPos:FlxObject;
 
 	public var badaiTime:Bool = false;
 
 	public var sunsetColor:FlxColor = FlxColor.fromRGB(255, 143, 178);
-
-	private static var prevCamFollow:FlxObject;
 
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 
@@ -172,6 +174,8 @@ class PlayState extends MusicBeatState
 	public var TwentySixKey:Bool = false;
 
 	public static var amogus:Int = 0;
+
+	public var cameraSpeed:Float = 1;
 
 	private var iconP1:HealthIcon;
 	private var iconP2:HealthIcon;
@@ -583,22 +587,26 @@ class PlayState extends MusicBeatState
 
 		generateSong(SONG.song);
 
-		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollow = new FlxPoint();
+		camFollowPos = new FlxObject(0, 0, 1, 1);
 
-		camFollow.setPosition(camPos.x, camPos.y);
-
+		snapCamFollowToPos(camPos.x, camPos.y);
 		if (prevCamFollow != null)
 		{
 			camFollow = prevCamFollow;
 			prevCamFollow = null;
 		}
+		if (prevCamFollowPos != null)
+		{
+			camFollowPos = prevCamFollowPos;
+			prevCamFollowPos = null;
+		}
+		add(camFollowPos);
 
-		add(camFollow);
-
-		FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		FlxG.camera.follow(camFollowPos, LOCKON, 1);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
-		FlxG.camera.focusOn(camFollow.getPosition());
+		FlxG.camera.focusOn(camFollow);
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
@@ -895,7 +903,7 @@ class PlayState extends MusicBeatState
 
 	function schoolIntro(?dialogueBox:DialogueBox, isStart:Bool = true):Void
 	{
-		camFollow.setPosition(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
+		snapCamFollowToPos(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
 		var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width * 5, FlxG.height * 5, FlxColor.BLACK);
 		black.screenCenter();
 		black.scrollFactor.set();
@@ -1947,6 +1955,9 @@ class PlayState extends MusicBeatState
 				iconP1.animation.play(boyfriendOldIcon);
 			}
 		}
+		var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed, 0, 1);
+		if(!inCutscene && camMoveAllowed)
+			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		super.update(elapsed);
 
@@ -2463,7 +2474,7 @@ class PlayState extends MusicBeatState
 		{
 			if(badaiTime)
 			{
-				camFollow.setPosition(badai.getMidpoint().x + 150, badai.getMidpoint().y - 100);
+				camFollow.set(badai.getMidpoint().x + 150, badai.getMidpoint().y - 100);
 				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 	
 				switch (badai.curCharacter)
@@ -2473,32 +2484,30 @@ class PlayState extends MusicBeatState
 					case 'bandu':
 						badai.POOP ? {
 						!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
-						camFollow.setPosition(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
+						camFollow.set(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
 						defaultCamZoom = 0.35;
 						} :
-							camFollow.setPosition(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
+							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
 					} :
-						camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 				}
 			}
 			else
 			{
-				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 	
 				switch (dad.curCharacter)
 				{
-					case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-						camFollow.y = dad.getMidpoint().y;
 					case 'bandu':
 						dad.POOP ? {
 						!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
-						camFollow.setPosition(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
+						camFollow.set(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
 						defaultCamZoom = 0.35;
 						} :
-							camFollow.setPosition(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
+							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
 					} :
-						camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 				}
 			}
 
@@ -2510,16 +2519,8 @@ class PlayState extends MusicBeatState
 
 		if (!focusondad)
 		{
-			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
-
-			switch(boyfriend.curCharacter)
-			{
-				case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-					camFollow.y = boyfriend.getMidpoint().y;
-				case 'bambi-3d' | 'bambi-unfair' | 'bambi-piss-3d':
-					camFollow.y = boyfriend.getMidpoint().y - 350;
-			}
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -2628,7 +2629,9 @@ class PlayState extends MusicBeatState
 
 		FlxTransitionableState.skipNextTransIn = true;
 		FlxTransitionableState.skipNextTransOut = true;
+		
 		prevCamFollow = camFollow;
+		prevCamFollowPos = camFollowPos;
 
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 		FlxG.sound.music.stop();
@@ -3568,6 +3571,11 @@ class PlayState extends MusicBeatState
 		{
 			trace(dialogue[0]);
 		}
+	}
+
+	function snapCamFollowToPos(x:Float, y:Float) {
+		camFollow.set(x, y);
+		camFollowPos.setPosition(x, y);
 	}
 
 	public function preload(graphic:String) //preload assets
