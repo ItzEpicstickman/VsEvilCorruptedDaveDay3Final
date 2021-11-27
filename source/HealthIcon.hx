@@ -26,6 +26,8 @@ class HealthIcon extends FlxSprite
 		'tunnel-dave',
 		'split-dave-3d',
 		'og-dave',
+		'og-dave-angey',
+		'garrett',
 		'badai'
 	];
 
