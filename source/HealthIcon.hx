@@ -28,7 +28,8 @@ class HealthIcon extends FlxSprite
 		'og-dave',
 		'og-dave-angey',
 		'garrett',
-		'badai'
+		'badai',
+		'3d-bf'
 	];
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
