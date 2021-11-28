@@ -275,6 +275,9 @@ class CharacterSelectState extends MusicBeatState
 				char.y = 100 + 400;
 			case 'bambi-angey':
 				char.y = 100 + 450;
+			case 'bf' | '3d-bf' | 'bf-pixel' | 'bf-christmas':
+				//dont do anything
+			default: char.y = 100;
 		}
 		add(char);
 		funnyIconMan.animation.play(char.curCharacter);
