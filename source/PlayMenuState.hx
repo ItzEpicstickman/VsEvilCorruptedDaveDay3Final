@@ -253,7 +253,7 @@ class PlayMenuState extends MusicBeatState
 									PlayState.storyDifficulty = 1;
 						
 									PlayState.storyWeek = 1;
-									LoadingState.loadAndSwitchState(new PlayState());
+									LoadingState.loadAndSwitchState(new CharacterSelectState());
 							}
 						});
 					}

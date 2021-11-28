@@ -38,8 +38,8 @@ class CharacterInSelect
 class CharacterSelectState extends MusicBeatState
 {
 	public var char:Boyfriend;
-	public var current:Int;
-	public var curForm:Int;
+	public var current:Int = 0;
+	public var curForm:Int = 0;
 	public var characterText:FlxText;
 
 	public var funnyIconMan:HealthIcon;
@@ -60,8 +60,10 @@ class CharacterSelectState extends MusicBeatState
 	
 	public var characters:Array<CharacterInSelect> = 
 	[
-		new CharacterInSelect(['bf', 'bf-pixel', 'bf-christmas'], ["Boyfriend", "Pixel Boyfriend", "Christmas Boyfriend"]),
-		new CharacterInSelect(['bambi-piss-3d', 'unfair-junker', 'bandu'], ['Angry 3D Bambi', 'Unfair Bambi Facing Forward', 'Bandu'])
+		new CharacterInSelect(['bf', '3d-bf', 'bf-pixel', 'bf-christmas'], ["Boyfriend", '3D Boyfriend', "Pixel Boyfriend", "Christmas Boyfriend"]),
+		new CharacterInSelect(['bambi-piss-3d', 'bandu', 'unfair-junker', 'badai'], ['Angry 3D Bambi', 'Bandu', 'Unfair Bambi Facing Forward', 'Badai']),
+		new CharacterInSelect(['split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)']),
+		new CharacterInSelect(['garrett'], ["Garrett"])
 	];
 	public function new() 
 	{
@@ -73,24 +75,35 @@ class CharacterSelectState extends MusicBeatState
 		super.create();
 		Conductor.changeBPM(110);
 		currentSelectedCharacter = characters[current];
-		/*if (FlxG.save.data.unlockedcharacters == null)
-		{
-			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false,false];
-		}
-		if(isDebug)	
-		{*/
-			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone hi
-		//}
+
+		FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone hi
 
 		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
 		add(end);
-		//FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
+		
 		//create stage
-		var hi = new FlxSprite().loadGraphic(Paths.image('2021-11-05_17.03.26'));
-		hi.scale.set(1.25, 1.25);
-		hi.screenCenter();
-		add(hi);
+		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+		bg.antialiasing = true;
+		bg.scrollFactor.set(0.9, 0.9);
+		bg.active = false;
+		add(bg);
+
+		var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+		stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+		stageFront.updateHitbox();
+		stageFront.antialiasing = true;
+		stageFront.scrollFactor.set(0.9, 0.9);
+		stageFront.active = false;
+		add(stageFront);
+
+		var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+		stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+		stageCurtains.updateHitbox();
+		stageCurtains.antialiasing = true;
+		stageCurtains.scrollFactor.set(1.3, 1.3);
+		stageCurtains.active = false;
+		add(stageCurtains);
 
 		FlxG.camera.zoom = 0.75;
 
