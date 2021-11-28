@@ -1076,12 +1076,7 @@ class PlayState extends MusicBeatState
 		}
 
 		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
+		DiscordClient.changePresence(SONG.song,
 			"\nAcc: "
 			+ truncateFloat(accuracy, 2)
 			+ "% | Score: "
@@ -1413,10 +1408,7 @@ class PlayState extends MusicBeatState
 
 			#if desktop
 			DiscordClient.changePresence("PAUSED on "
-				+ SONG.song
-				+ " ("
-				+ storyDifficultyText
-				+ ") |",
+				+ SONG.song,
 				"Acc: "
 				+ truncateFloat(accuracy, 2)
 				+ "% | Score: "
@@ -1447,12 +1439,7 @@ class PlayState extends MusicBeatState
 			if (startTimer.finished)
 				{
 					#if desktop
-					DiscordClient.changePresence(detailsText
-						+ " "
-						+ SONG.song
-						+ " ("
-						+ storyDifficultyText
-						+ ") ",
+					DiscordClient.changePresence(SONG.song,
 						"\nAcc: "
 						+ truncateFloat(accuracy, 2)
 						+ "% | Score: "
@@ -1486,10 +1473,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence(detailsText
 			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
+			+ SONG.song,
 			"\nAcc: "
 			+ truncateFloat(accuracy, 2)
 			+ "% | Score: "
@@ -1910,21 +1894,6 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
-
-		/*//cheating modchart is temp, replace it with custom one later
-		if(badaiTime)
-		{
-			playerStrums.forEach(function(spr:FlxSprite)
-			{
-				spr.x += Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
-				spr.x -= Math.sin(elapsedtime) * 1.5;
-			});
-			dadStrums.forEach(function(spr:FlxSprite)
-			{
-				spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
-				spr.x += Math.sin(elapsedtime) * 1.5;
-			});
-		}*/
 			
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
@@ -2154,11 +2123,8 @@ class PlayState extends MusicBeatState
 							.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
 							#if desktop
-							DiscordClient.changePresence("GAME OVER -- "
-							+ SONG.song
-							+ " ("
-							+ storyDifficultyText
-							+ ") ",
+							DiscordClient.changePresence("GAME OVER - "
+							+ SONG.song,
 							"\nAcc: "
 							+ truncateFloat(accuracy, 2)
 							+ "% | Score: "
@@ -3238,12 +3204,7 @@ class PlayState extends MusicBeatState
 		}
 
 		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
+		DiscordClient.changePresence(SONG.song,
 			"Acc: "
 			+ truncateFloat(accuracy, 2)
 			+ "% | Score: "
