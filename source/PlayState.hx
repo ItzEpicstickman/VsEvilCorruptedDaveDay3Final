@@ -3363,7 +3363,6 @@ class PlayState extends MusicBeatState
 						curbg =  unswagBG;
 						swagBG.visible = swagBG.active = false;
 					case 636:
-						iconRPC = 'icon_unfair_junker';
 						unfairPart = true;
 						gfSpeed = 1;
 						playerStrums.forEach(function(spr:FlxSprite){
@@ -3427,7 +3426,7 @@ class PlayState extends MusicBeatState
 								FlxTween.tween(derez, {"scale.x": 0.1, "scale.y": 0.1, x: littleIdiot.getMidpoint().x - derez.width / 2 - 100, y: littleIdiot.getMidpoint().y - derez.width / 2 - 500}, 0.65, {ease: FlxEase.quadIn});
 								FlxTween.angle(derez, 0, 360, 0.65, {ease: FlxEase.quadIn, onComplete: function(twn:FlxTween) derez.kill()});
 
-								new FlxTimer().start(1, function(tmr:FlxTimer) poipInMahPahntsIsGud = true);
+								new FlxTimer().start(1, function(tmr:FlxTimer){ poipInMahPahntsIsGud = true; iconRPC = 'icon_unfair_junker';});
 							});
 						}});
 				}
