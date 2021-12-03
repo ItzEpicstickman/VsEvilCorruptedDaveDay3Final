@@ -1826,6 +1826,18 @@ class PlayState extends MusicBeatState
 			});
 		}
 
+		if(SONG.song.toLowerCase() == 'disability')
+		{
+			playerStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.angle += elapsed * 5;
+			});
+			dadStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.angle += elapsed * 5;
+			});
+		}
+
 		if (SONG.song.toLowerCase() == 'disruption') // deez all day
 		{
 			var krunkThing = 60;
