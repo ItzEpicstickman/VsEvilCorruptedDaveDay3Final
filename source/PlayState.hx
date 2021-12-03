@@ -1365,7 +1365,6 @@ class PlayState extends MusicBeatState
 				babyArrow.y -= 10;
 				babyArrow.alpha = 0;
 				babyArrow.y -= 1000;
-				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 
 				babyArrow.ID = i;
 
@@ -3347,6 +3346,7 @@ class PlayState extends MusicBeatState
 						creditsWatermark.text = 'Screw you!';
 						kadeEngineWatermark.y -= 20;
 						camHUD.flash(FlxColor.WHITE, 1);
+						
 						iconRPC = 'icon_the_two_dunkers';
 						iconP2.animation.play('the-two-dunkers');
 						dad.playAnim('NOOMYPHONES', true);
@@ -3355,7 +3355,7 @@ class PlayState extends MusicBeatState
 						dadmirror.POOP = true; // :))))))))))
 						new FlxTimer().start(3.5, function(deez:FlxTimer){
 							swagThings.forEach(function(spr:FlxSprite){
-								FlxTween.tween(spr, {y: spr.y + 1000}, 1.2, {ease:FlxEase.circOut});
+								FlxTween.tween(spr, {y: spr.y + 1010, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
 							});	
 							FlxTween.tween(swagger, {y: swagger.y + 1000}, 1.05, {ease:FlxEase.cubeInOut});
 						});
