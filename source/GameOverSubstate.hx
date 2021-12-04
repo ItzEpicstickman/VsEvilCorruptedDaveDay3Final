@@ -78,8 +78,23 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-				
-			FlxG.switchState(new MainMenuState());
+
+			if (PlayState.SONG.song.toLowerCase() == 'disability') {
+				trace("WUH OH!!!");
+
+				var poop:String = Highscore.formatSong('recovered-project', 1);
+
+				trace(poop);
+
+				PlayState.SONG = Song.loadFromJson(poop, 'recovered-project');
+				PlayState.isStoryMode = false;
+				PlayState.storyDifficulty = 1;
+
+				PlayState.storyWeek = 1;
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
+			else
+				FlxG.switchState(new MainMenuState());
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
@@ -112,16 +127,18 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (!isEnding)
 		{
 			isEnding = true;
-			bf.playAnim('deathConfirm', true);
-			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
-			new FlxTimer().start(0.7, function(tmr:FlxTimer)
-			{
-				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
+			
+				bf.playAnim('deathConfirm', true);
+				FlxG.sound.music.stop();
+				FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+				new FlxTimer().start(0.7, function(tmr:FlxTimer)
 				{
+					FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
+					{
 						LoadingState.loadAndSwitchState(new PlayState());
+					});
 				});
-			});
+			
 		}
 	}
 }

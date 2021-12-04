@@ -106,6 +106,26 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+			case 'RECOVERED_PROJECT':
+				tex = Paths.getSparrowAtlas('dave/RECOVERED_PROJECT_01');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+
 			case 'badai':
 				// BADAI SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('bambi/badai');

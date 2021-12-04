@@ -455,6 +455,8 @@ class PlayState extends MusicBeatState
 			case 'bambi-angey':
 				dad.y += 450;
 				dad.x += 100;
+			case 'RECOVERED_PROJECT':
+				dad.setPosition(-307, 10);
 		}
 
 
@@ -746,6 +748,14 @@ class PlayState extends MusicBeatState
 		var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		switch (song)
 		{
+			case 'recovered-project':
+				defaultCamZoom = 0.85;
+				curStage = 'recover';
+				var yea = new FlxSprite(-641, -222).loadGraphic(Paths.image('RECOVER_assets/q'));
+				yea.setGraphicSize(2478);
+				yea.updateHitbox();
+				sprites.add(yea);
+				add(yea);
 			case 'applecore':
 				defaultCamZoom = 0.5;
 				curStage = 'POOP';
