@@ -47,7 +47,8 @@ class MusicPlayerState extends MusicBeatState
   
     override function create()
     {
-        var initSonglist = CoolUtil.coolTextFile(Paths.txt('djSonglist')); //ah yeah dj song list
+        var initSonglist = ['internal,disruption,bambi-piss-3d,good', 'internal,applecore,bandu,good', 'internal,disability,split-dave-3d,good', 'internal,wireframe,tunnel-dave,good', 'internal,algebra,og-dave,good']; //ah yeah dj song list
+        if(FlxG.save.data.foundRecoveredProject){initSonglist.push('internal,recovered-project,RECOVERED_PROJECT,bad');};
         for (i in 0...initSonglist.length)
         {
             var splitstring:Array<String> = initSonglist[i].split(",");
