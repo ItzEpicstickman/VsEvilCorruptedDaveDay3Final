@@ -452,6 +452,9 @@ class PlayState extends MusicBeatState
 					dad.x += 175;
 					dad.y += 400;
 				}
+			case 'dave-png':
+				dad.x += 81;
+				dad.y += 108;
 			case 'bambi-angey':
 				dad.y += 450;
 				dad.x += 100;
@@ -516,6 +519,14 @@ class PlayState extends MusicBeatState
 			case 'bambi-angey':
 				boyfriend.y = 100 + 450;
 				boyfriendOldIcon = 'bambi-old';
+		}
+
+		switch (curStage) {
+			case 'out':
+				boyfriend.x += 300;
+				boyfriend.y += 10;
+				gf.x += 70;
+				dad.x -= 100;
 		}
 
 		if(darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
@@ -877,6 +888,24 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.y = 1500;
 				add(daveFuckingDies);
 				daveFuckingDies.visible = false;
+			case 'thunderstorm':
+				curStage = 'out';
+				defaultCamZoom = 0.8;
+
+				var sky:ShaggyModMoment = new ShaggyModMoment('thunda/sky', -1204, -456, 0.15, 1, 0);
+				add(sky);
+
+				//var clouds:ShaggyModMoment = new ShaggyModMoment('thunda/clouds', -988, -260, 0.25, 1, 1);
+				//add(clouds);
+
+				var backMount:ShaggyModMoment = new ShaggyModMoment('thunda/backmount', -700, -40, 0.4, 1, 2);
+				add(backMount);
+
+				var middleMount:ShaggyModMoment = new ShaggyModMoment('thunda/middlemount', -240, 200, 0.6, 1, 3);
+				add(middleMount);
+
+				var ground:ShaggyModMoment = new ShaggyModMoment('thunda/ground', -660, 624, 1, 1, 4);
+				add(ground);
 			default:
 				defaultCamZoom = 0.9;
 				curStage = 'stage';
@@ -2516,6 +2545,8 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	public static var xtraSong:Bool = false;
+
 	function endSong():Void
 	{
 		inCutscene = false;
@@ -2574,6 +2605,9 @@ class PlayState extends MusicBeatState
 						nextSong();
 				}
 			}
+		}
+		else if (xtraSong) {
+			FlxG.switchState(new ExtraSongState());
 		}
 		else
 		{

@@ -30,7 +30,7 @@ class PlayMenuState extends MusicBeatState
 
 	var scoreText:FlxText;
 
-	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra'];
+	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra', 'extra'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -243,6 +243,8 @@ class PlayMenuState extends MusicBeatState
 							{
 								case 'story mode':
 									FlxG.switchState(new StoryMenuState());
+								case 'extra':
+									FlxG.switchState(new ExtraSongState());
 								default:
 									var poop:String = Highscore.formatSong(daChoice, 1);
 
@@ -251,9 +253,10 @@ class PlayMenuState extends MusicBeatState
 									PlayState.SONG = Song.loadFromJson(poop, daChoice);
 									PlayState.isStoryMode = false;
 									PlayState.storyDifficulty = 1;
+									PlayState.xtraSong = false;
 						
 									PlayState.storyWeek = 1;
-									LoadingState.loadAndSwitchState(new CharacterSelectState());
+									LoadingState.loadAndSwitchState(new PlayState());
 							}
 						});
 					}

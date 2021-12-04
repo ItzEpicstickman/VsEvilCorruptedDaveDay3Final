@@ -240,10 +240,13 @@ class MainMenuState extends MusicBeatState
 									var poop:String = Highscore.formatSong('dave-x-bambi-shipping-cute', 1);
 
 									trace(poop);
+
+									FlxG.save.data.shipUnlocked = true;
 						
 									PlayState.SONG = Song.loadFromJson(poop, 'dave-x-bambi-shipping-cute');
 									PlayState.isStoryMode = false;
 									PlayState.storyDifficulty = 1;
+									PlayState.xtraSong = false;
 						
 									PlayState.storyWeek = 1;
 									LoadingState.loadAndSwitchState(new PlayState());

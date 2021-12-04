@@ -85,6 +85,20 @@ class Character extends FlxSprite
 				nativelyPlayable = flipX = true;
 
 				playAnim('idle');
+			case 'dave-png':
+				frames = Paths.getSparrowAtlas('dave/dave-png');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT', 45);
+				addOffset('singDOWN', 28, -5);
+				addOffset('singUP', -2, 29);
+				addOffset('singRIGHT', 1);
+
+				playAnim('idle');
 			case 'split-dave-3d':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/split_dave_3d');
