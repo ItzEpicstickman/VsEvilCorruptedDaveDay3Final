@@ -92,8 +92,6 @@ class GameOverSubstate extends MusicBeatSubstate
 				PlayState.isStoryMode = false;
 				PlayState.storyDifficulty = 1;
 
-				FlxG.save.data.recoverFound = true;
-
 				PlayState.storyWeek = 1;
 				LoadingState.loadAndSwitchState(new PlayState());
 			}

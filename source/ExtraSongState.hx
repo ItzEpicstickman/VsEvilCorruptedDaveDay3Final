@@ -98,7 +98,7 @@ class ExtraSongState extends MusicBeatState
 		var num:Int = 0;
 		for (song in songs)
 		{
-            if ((song.toLowerCase() == 'dave-x-bambi-shipping-cute' && !FlxG.save.data.shipUnlocked) || (song.toLowerCase() == 'recovered-project' && !FlxG.save.data.recoverFound))
+            if ((song.toLowerCase() == 'dave-x-bambi-shipping-cute' && !FlxG.save.data.shipUnlocked) || (song.toLowerCase() == 'recovered-project' && !FlxG.save.data.foundRecoveredProject))
                 addSong('unknown', weekNum, 'face');
             else
 			    addSong(song, weekNum, songCharacters[num]);
