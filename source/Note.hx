@@ -281,6 +281,10 @@ class Note extends FlxSprite
 	{
 		super.update(elapsed);
 
+		if (PlayState.SONG.song.toLowerCase() == 'disability')
+		{
+			angle += elapsed * 5;
+		}
 
 		if (MyStrum != null && !isAlt)
 		{

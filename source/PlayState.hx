@@ -1375,7 +1375,6 @@ class PlayState extends MusicBeatState
 				babyArrow.y -= 10;
 				babyArrow.alpha = 0;
 				babyArrow.y -= 1000;
-				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 
 				babyArrow.ID = i;
 
@@ -1833,6 +1832,18 @@ class PlayState extends MusicBeatState
 			{
 				spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
 				spr.x += Math.sin(elapsedtime) * 1.5;
+			});
+		}
+
+		if(SONG.song.toLowerCase() == 'disability')
+		{
+			playerStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.angle += elapsed * 5;
+			});
+			dadStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.angle += elapsed * 5;
 			});
 		}
 
@@ -3345,6 +3356,7 @@ class PlayState extends MusicBeatState
 						creditsWatermark.text = 'Screw you!';
 						kadeEngineWatermark.y -= 20;
 						camHUD.flash(FlxColor.WHITE, 1);
+						
 						iconRPC = 'icon_the_two_dunkers';
 						iconP2.animation.play('the-two-dunkers');
 						dad.playAnim('NOOMYPHONES', true);
@@ -3353,7 +3365,7 @@ class PlayState extends MusicBeatState
 						dadmirror.POOP = true; // :))))))))))
 						new FlxTimer().start(3.5, function(deez:FlxTimer){
 							swagThings.forEach(function(spr:FlxSprite){
-								FlxTween.tween(spr, {y: spr.y + 1000}, 1.2, {ease:FlxEase.circOut});
+								FlxTween.tween(spr, {y: spr.y + 1010, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
 							});	
 							FlxTween.tween(swagger, {y: swagger.y + 1000}, 1.05, {ease:FlxEase.cubeInOut});
 						});
@@ -3361,7 +3373,6 @@ class PlayState extends MusicBeatState
 						curbg =  unswagBG;
 						swagBG.visible = swagBG.active = false;
 					case 636:
-						iconRPC = 'icon_unfair_junker';
 						unfairPart = true;
 						gfSpeed = 1;
 						playerStrums.forEach(function(spr:FlxSprite){
@@ -3425,7 +3436,7 @@ class PlayState extends MusicBeatState
 								FlxTween.tween(derez, {"scale.x": 0.1, "scale.y": 0.1, x: littleIdiot.getMidpoint().x - derez.width / 2 - 100, y: littleIdiot.getMidpoint().y - derez.width / 2 - 500}, 0.65, {ease: FlxEase.quadIn});
 								FlxTween.angle(derez, 0, 360, 0.65, {ease: FlxEase.quadIn, onComplete: function(twn:FlxTween) derez.kill()});
 
-								new FlxTimer().start(1, function(tmr:FlxTimer) poipInMahPahntsIsGud = true);
+								new FlxTimer().start(1, function(tmr:FlxTimer){ poipInMahPahntsIsGud = true; iconRPC = 'icon_unfair_junker';});
 							});
 						}});
 				}
