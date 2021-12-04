@@ -82,6 +82,8 @@ class GameOverSubstate extends MusicBeatSubstate
 			if (PlayState.SONG.song.toLowerCase() == 'disability') {
 				trace("WUH OH!!!");
 
+				FlxG.save.data.foundRecoveredProject = true;
+
 				var poop:String = Highscore.formatSong('recovered-project', 1);
 
 				trace(poop);
