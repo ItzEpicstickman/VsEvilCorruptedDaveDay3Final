@@ -1868,11 +1868,11 @@ class PlayState extends MusicBeatState
 		{
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.angle += elapsed * 5;
+				spr.angle += (Math.sin(elapsedtime * 2.5) + 1) * 5;
 			});
 			dadStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.angle += elapsed * 5;
+				spr.angle += (Math.sin(elapsedtime * 2.5) + 1) * 5;
 			});
 		}
 
@@ -2348,20 +2348,21 @@ class PlayState extends MusicBeatState
 								if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
 								{
 									sprite.animation.play('confirm', true);
-									if (sprite.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
+									if (sprite.animation.curAnim.name == 'confirm' && !curStage.startsWith('school') && (SONG.song.toLowerCase() != 'disability'))
 									{
 										sprite.centerOffsets();
 										sprite.offset.x -= 13;
 										sprite.offset.y -= 13;
 									}
-									else
+									else if (SONG.song.toLowerCase() != 'disability')
 									{
 										sprite.centerOffsets();
 									}
 									sprite.animation.finishCallback = function(name:String)
 									{
 										sprite.animation.play('static',true);
-										sprite.centerOffsets();
+										if (SONG.song.toLowerCase() != 'disability')
+											sprite.centerOffsets();
 									}
 		
 								}
@@ -3047,13 +3048,13 @@ class PlayState extends MusicBeatState
 					}
 			}
 
-			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
+			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school') && (SONG.song.toLowerCase() != 'disability'))
 			{
 				spr.centerOffsets();
 				spr.offset.x -= 13;
 				spr.offset.y -= 13;
 			}
-			else
+			else if (SONG.song.toLowerCase() != 'disability')
 				spr.centerOffsets();
 		});
 	}
