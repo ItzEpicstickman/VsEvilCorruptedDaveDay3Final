@@ -2589,7 +2589,7 @@ class PlayState extends MusicBeatState
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
-			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.75;
+			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.6;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
