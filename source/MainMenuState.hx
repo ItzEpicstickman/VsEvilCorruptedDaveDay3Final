@@ -27,9 +27,9 @@ class MainMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var realMenuItems:Int = 2;
+	var realMenuItems:Int = 4;
 
-	var optionShit:Array<String> = ['play', 'options', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
+	var optionShit:Array<String> = ['play', 'ost', 'options', 'discord', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -170,10 +170,17 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			spr.screenCenter(X);
+		});
+
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+
+		super.update(elapsed);
 
 		if (!selectedSomethin)
 		{
@@ -196,6 +203,11 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
+				if(optionShit[curSelected] == 'discord')
+				{
+					fancyOpenURL('https://discord.gg/UvyuaUrX');
+					return;
+				}
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
@@ -229,7 +241,7 @@ class MainMenuState extends MusicBeatState
 								case 'options':
 									FlxG.switchState(new OptionsMenu());
 								case 'extras':
-									FlxG.switchState(new ExtrasMenuState());
+									FlxG.switchState(new ExtraSongState());
 								case 'ost':
 									FlxG.switchState(new MusicPlayerState());
 								case 'credits':
@@ -257,13 +269,6 @@ class MainMenuState extends MusicBeatState
 				
 			}
 		}
-
-		super.update(elapsed);
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});
 	}
 
 	override function beatHit()

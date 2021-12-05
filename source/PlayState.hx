@@ -201,6 +201,9 @@ class PlayState extends MusicBeatState
 
 	var GFScared:Bool = false;
 
+	public static var dadChar:String = 'bf';
+	public static var bfChar:String = 'bf';
+
 	var scaryBG:FlxSprite;
 	var showScary:Bool = false;
 
@@ -242,6 +245,8 @@ class PlayState extends MusicBeatState
 
 	var creditsWatermark:FlxText;
 	var kadeEngineWatermark:FlxText;
+
+	var thunderBlack:FlxSprite;
 
 	override public function create()
 	{
@@ -395,7 +400,7 @@ class PlayState extends MusicBeatState
 		}
 		switch (SONG.song.toLowerCase())
 		{
-			case 'applecore':
+			case 'applecore' | 'sugar-rush':
 				dadmirror = new Character(dad.x, dad.y, dad.curCharacter);
 			default:
 				dadmirror = new Character(100, 100, "dave-angey");
@@ -567,6 +572,9 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
+		dadChar = dad.curCharacter;
+		bfChar = boyfriend.curCharacter;
+
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
 
 		if (swagger != null) add(swagger);
@@ -656,6 +664,8 @@ class PlayState extends MusicBeatState
 				credits = "Ghost tapping is forced off! Screw you!";
 			case 'cheating' | 'disruption':
 				credits = 'Screw you!';
+			case 'thunderstorm':
+				credits = 'Original song made by Saruky for Vs. Shaggy!';
 			default:
 				credits = '';
 		}
@@ -721,12 +731,18 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
+		thunderBlack = new FlxSprite().makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
+		thunderBlack.screenCenter();
+		thunderBlack.alpha = 0;
+		add(thunderBlack);
+
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
+		thunderBlack.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
@@ -1572,6 +1588,8 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
+		dadChar = dad.curCharacter;
+		bfChar = boyfriend.curCharacter;
 		if(redTunnel != null)
 		{
 			redTunnel.angle += elapsed * 3.5;
@@ -1887,11 +1905,11 @@ class PlayState extends MusicBeatState
 		{
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.angle += elapsed * 5;
+				spr.angle += elapsed * 15;
 			});
 			dadStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.angle += elapsed * 5;
+				spr.angle += elapsed * 15;
 			});
 		}
 
@@ -2563,12 +2581,15 @@ class PlayState extends MusicBeatState
 			{
 				tweenCamIn();
 			}
+
+			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
 		}
 
 		if (!focusondad)
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			if (SONG.song.toLowerCase() == 'applecore' || SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
+			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
+			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.75;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -3406,6 +3427,22 @@ class PlayState extends MusicBeatState
 		}
 		switch (curSong.toLowerCase())
 		{
+			case 'sugar-rush':
+				switch(curBeat)
+				{
+					case 172:
+						FlxTween.tween(thunderBlack, {alpha: 0.35}, Conductor.stepCrochet / 500);
+					case 204:
+						FlxTween.tween(thunderBlack, {alpha: 0}, Conductor.stepCrochet / 500);
+				}
+			case 'thunderstorm':
+				switch(curBeat)
+				{
+					case 272 | 304:
+						FlxTween.tween(thunderBlack, {alpha: 0.35}, Conductor.stepCrochet / 500);
+					case 300 | 332:
+						FlxTween.tween(thunderBlack, {alpha: 0}, Conductor.stepCrochet / 500);
+				}
 			case 'applecore':
 				switch(curBeat) {
 					case 160 | 436 | 684:

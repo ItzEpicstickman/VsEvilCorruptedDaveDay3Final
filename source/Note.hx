@@ -69,7 +69,7 @@ class Note extends FlxSprite
 		this.noteData = noteData;
 
 		var daStage:String = PlayState.curStage;
-		if (((CharactersWith3D.contains(PlayState.SONG.player2) && !musthit) || ((CharactersWith3D.contains(PlayState.SONG.player1) || PlayState.characteroverride == "dave-angey") && musthit)) || ((CharactersWith3D.contains(PlayState.SONG.player2) || CharactersWith3D.contains(PlayState.SONG.player1)) && ((this.strumTime / 50) % 20 > 10)))
+		if (((CharactersWith3D.contains(PlayState.dadChar) && !musthit) || (CharactersWith3D.contains(PlayState.bfChar) && musthit)) || ((CharactersWith3D.contains(PlayState.SONG.player2) || CharactersWith3D.contains(PlayState.SONG.player1)) && ((this.strumTime / 50) % 20 > 10)))
 		{
 				frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 
@@ -281,14 +281,10 @@ class Note extends FlxSprite
 	{
 		super.update(elapsed);
 
-		if (PlayState.SONG.song.toLowerCase() == 'disability')
-		{
-			angle += elapsed * 5;
-		}
-
 		if (MyStrum != null && !isAlt)
 		{
 			x = MyStrum.x + (isSustainNote ? width : 0);
+			angle = MyStrum.angle;
 		}
 		else
 		{
@@ -302,6 +298,7 @@ class Note extends FlxSprite
 							if (spr.ID == notetolookfor)
 							{
 								x = spr.x;
+								angle = spr.angle;
 								MyStrum = spr;
 							}
 						});
@@ -313,6 +310,7 @@ class Note extends FlxSprite
 								if (spr.ID == notetolookfor)
 								{
 									x = spr.x;
+									angle = spr.angle;
 									MyStrum = spr;
 								}
 							});
