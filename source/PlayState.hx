@@ -70,6 +70,9 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
+	public var camBeatSnap:Int = 4;
+	public var danceBeatSnap:Int = 4;
+
 	public var camMoveAllowed:Bool = true;
 
 	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
@@ -146,6 +149,8 @@ class PlayState extends MusicBeatState
 	public var dadStrums:FlxTypedGroup<FlxSprite>;
 	private var poopStrums:FlxTypedGroup<FlxSprite>;
 
+	public var idleAlt:Bool = false;
+
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
 
@@ -196,6 +201,9 @@ class PlayState extends MusicBeatState
 
 	var GFScared:Bool = false;
 
+	public static var dadChar:String = 'bf';
+	public static var bfChar:String = 'bf';
+
 	var scaryBG:FlxSprite;
 	var showScary:Bool = false;
 
@@ -237,6 +245,8 @@ class PlayState extends MusicBeatState
 
 	var creditsWatermark:FlxText;
 	var kadeEngineWatermark:FlxText;
+
+	var thunderBlack:FlxSprite;
 
 	override public function create()
 	{
@@ -390,7 +400,7 @@ class PlayState extends MusicBeatState
 		}
 		switch (SONG.song.toLowerCase())
 		{
-			case 'applecore':
+			case 'applecore' | 'sugar-rush':
 				dadmirror = new Character(dad.x, dad.y, dad.curCharacter);
 			default:
 				dadmirror = new Character(100, 100, "dave-angey");
@@ -562,6 +572,9 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
+		dadChar = dad.curCharacter;
+		bfChar = boyfriend.curCharacter;
+
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
 
 		if (swagger != null) add(swagger);
@@ -651,6 +664,8 @@ class PlayState extends MusicBeatState
 				credits = "Ghost tapping is forced off! Screw you!";
 			case 'cheating' | 'disruption':
 				credits = 'Screw you!';
+			case 'thunderstorm':
+				credits = 'Original song made by Saruky for Vs. Shaggy!';
 			default:
 				credits = '';
 		}
@@ -716,12 +731,18 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
+		thunderBlack = new FlxSprite().makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
+		thunderBlack.screenCenter();
+		thunderBlack.alpha = 0;
+		add(thunderBlack);
+
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
+		thunderBlack.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
@@ -759,6 +780,20 @@ class PlayState extends MusicBeatState
 		var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		switch (song)
 		{
+			case 'sugar-rush':
+				camBeatSnap = 1;
+				defaultCamZoom = 0.5;
+				curStage = 'sugar';
+				unswagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/poop'));
+				unswagBG.scale.set(1.75, 1.75);
+				var testshader2:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+				testshader2.waveAmplitude = 0.1;
+				testshader2.waveFrequency = 5;
+				testshader2.waveSpeed = 2;
+				unswagBG.shader = testshader2.shader;
+				sprites.add(unswagBG);
+				add(unswagBG);
+				curbg = unswagBG;
 			case 'recovered-project':
 				defaultCamZoom = 0.85;
 				curStage = 'recover';
@@ -1553,6 +1588,8 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
+		dadChar = dad.curCharacter;
+		bfChar = boyfriend.curCharacter;
 		if(redTunnel != null)
 		{
 			redTunnel.angle += elapsed * 3.5;
@@ -2300,14 +2337,25 @@ class PlayState extends MusicBeatState
 					if (SONG.notes[Math.floor(curStep / 16)] != null)
 					{
 						if (SONG.notes[Math.floor(curStep / 16)].altAnim)
+						{
 							if (SONG.song.toLowerCase() != "cheating")
 							{
 								altAnim = '-alt';
+								if(SONG.song.toLowerCase() == 'sugar-rush')
+								{
+									idleAlt = true;
+								}
 							}
 							else
 							{
 								healthtolower = 0.005;
 							}
+						}
+						else
+						{
+							if(SONG.song.toLowerCase() == 'sugar-rush')
+								idleAlt = false;
+						}
 					}
 
 					//'LEFT', 'DOWN', 'UP', 'RIGHT'
@@ -2534,12 +2582,15 @@ class PlayState extends MusicBeatState
 			{
 				tweenCamIn();
 			}
+
+			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
 		}
 
 		if (!focusondad)
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			if (SONG.song.toLowerCase() == 'applecore' || SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
+			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
+			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.6;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -3307,7 +3358,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-		if(curBeat % 2 == 0 && daveFuckingDies != null)
+		if(curBeat % danceBeatSnap == 0 && daveFuckingDies != null)
 		{
 			daveFuckingDies.dance();
 		}
@@ -3335,48 +3386,64 @@ class PlayState extends MusicBeatState
 			switch (SONG.song.toLowerCase())
 			{
 				case 'tutorial':
-					dad.dance();
-					dadmirror.dance();
+					dad.dance(idleAlt);
+					dadmirror.dance(idleAlt);
 				case 'disruption':
 					if (curBeat % gfSpeed == 0 && dad.holdTimer <= 0) {
-						dad.dance();
-						dadmirror.dance();
+						dad.dance(idleAlt);
+						dadmirror.dance(idleAlt);
 					}
 				case 'applecore':
-					if (dad.holdTimer <= 0 && curBeat % 2 == 0)
+					if (dad.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
 						!wtfThing ? dad.dance(dad.POOP) : dad.playAnim('idle-alt', true); // i hate everything
-					if (dadmirror.holdTimer <= 0 && curBeat % 2 == 0)
+					if (dadmirror.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
 						!wtfThing ? dadmirror.dance(dad.POOP) : dadmirror.playAnim('idle-alt', true); // sutpid
 				default:
-					if (dad.holdTimer <= 0 && curBeat % 2 == 0)
-						dad.dance();
-					if (dadmirror.holdTimer <= 0 && curBeat % 2 == 0)
-						dadmirror.dance();
+					if (dad.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+						dad.dance(idleAlt);
+					if (dadmirror.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+						dadmirror.dance(idleAlt);
 					if(badai != null)
 					{
-						if (badai.holdTimer <= 0 && curBeat % 2 == 0)
-							badai.dance();
+						if (badai.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+							badai.dance(idleAlt);
 					}
 			}
 		}
 		if (swagger != null) {
-			if (swagger.holdTimer <= 0 && curBeat % 2 == 0 && swagger.animation.finished)
+			if (swagger.holdTimer <= 0 && curBeat % danceBeatSnap == 0 && swagger.animation.finished)
 				swagger.dance();
 		}
 		if (littleIdiot != null) {
-			if (littleIdiot.animation.finished && littleIdiot.holdTimer <= 0 && curBeat % 2 == 0) littleIdiot.dance();
+			if (littleIdiot.animation.finished && littleIdiot.holdTimer <= 0 && curBeat % danceBeatSnap == 0) littleIdiot.dance();
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
+		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % camBeatSnap == 0)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
 		switch (curSong.toLowerCase())
 		{
+			case 'sugar-rush':
+				switch(curBeat)
+				{
+					case 172:
+						FlxTween.tween(thunderBlack, {alpha: 0.35}, Conductor.stepCrochet / 500);
+					case 204:
+						FlxTween.tween(thunderBlack, {alpha: 0}, Conductor.stepCrochet / 500);
+				}
+			case 'thunderstorm':
+				switch(curBeat)
+				{
+					case 272 | 304:
+						FlxTween.tween(thunderBlack, {alpha: 0.35}, Conductor.stepCrochet / 500);
+					case 300 | 332:
+						FlxTween.tween(thunderBlack, {alpha: 0}, Conductor.stepCrochet / 500);
+				}
 			case 'applecore':
 				switch(curBeat) {
 					case 160 | 436 | 684:
@@ -3556,7 +3623,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance && curBeat % 2 == 0)
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance && curBeat % danceBeatSnap == 0)
 		{
 			boyfriend.playAnim('idle', true);
 			if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")

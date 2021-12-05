@@ -51,6 +51,7 @@ class ExtraSongState extends MusicBeatState
 		bg.color = 0xFF4965FF;
 		add(bg);
         
+		addWeek(['Sugar-Rush'], 2, ['bandu-candy']);
         addWeek(['Thunderstorm', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-good', 'RECOVERED_PROJECT']);
 		addWeek(['Sugar-Rush'], 2, ['bandu-candy']);
 
@@ -72,6 +73,10 @@ class ExtraSongState extends MusicBeatState
 
             var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
+			if(songs[i].blackoutIcon)
+			{
+				icon.color = FlxColor.BLACK;
+			}
 
 			iconArray.push(icon);
 			add(icon);
@@ -100,18 +105,18 @@ class ExtraSongState extends MusicBeatState
 		for (song in songs)
 		{
             if ((song.toLowerCase() == 'dave-x-bambi-shipping-cute' && !FlxG.save.data.shipUnlocked) || (song.toLowerCase() == 'recovered-project' && !FlxG.save.data.foundRecoveredProject))
-                addSong('unknown', weekNum, 'face');
+                addSong('unknown', weekNum, songCharacters[num], true);
             else
-			    addSong(song, weekNum, songCharacters[num]);
+			    addSong(song, weekNum, songCharacters[num], false);
 
 			if (songCharacters.length != 1)
 				num++;
 		}
 	}
 
-    public function addSong(songName:String, weekNum:Int, songCharacter:String)
+    public function addSong(songName:String, weekNum:Int, songCharacter:String, blackoutIcon:Bool = false)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter));
+		songs.push(new SongMetadata(songName, weekNum, songCharacter, blackoutIcon));
 	}
 
     override function update(p:Float) {
@@ -163,7 +168,7 @@ class ExtraSongState extends MusicBeatState
 
         switch(songs[curSelected].songName.toLowerCase()) {
             case 'unknown':
-                swagText.text = 'a secret is required \nto unlock this song!';
+                swagText.text = 'A secret is required \nto unlock this song!';
                 swagText.visible = true;
             default:
                 swagText.visible = false;

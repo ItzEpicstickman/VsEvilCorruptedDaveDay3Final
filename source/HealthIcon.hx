@@ -32,7 +32,8 @@ class HealthIcon extends FlxSprite
 		'og-dave-angey',
 		'garrett',
 		'badai',
-		'3d-bf'
+		'3d-bf',
+		'RECOVERED_PROJECT'
 	];
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
@@ -82,6 +83,10 @@ class HealthIcon extends FlxSprite
 		addIcon('the-two-dunkers', 10);
 
 		addIcon('dave-png', 22);
+
+		addIcon('dave-good', 22);
+		
+		addIcon('RECOVERED_PROJECT', 24);
 
 		animation.play('face');
 
