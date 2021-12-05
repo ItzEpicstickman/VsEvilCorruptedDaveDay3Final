@@ -84,6 +84,8 @@ class Character extends FlxSprite
 
 				nativelyPlayable = flipX = true;
 
+				antialiasing = false;
+
 				playAnim('idle');
 			case 'dave-png':
 				frames = Paths.getSparrowAtlas('dave/dave-png');
@@ -325,6 +327,32 @@ class Character extends FlxSprite
 
 				setGraphicSize(Std.int(width / furiosityScale));
 				updateHitbox();
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'bandu-candy':
+				frames = Paths.getSparrowAtlas('bambi/bandu');
+				
+				animation.addByPrefix('idle', 'idle', 24, true);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 0, 80);
+				addOffset("singRIGHT", 140, -80);
+				addOffset("singLEFT", 200);
+				addOffset("singDOWN", 0, -30);
+
+				globaloffset[0] = 150;
+				globaloffset[1] = 450;
+
+				setGraphicSize(Std.int(width / furiosityScale));
+				updateHitbox();
+
+				antialiasing = false;
 
 				playAnim('idle');
 			case 'bambi-unfair':
