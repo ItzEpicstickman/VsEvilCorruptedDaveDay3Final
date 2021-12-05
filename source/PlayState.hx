@@ -94,7 +94,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -261,7 +261,7 @@ class PlayState extends MusicBeatState
 				iconRPC = 'icon_og_dave';
 			case 'bambi-piss-3d':
 				iconRPC = 'icon_bambi_piss_3d';
-			case 'bandu':
+			case 'bandu' | 'bandu-candy':
 				iconRPC = 'icon_bandu';
 			case 'badai':
 				iconRPC = 'icon_badai';
@@ -994,7 +994,7 @@ class PlayState extends MusicBeatState
 			gf.dance();
 			boyfriend.playAnim('idle', true);
 
-			if (dad.curCharacter == 'bandu') {
+			if (dad.curCharacter == 'bandu' || dad.curCharacter == 'bandu-candy') {
 				// SO THEIR ANIMATIONS DONT START OFF-SYNCED
 				dad.playAnim('singUP');
 				dadmirror.playAnim('singUP');
@@ -1758,7 +1758,7 @@ class PlayState extends MusicBeatState
 		{
 			switch(dad.curCharacter) 
 			{
-				case 'bandu':
+				case 'bandu' | 'bandu-candy':
 					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
@@ -1793,7 +1793,7 @@ class PlayState extends MusicBeatState
 		{
 			switch(badai.curCharacter) 
 			{
-				case 'bandu':
+				case 'bandu' | 'bandu-candy':
 					badai.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					badai.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
@@ -2495,8 +2495,6 @@ class PlayState extends MusicBeatState
 	
 				switch (badai.curCharacter)
 				{
-					case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-						camFollow.y = badai.getMidpoint().y;
 					case 'bandu':
 						badai.POOP ? {
 						!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
@@ -2505,6 +2503,8 @@ class PlayState extends MusicBeatState
 						} :
 							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
 					} :
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+					case 'bandu-candy':
 						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 				}
 			}
@@ -2524,6 +2524,8 @@ class PlayState extends MusicBeatState
 							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
 					} :
 						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+					case 'bandu-candy':
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 				}
 			}
 
@@ -2536,7 +2538,7 @@ class PlayState extends MusicBeatState
 		if (!focusondad)
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
+			if (SONG.song.toLowerCase() == 'applecore' || SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{

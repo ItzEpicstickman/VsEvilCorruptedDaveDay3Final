@@ -71,6 +71,8 @@ class HealthIcon extends FlxSprite
 
 		addIcon('bandu', 8);
 
+		addIcon('bandu-candy', 8);
+
 		addIcon('tunnel-dave', 12);
 
 		addIcon('og-dave', 14);

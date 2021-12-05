@@ -2,9 +2,6 @@ package;
 
 import flixel.system.FlxAssets.FlxShader;
 
-
-
-
 class GlitchEffect
 {
     public var shader(default,null):GlitchShader = new GlitchShader();
