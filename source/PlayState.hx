@@ -272,7 +272,7 @@ class PlayState extends MusicBeatState
 				iconRPC = 'icon_og_dave';
 			case 'bambi-piss-3d':
 				iconRPC = 'icon_bambi_piss_3d';
-			case 'bandu' | 'bandu-candy':
+			case 'bandu' | 'bandu-candy' | 'bandu-scaredy':
 				iconRPC = 'icon_bandu';
 			case 'badai':
 				iconRPC = 'icon_badai';
@@ -469,6 +469,10 @@ class PlayState extends MusicBeatState
 			case 'bambi-angey':
 				dad.y += 450;
 				dad.x += 100;
+			case 'bandu-scaredy':
+				dad.setPosition(-202, 20);
+			case 'sart-producer':
+				dad.setPosition(732, 83);
 			case 'RECOVERED_PROJECT':
 				dad.setPosition(-307, 10);
 		}
@@ -501,6 +505,9 @@ class PlayState extends MusicBeatState
 			case 'dave-old':
 				boyfriend.y = 100 + 270;
 				boyfriendOldIcon = 'dave';
+			case 'bandu-scaredy':
+				if (SONG.song.toLowerCase() == 'cycles')
+					boyfriend.setPosition(-202, 20);
 			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				boyfriend.y = 100;
 				switch(boyfriend.curCharacter)
@@ -577,6 +584,7 @@ class PlayState extends MusicBeatState
 		bfChar = boyfriend.curCharacter;
 
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
+		if (curStage == 'house') gf.visible = false;
 
 		if (swagger != null) add(swagger);
 
@@ -937,6 +945,11 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.y = 1500;
 				add(daveFuckingDies);
 				daveFuckingDies.visible = false;
+			case 'cycles':
+				curStage = 'house';
+				defaultCamZoom = 1.05;
+
+				add(new FlxSprite(-130, -94).loadGraphic(Paths.image('bambi/yesThatIsATransFlag')));
 			case 'thunderstorm':
 				curStage = 'out';
 				defaultCamZoom = 0.8;
@@ -2562,46 +2575,7 @@ class PlayState extends MusicBeatState
 		}
 		if (focusondad)
 		{
-			if(badaiTime)
-			{
-				camFollow.set(badai.getMidpoint().x + 150, badai.getMidpoint().y - 100);
-				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
-	
-				switch (badai.curCharacter)
-				{
-					case 'bandu':
-						badai.POOP ? {
-						!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
-						camFollow.set(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
-						defaultCamZoom = 0.35;
-						} :
-							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
-					} :
-						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-					case 'bandu-candy':
-						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-				}
-			}
-			else
-			{
-				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
-	
-				switch (dad.curCharacter)
-				{
-					case 'bandu':
-						dad.POOP ? {
-						!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
-						camFollow.set(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
-						defaultCamZoom = 0.35;
-						} :
-							camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
-					} :
-						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-					case 'bandu-candy':
-						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-				}
-			}
+			focusOnChar(badaiTime ? badai : dad);
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -2614,8 +2588,12 @@ class PlayState extends MusicBeatState
 		if (!focusondad)
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+
 			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
-			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.6;
+
+			if (SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.6;
+
+			if (boyfriend.curCharacter == 'bandu-scaredy') camFollow.x += 350;
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -2625,6 +2603,26 @@ class PlayState extends MusicBeatState
 	}
 
 	public static var xtraSong:Bool = false;
+
+	function focusOnChar(char:Character) {
+		camFollow.set(char.getMidpoint().x + 150, char.getMidpoint().y - 100);
+		// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
+
+		switch (char.curCharacter)
+		{
+			case 'bandu':
+				char.POOP ? {
+				!SONG.notes[Math.floor(curStep / 16)].altAnim ? {
+				camFollow.set(littleIdiot.getMidpoint().x, littleIdiot.getMidpoint().y - 300);
+				defaultCamZoom = 0.35;
+				} :
+					camFollow.set(swagger.getMidpoint().x + 150, swagger.getMidpoint().y - 100);
+			} :
+				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+			case 'bandu-candy':
+				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+		}
+	}
 
 	function endSong():Void
 	{
