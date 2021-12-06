@@ -284,7 +284,7 @@ class Note extends FlxSprite
 		if (MyStrum != null && !isAlt)
 		{
 			x = MyStrum.x + (isSustainNote ? width : 0);
-			angle = MyStrum.angle;
+			//angle = MyStrum.angle;
 		}
 		else
 		{
@@ -298,7 +298,7 @@ class Note extends FlxSprite
 							if (spr.ID == notetolookfor)
 							{
 								x = spr.x;
-								angle = spr.angle;
+								//angle = spr.angle;
 								MyStrum = spr;
 							}
 						});
@@ -310,7 +310,7 @@ class Note extends FlxSprite
 								if (spr.ID == notetolookfor)
 								{
 									x = spr.x;
-									angle = spr.angle;
+									//angle = spr.angle;
 									MyStrum = spr;
 								}
 							});
