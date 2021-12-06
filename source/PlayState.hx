@@ -873,6 +873,14 @@ class PlayState extends MusicBeatState
 					what.add(pizza);
 				}
 
+			case 'algebra':
+				curStage = 'algebra';
+				defaultCamZoom = 1.1;
+				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('dave/algebraBg'));
+				bg.screenCenter();
+				sprites.add(bg);
+				add(bg);
+
 			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
