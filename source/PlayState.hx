@@ -71,7 +71,8 @@ class PlayState extends MusicBeatState
 	public static var sicks:Int = 0;
 
 	public var camBeatSnap:Int = 4;
-	public var danceBeatSnap:Int = 4;
+	public var danceBeatSnap:Int = 2;
+	public var dadDanceSnap:Int = 2;
 
 	public var camMoveAllowed:Bool = true;
 
@@ -590,6 +591,11 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == "unfairness")
 		{
 			health = 2;
+		}
+
+		if(dadChar == 'bandu-candy')
+		{
+			dadDanceSnap = 1;
 		}
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
@@ -1932,6 +1938,17 @@ class PlayState extends MusicBeatState
 			{
 				spr.angle += (Math.sin(elapsedtime * 2.5) + 1) * 5;
 			});
+			for(note in notes)
+			{
+				if(note.mustPress)
+				{
+					note.angle = playerStrums.members[note.noteData].angle;
+				}
+				else
+				{
+					note.angle = dadStrums.members[note.noteData].angle;
+				}
+			}
 		}
 
 		if (SONG.song.toLowerCase() == 'disruption') // deez all day
@@ -2338,7 +2355,7 @@ class PlayState extends MusicBeatState
 			{
 				if (daNote.y > FlxG.height)
 				{
-					daNote.active = false;
+					//daNote.active = false;
 					daNote.visible = false;
 				}
 				else
@@ -2364,7 +2381,7 @@ class PlayState extends MusicBeatState
 								altAnim = '-alt';
 								if(SONG.song.toLowerCase() == 'sugar-rush')
 								{
-									idleAlt = true;
+									//idleAlt = true;
 								}
 							}
 							else
@@ -3400,28 +3417,28 @@ class PlayState extends MusicBeatState
 						dadmirror.dance(idleAlt);
 					}
 				case 'applecore':
-					if (dad.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+					if (dad.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						!wtfThing ? dad.dance(dad.POOP) : dad.playAnim('idle-alt', true); // i hate everything
-					if (dadmirror.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+					if (dadmirror.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						!wtfThing ? dadmirror.dance(dad.POOP) : dadmirror.playAnim('idle-alt', true); // sutpid
 				default:
-					if (dad.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+					if (dad.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						dad.dance(idleAlt);
-					if (dadmirror.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+					if (dadmirror.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						dadmirror.dance(idleAlt);
 					if(badai != null)
 					{
-						if (badai.holdTimer <= 0 && curBeat % danceBeatSnap == 0)
+						if (badai.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 							badai.dance(idleAlt);
 					}
 			}
 		}
 		if (swagger != null) {
-			if (swagger.holdTimer <= 0 && curBeat % danceBeatSnap == 0 && swagger.animation.finished)
+			if (swagger.holdTimer <= 0 && curBeat % dadDanceSnap == 0 && swagger.animation.finished)
 				swagger.dance();
 		}
 		if (littleIdiot != null) {
-			if (littleIdiot.animation.finished && littleIdiot.holdTimer <= 0 && curBeat % danceBeatSnap == 0) littleIdiot.dance();
+			if (littleIdiot.animation.finished && littleIdiot.holdTimer <= 0 && curBeat % dadDanceSnap == 0) littleIdiot.dance();
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);

@@ -44,7 +44,15 @@ class ExtraSongState extends MusicBeatState
     
     private var grpSongs:FlxTypedGroup<Alphabet>;
 
-    override function create() {
+    override function create() 
+	{
+
+		
+		if (!FlxG.sound.music.playing)
+		{
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}
+
         #if desktop DiscordClient.changePresence("In the Freeplay Menu", null); #end
 
         bg.loadGraphic(MainMenuState.randomizeBG());

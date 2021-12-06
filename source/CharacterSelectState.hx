@@ -61,8 +61,10 @@ class CharacterSelectState extends MusicBeatState
 	public var characters:Array<CharacterInSelect> = 
 	[
 		new CharacterInSelect(['bf', '3d-bf', 'bf-pixel', 'bf-christmas'], ["Boyfriend", '3D Boyfriend', "Pixel Boyfriend", "Christmas Boyfriend"]),
-		new CharacterInSelect(['bambi-piss-3d', 'bandu', 'unfair-junker', 'badai'], ['Angry 3D Bambi', 'Bandu', 'Unfair Bambi Facing Forward', 'Badai']),
 		new CharacterInSelect(['split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)']),
+		new CharacterInSelect(['bambi-piss-3d', 'unfair-junker'], ['Angry 3D Bambi', 'Unfair Bambi Facing Forward']),
+		new CharacterInSelect(['bandu', 'bandu-candy'], ['Bandu', 'Bandu (Sugar Rush)']),
+		new CharacterInSelect(['badai'], ['Badai']),
 		new CharacterInSelect(['garrett'], ["Garrett"])
 	];
 	public function new() 
@@ -263,7 +265,7 @@ class CharacterSelectState extends MusicBeatState
 				char.y = 100 + 270;
 			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				char.y = 100;
-			case 'bambi-3d' | 'bambi-piss-3d' | 'bandu':
+			case 'bambi-3d' | 'bambi-piss-3d' | 'bandu' | 'bandu-candy':
 				char.y = 100 + 350;
 			case 'bambi-unfair':
 				char.y = 100 + 575;

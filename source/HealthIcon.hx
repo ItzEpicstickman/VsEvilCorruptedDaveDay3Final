@@ -33,7 +33,8 @@ class HealthIcon extends FlxSprite
 		'garrett',
 		'badai',
 		'3d-bf',
-		'RECOVERED_PROJECT'
+		'RECOVERED_PROJECT',
+		'bandu-candy'
 	];
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
