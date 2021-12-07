@@ -84,10 +84,10 @@ class OptionsMenu extends MusicBeatState
 			}
 
 			if (controls.LEFT_R)
-				{
-					FlxG.save.data.offset--;
-					versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
-				}
+			{
+				FlxG.save.data.offset--;
+				versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
+			}
 	
 
 			if (controls.ACCEPT)

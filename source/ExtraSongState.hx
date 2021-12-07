@@ -156,7 +156,14 @@ class ExtraSongState extends MusicBeatState
                     PlayState.xtraSong = true;
 
                     PlayState.storyWeek = songs[curSelected].week;
-                    LoadingState.loadAndSwitchState(new CharacterSelectState());
+					if(songs[curSelected].songName.toLowerCase() == 'cycles')
+					{
+						LoadingState.loadAndSwitchState(new PlayState());
+					}
+					else
+					{
+						LoadingState.loadAndSwitchState(new CharacterSelectState());
+					}
             }
 			
 		}
