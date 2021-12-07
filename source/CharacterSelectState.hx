@@ -60,7 +60,7 @@ class CharacterSelectState extends MusicBeatState
 	
 	public var characters:Array<CharacterInSelect> = 
 	[
-		new CharacterInSelect(['bf', '3d-bf', 'bf-pixel', 'bf-christmas'], ["Boyfriend", '3D Boyfriend', "Pixel Boyfriend", "Christmas Boyfriend"]),
+		new CharacterInSelect(['bf', '3d-bf'], ["Boyfriend", '3D Boyfriend']),
 		new CharacterInSelect(['split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)']),
 		new CharacterInSelect(['bambi-piss-3d', 'unfair-junker'], ['Angry 3D Bambi', 'Unfair Bambi Facing Forward']),
 		new CharacterInSelect(['bandu', 'bandu-candy', 'bandu-origin'], ['Bandu', 'Bandu (Sugar Rush)', 'Bandu (Origin)']),
