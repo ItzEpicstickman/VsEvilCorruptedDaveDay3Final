@@ -2113,7 +2113,7 @@ class PlayState extends MusicBeatState
 		}
 		screenshader.Enabled = shakeCam && eyesoreson;
 
-		if (FlxG.keys.justPressed.NINE)
+		if (FlxG.keys.justPressed.NINE && iconP1.charPublic != 'bandu-origin')
 		{
 			if (iconP1.animation.curAnim.name == boyfriendOldIcon)
 			{
@@ -2185,14 +2185,18 @@ class PlayState extends MusicBeatState
 			health = 2;
 
 		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
+			if(iconP1.charPublic != 'bandu-origin')
+				iconP1.animation.curAnim.curFrame = 1;
 		else
-			iconP1.animation.curAnim.curFrame = 0;
+			if(iconP1.charPublic != 'bandu-origin')
+				iconP1.animation.curAnim.curFrame = 0;
 
 		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
+			if(iconP2.charPublic != 'bandu-origin')
+				iconP2.animation.curAnim.curFrame = 1;
 		else
-			iconP2.animation.curAnim.curFrame = 0;
+			if(iconP2.charPublic != 'bandu-origin')
+				iconP2.animation.curAnim.curFrame = 0;
 
 		/* if (FlxG.keys.justPressed.NINE)
 			FlxG.switchState(new Charting()); */
@@ -3712,6 +3716,18 @@ class PlayState extends MusicBeatState
 
 			iconP1.updateHitbox();
 			iconP2.updateHitbox();
+		}
+
+		if(curBeat % danceBeatSnap == 0)
+		{
+			if(iconP1.charPublic == 'bandu-origin')
+			{
+				iconP1.animation.play(iconP1.charPublic, true);
+			}
+			if(iconP2.charPublic == 'bandu-origin')
+			{
+				iconP2.animation.play(iconP2.charPublic, true);
+			}
 		}
 
 		if (curBeat % gfSpeed == 0)

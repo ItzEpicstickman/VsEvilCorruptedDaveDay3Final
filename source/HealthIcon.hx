@@ -35,61 +35,73 @@ class HealthIcon extends FlxSprite
 		'bandu-origin'
 	];
 
+	public var charPublic:String = 'bf';
+
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
 
 		this.isPlayer = isPlayer;
 
-		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
+		charPublic = char;
+
+		if(char != 'bandu-origin')
+		{
+			loadGraphic(Paths.image('iconGrid'), true, 150, 150);
+	
+			addIcon('face', 58);
+	
+			addIcon('bf', 0);
+	
+			addIcon('tunnel-bf', 0);
+	
+			animation.add('tunnel-bf-flipped', [0, 1], 0, false, true);
+	
+			addIcon('bf-old', 2);
+	
+			animation.add('bf-old-flipped', [2, 3], 0, false, true);
+	
+			addIcon('gf', 57, true);
+	
+			addIcon('bambi-unfair', 4);
+	
+			addIcon('bambi-piss-3d', 6);
+			
+			addIcon('split-dave-3d', 16);
+	
+			addIcon('garrett', 20);
+	
+			addIcon('badai', 18);
+	
+			addIcon('bandu', 8);
+	
+			addIcon('bandu-candy', 8);
+	
+			addIcon('bandu-origin', 8);
+	
+			addIcon('tunnel-dave', 12);
+	
+			addIcon('og-dave', 14);
+	
+			addIcon('og-dave-angey', 14);
+	
+			addIcon('the-two-dunkers', 10);
+	
+			addIcon('dave-png', 22);
+	
+			addIcon('dave-good', 22);
+			
+			addIcon('RECOVERED_PROJECT', 24);
+	
+			animation.play('face');
+		}
+		else
+		{
+			frames = Paths.getSparrowAtlas('bandu_origin_icon');
+			animation.addByPrefix(char, char, 24, false, isPlayer, false);
+		}
 
 		antialiasing = true;
-
-		addIcon('face', 58);
-
-		addIcon('bf', 0);
-
-		addIcon('tunnel-bf', 0);
-
-		animation.add('tunnel-bf-flipped', [0, 1], 0, false, true);
-
-		addIcon('bf-old', 2);
-
-		animation.add('bf-old-flipped', [2, 3], 0, false, true);
-
-		addIcon('gf', 57, true);
-
-		addIcon('bambi-unfair', 4);
-
-		addIcon('bambi-piss-3d', 6);
-		
-		addIcon('split-dave-3d', 16);
-
-		addIcon('garrett', 20);
-
-		addIcon('badai', 18);
-
-		addIcon('bandu', 8);
-
-		addIcon('bandu-candy', 8);
-
-		addIcon('bandu-origin', 8);
-
-		addIcon('tunnel-dave', 12);
-
-		addIcon('og-dave', 14);
-
-		addIcon('og-dave-angey', 14);
-
-		addIcon('the-two-dunkers', 10);
-
-		addIcon('dave-png', 22);
-
-		addIcon('dave-good', 22);
-		
-		addIcon('RECOVERED_PROJECT', 24);
-
-		animation.play('face');
 
 		animation.play(char);
 
