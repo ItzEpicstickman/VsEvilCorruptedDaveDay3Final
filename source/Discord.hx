@@ -58,13 +58,18 @@ class DiscordClient
 	{
 		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
 
+		var realDetails:String = details;
+
+		// CHANGE THIS AT RELEASE!!!
+		realDetails = "NO LEAKS!!!";
+
 		if (endTimestamp > 0)
 		{
 			endTimestamp = startTimestamp + endTimestamp;
 		}
 
 		DiscordRpc.presence({
-			details: details,
+			details: realDetails,
 			state: state,
 			largeImageKey: 'icon_logo',
 			largeImageText: "Vs Dave & Bambi: Golden Apple",
