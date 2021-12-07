@@ -914,7 +914,7 @@ class PlayState extends MusicBeatState
 						bg.loadGraphic(Paths.image('dave/disabled'));
 						curStage = 'disabled';
 					case 'origin':
-						bg.loadGraphic(Paths.image('bambi/origin'));
+						bg.loadGraphic(Paths.image('bambi/heaven'));
 						curStage = 'origin';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
@@ -1673,7 +1673,7 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
-		if(bfSpazOut && elapsedtime % 4 == 0)
+		if(bfSpazOut)
 		{
 			boyfriend.playAnim('sing' + notestuffs[FlxG.random.int(0,3)]);
 		}
@@ -2603,7 +2603,7 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if(camMoveAllowed)
+		if(camMoveAllowed && !inCutscene)
 			ZoomCam(focusOnDadGlobal);
 
 		if (!inCutscene)
