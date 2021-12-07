@@ -59,7 +59,7 @@ class ExtraSongState extends MusicBeatState
 		bg.color = 0xFF4965FF;
 		add(bg);
         
-		addWeek(['Sugar-Rush', 'Cycles'], 2, ['bandu-candy', 'bandu-scaredy']);
+		addWeek(['Sugar-Rush', 'Origin', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'bandu-scaredy']);
         addWeek(['Thunderstorm', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-good', 'RECOVERED_PROJECT']);
 
         grpSongs = new FlxTypedGroup<Alphabet>();
