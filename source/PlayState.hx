@@ -98,7 +98,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy', 'bandu-origin'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -167,6 +167,8 @@ class PlayState extends MusicBeatState
 	private var ss:Bool = false;
 
 	public static var eyesoreson = true;
+
+	public var bfSpazOut:Bool = false;
 
 	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
 
@@ -272,7 +274,7 @@ class PlayState extends MusicBeatState
 				iconRPC = 'icon_og_dave';
 			case 'bambi-piss-3d':
 				iconRPC = 'icon_bambi_piss_3d';
-			case 'bandu' | 'bandu-candy' | 'bandu-scaredy':
+			case 'bandu' | 'bandu-candy' | 'bandu-scaredy' | 'bandu-origin':
 				iconRPC = 'icon_bandu';
 			case 'badai':
 				iconRPC = 'icon_badai';
@@ -774,6 +776,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
 					schoolIntro(doof);
+				case 'origin':
+					originCutscene();
 				default:
 					startCountdown();
 			}
@@ -782,6 +786,8 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
+				case 'origin':
+					originCutscene();
 				default:
 					startCountdown();
 			}
@@ -887,7 +893,7 @@ class PlayState extends MusicBeatState
 				sprites.add(bg);
 				add(bg);
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability':
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
@@ -907,6 +913,9 @@ class PlayState extends MusicBeatState
 					case 'disability':
 						bg.loadGraphic(Paths.image('dave/disabled'));
 						curStage = 'disabled';
+					case 'origin':
+						bg.loadGraphic(Paths.image('bambi/origin'));
+						curStage = 'origin';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -1033,12 +1042,61 @@ class PlayState extends MusicBeatState
 		});
 	}
 
+	function originCutscene():Void
+	{
+		inCutscene = true;
+		dad.visible = false;
+		boyfriend.canDance = false;
+		dad.canDance = false;
+		focusOnDadGlobal = false;
+		ZoomCam(false);
+		new FlxTimer().start(1, function(suckMyGoddamnCock:FlxTimer)
+		{
+			FlxG.sound.play(Paths.sound('origin_bf_call'));
+			bfSpazOut = true;
+			new FlxTimer().start(2, function(cockAndBalls:FlxTimer)
+			{
+				bfSpazOut = false;
+				focusOnDadGlobal = true;
+				ZoomCam(true);
+				new FlxTimer().start(0.5, function(ballsInJaws:FlxTimer)
+				{
+					dad.visible = true;
+					dad.playAnim('cutscene');
+					FlxG.sound.play(Paths.sound('origin_intro'));
+					new FlxTimer().start(1.5, function(deezCandies:FlxTimer)
+					{
+						FlxG.sound.play(Paths.sound('origin_bandu_talk'));
+						new FlxTimer().start(1.5, function(penisCockDick:FlxTimer)
+						{
+							focusOnDadGlobal = false;
+							ZoomCam(false);
+							bfSpazOut = true;
+							FlxG.sound.play(Paths.sound('origin_bf_talk'));
+							new FlxTimer().start(1.5, function(buttAssAnusGluteus:FlxTimer)
+							{
+								bfSpazOut = false;
+								focusOnDadGlobal = true;
+								ZoomCam(true);
+								startCountdown();
+							});
+						});
+					});
+				});
+			});
+		});
+	}
+
 	var startTimer:FlxTimer;
 	var perfectMode:Bool = false;
 
 	function startCountdown():Void
 	{
 		inCutscene = false;
+
+		boyfriend.canDance = true;
+		dad.canDance = true;
+		gf.canDance = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -1615,6 +1673,10 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
+		if(bfSpazOut && elapsedtime % 4 == 0)
+		{
+			boyfriend.playAnim('sing' + notestuffs[FlxG.random.int(0,3)]);
+		}
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 		if(redTunnel != null)

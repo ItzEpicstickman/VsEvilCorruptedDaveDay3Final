@@ -17,9 +17,6 @@ class HealthIcon extends FlxSprite
 		'dave-angey',
 		'dave-annoyed-3d',
 		'bambi-3d',
-		'senpai',
-		'senpai-angry',
-		'spirit',
 		'bf-pixel',
 		'gf-pixel',
 		'bambi-unfair',
@@ -34,7 +31,8 @@ class HealthIcon extends FlxSprite
 		'badai',
 		'3d-bf',
 		'RECOVERED_PROJECT',
-		'bandu-candy'
+		'bandu-candy',
+		'bandu-origin'
 	];
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
@@ -74,6 +72,8 @@ class HealthIcon extends FlxSprite
 		addIcon('bandu', 8);
 
 		addIcon('bandu-candy', 8);
+
+		addIcon('bandu-origin', 8);
 
 		addIcon('tunnel-dave', 12);
 

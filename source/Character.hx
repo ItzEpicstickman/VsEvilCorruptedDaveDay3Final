@@ -164,6 +164,28 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+			case 'bandu-origin':
+				tex = Paths.getSparrowAtlas('bambi/bandu_origin');
+				frames = tex;
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('cutscene', 'CUTSCENE', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				addOffset("cutscene");
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+
 			case 'RECOVERED_PROJECT':
 				tex = Paths.getSparrowAtlas('dave/RECOVERED_PROJECT_01');
 				frames = tex;
