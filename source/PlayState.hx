@@ -582,6 +582,12 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
+		if(dad.curCharacter == 'bandu-origin')
+		{
+			dad.x -= 250;
+			dad.y -= 350;
+		}
+
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 
@@ -1884,7 +1890,7 @@ class PlayState extends MusicBeatState
 		{
 			switch(dad.curCharacter) 
 			{
-				case 'bandu' | 'bandu-candy':
+				case 'bandu':
 					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
@@ -1919,7 +1925,7 @@ class PlayState extends MusicBeatState
 		{
 			switch(badai.curCharacter) 
 			{
-				case 'bandu' | 'bandu-candy':
+				case 'bandu':
 					badai.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					badai.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
