@@ -146,7 +146,7 @@ class CharacterSelectState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			LoadingState.loadAndSwitchState(new FreeplayState());
+			LoadingState.loadAndSwitchState(new PlayMenuState());
 		}
 
 		if(controls.LEFT_P && !PressedTheFunny)

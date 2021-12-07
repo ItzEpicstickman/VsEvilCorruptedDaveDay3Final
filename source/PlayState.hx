@@ -1051,39 +1051,45 @@ class PlayState extends MusicBeatState
 	function originCutscene():Void
 	{
 		inCutscene = true;
-		dad.visible = false;
-		boyfriend.canDance = false;
+		camHUD.visible = false;
+		dad.alpha = 0;
 		dad.canDance = false;
 		focusOnDadGlobal = false;
-		ZoomCam(false);
+		focusOnChar(boyfriend);
 		new FlxTimer().start(1, function(suckMyGoddamnCock:FlxTimer)
 		{
 			FlxG.sound.play(Paths.sound('origin_bf_call'));
+			boyfriend.canDance = false;
 			bfSpazOut = true;
-			new FlxTimer().start(2, function(cockAndBalls:FlxTimer)
+			new FlxTimer().start(1.35, function(cockAndBalls:FlxTimer)
 			{
+				boyfriend.canDance = true;
 				bfSpazOut = false;
 				focusOnDadGlobal = true;
-				ZoomCam(true);
+				focusOnChar(dad);
 				new FlxTimer().start(0.5, function(ballsInJaws:FlxTimer)
 				{
-					dad.visible = true;
+					dad.alpha = 1;
 					dad.playAnim('cutscene');
 					FlxG.sound.play(Paths.sound('origin_intro'));
 					new FlxTimer().start(1.5, function(deezCandies:FlxTimer)
 					{
 						FlxG.sound.play(Paths.sound('origin_bandu_talk'));
+						dad.playAnim('singUP');
 						new FlxTimer().start(1.5, function(penisCockDick:FlxTimer)
 						{
+							dad.canDance = true;
 							focusOnDadGlobal = false;
-							ZoomCam(false);
+							focusOnChar(boyfriend);
+							boyfriend.canDance = false;
 							bfSpazOut = true;
 							FlxG.sound.play(Paths.sound('origin_bf_talk'));
 							new FlxTimer().start(1.5, function(buttAssAnusGluteus:FlxTimer)
 							{
+								boyfriend.canDance = true;
 								bfSpazOut = false;
 								focusOnDadGlobal = true;
-								ZoomCam(true);
+								focusOnChar(dad);
 								startCountdown();
 							});
 						});
@@ -1099,6 +1105,8 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 		inCutscene = false;
+
+		camHUD.visible = true;
 
 		boyfriend.canDance = true;
 		dad.canDance = true;
