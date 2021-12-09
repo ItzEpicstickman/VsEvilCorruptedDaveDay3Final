@@ -108,7 +108,7 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				playAnim('idle');
-			case 'sart-producer':
+			case 'sart-producer-night':
 				frames = Paths.getSparrowAtlas('bambi/sart_producer');
 				animation.addByPrefix('idle', 'idle', 24, false);
 				for (anim in ['left', 'down', 'up', 'right']) {
@@ -125,6 +125,22 @@ class Character extends FlxSprite
 
 				setGraphicSize(811);
 				updateHitbox();
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'sart-producer':
+				frames = Paths.getSparrowAtlas('sart/sart-producer');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
 
 				antialiasing = false;
 

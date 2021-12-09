@@ -35,7 +35,8 @@ class ExtraSongState extends MusicBeatState
     	0xFFca1f6f, // GF
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI r slur (i cant reclaim)
-		0xFF00FFFF //SPLIT THE THONNNNN
+		0xFF00FFFF, //SPLIT THE THONNNNN
+		0xFF000000 // sart.
     ];
     
     private var grpSongs:FlxTypedGroup<Alphabet>;
@@ -57,6 +58,7 @@ class ExtraSongState extends MusicBeatState
         
 		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
         addWeek(['Thunderstorm', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-good', 'RECOVERED_PROJECT']);
+		addWeek(['Sart-Producer'], 4, ['sart-producer']);
 
         grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);

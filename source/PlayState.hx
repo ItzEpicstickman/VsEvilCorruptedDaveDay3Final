@@ -479,10 +479,13 @@ class PlayState extends MusicBeatState
 				dad.x += 100;
 			case 'bandu-scaredy':
 				dad.setPosition(-202, 20);
-			case 'sart-producer':
+			case 'sart-producer-night':
 				dad.setPosition(732, 83);
 			case 'RECOVERED_PROJECT':
 				dad.setPosition(-307, 10);
+			case 'sart-producer':
+				dad.x -= 750;
+				dad.y -= 360;
 		}
 
 
@@ -981,6 +984,11 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.y = 1500;
 				add(daveFuckingDies);
 				daveFuckingDies.visible = false;
+			case 'sart-producer':
+				curStage = 'sart';
+				defaultCamZoom = 0.6;
+
+				add(new FlxSprite(-1350, -1111).loadGraphic(Paths.image('sart/bg')));
 			case 'cycles':
 				curStage = 'house';
 				defaultCamZoom = 1.05;
@@ -2755,6 +2763,9 @@ class PlayState extends MusicBeatState
 				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			case 'bandu-candy':
 				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+
+			case 'sart-producer':
+				camFollow.x -= 100;
 		}
 	}
 
