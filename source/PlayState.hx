@@ -930,6 +930,12 @@ class PlayState extends MusicBeatState
 					case 'metallic':
 						bg.loadGraphic(Paths.image('bambi/metal'));
 						curStage = 'metallic';
+					case 'strawberry':
+						bg.loadGraphic(Paths.image('bambi/strawberries'));
+						curStage = 'strawberry';
+					case 'keyboard':
+						bg.loadGraphic(Paths.image('bambi/keyboard'));
+						curStage = 'keyboard';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -2212,17 +2218,23 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new Charting()); */
 
 		if (FlxG.keys.justPressed.EIGHT)
+		{
 			PlayState.characteroverride = 'none';
 			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(dad.curCharacter));
+		}
 		if (FlxG.keys.justPressed.TWO)
+		{
 			PlayState.characteroverride = 'none';
 			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
+		}
 		if (FlxG.keys.justPressed.THREE)
+		{
 			PlayState.characteroverride = 'none';
 			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(gf.curCharacter));
+		}
 		if (startingSong)
 		{
 			if (startedCountdown)
