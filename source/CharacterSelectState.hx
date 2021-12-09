@@ -61,11 +61,16 @@ class CharacterSelectState extends MusicBeatState
 	public var characters:Array<CharacterInSelect> = 
 	[
 		new CharacterInSelect(['bf', '3d-bf'], ["Boyfriend", '3D Boyfriend']),
-		new CharacterInSelect(['split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)']),
+		new CharacterInSelect(['split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Disability Dave', 'Decimated Dave', 'Algebra Dave', 'Algebra Dave (Angry)']),
 		new CharacterInSelect(['bambi-piss-3d', 'unfair-junker'], ['Angry 3D Bambi', 'Unfair Bambi Facing Forward']),
-		new CharacterInSelect(['bandu', 'bandu-candy', 'bandu-origin'], ['Bandu', 'Bandu (Sugar Rush)', 'Bandu (Origin)']),
-		new CharacterInSelect(['badai'], ['Badai']),
-		new CharacterInSelect(['garrett'], ["Garrett"])
+		new CharacterInSelect(['bandu', 'badai', 'bandu-candy', 'bandu-origin'], ['Bandu', 'Badai', 'Bandu (Sugar Rush)', 'Bandu (Origin)']),
+		new CharacterInSelect(['garrett'], ["Garrett"]),
+		new CharacterInSelect(['diamond-man'], ["Diamond Man"]),
+		new CharacterInSelect(['ringi'], ["Ringi"]),
+		new CharacterInSelect(['bambom'], ["Bambom"]),
+		new CharacterInSelect(['bendu'], ["Bendu"]),
+		new CharacterInSelect(['sart-producer'], ["Sart Producer"])
+
 	];
 	public function new() 
 	{

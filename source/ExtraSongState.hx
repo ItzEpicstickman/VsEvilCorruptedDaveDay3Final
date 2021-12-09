@@ -29,11 +29,7 @@ class ExtraSongState extends MusicBeatState
 
     private var iconArray:Array<HealthIcon> = [];
 
-    var scoreText:FlxText;
-	var lerpScore:Int = 0;
-	var intendedScore:Int = 0;
-
-    var swagText:FlxText = new FlxText(FlxG.width - 300, 0, 0, 'my poop is brimming', 85);
+    var swagText:FlxText = new FlxText(0, 0, 0, 'my poop is brimming', 85);
 
     var songColors:Array<FlxColor> = [
     	0xFFca1f6f, // GF
@@ -53,22 +49,21 @@ class ExtraSongState extends MusicBeatState
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
 
-        #if desktop DiscordClient.changePresence("In the Freeplay Menu", null); #end
+        #if desktop DiscordClient.changePresence("In the Extra Songs Menu", null); #end
 
         bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = 0xFF4965FF;
 		add(bg);
         
-		addWeek(['Sugar-Rush', 'Origin', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'bandu-scaredy']);
+		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
         addWeek(['Thunderstorm', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-good', 'RECOVERED_PROJECT']);
 
         grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-        swagText.setFormat("assets/fonts/vcr.ttf", 47, FlxColor.BLACK, RIGHT);
-		swagText.screenCenter();
-		swagText.x += 300;
-        swagText.y -= 150;
+        swagText.setFormat(Paths.font("vcr.ttf"), 47, FlxColor.BLACK, LEFT);
+		swagText.screenCenter(X);
+		swagText.y += 50;
 		add(swagText);
 
 		for (i in 0...songs.length)
@@ -88,15 +83,6 @@ class ExtraSongState extends MusicBeatState
 			iconArray.push(icon);
 			add(icon);
 		}
-
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
-		scoreBG.alpha = 0.6;
-		add(scoreBG);
-
-		add(scoreText);
 
 		changeSelection();
 
@@ -126,10 +112,14 @@ class ExtraSongState extends MusicBeatState
 		songs.push(new SongMetadata(songName, weekNum, songCharacter, blackoutIcon));
 	}
 
-    override function update(p:Float) {
-        super.update(p);
+    override function update(p:Float)
+	{
+		if (FlxG.sound.music.volume < 0.7)
+		{
+			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+		}
 
-        lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
+        super.update(p);
 
         if (controls.UP_P)
             changeSelection(-1);
@@ -165,7 +155,6 @@ class ExtraSongState extends MusicBeatState
 						LoadingState.loadAndSwitchState(new CharacterSelectState());
 					}
             }
-			
 		}
     }
 
@@ -182,19 +171,15 @@ class ExtraSongState extends MusicBeatState
 
         switch(songs[curSelected].songName.toLowerCase()) {
             case 'unknown':
-                swagText.text = 'A secret is required \nto unlock this song!';
+                swagText.text = 'A secret is required to unlock this song!';
                 swagText.visible = true;
             default:
                 swagText.visible = false;
         }
 
-        
-		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, 1);
-		#end
-
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		if(songs[curSelected].songName.toLowerCase() != 'unknown')
+			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
 		#end
 
 		var bullShit:Int = 0;

@@ -28,8 +28,6 @@ class PlayMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var scoreText:FlxText;
-
 	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra', 'extras'];
 
 	var newGaming:FlxText;
@@ -112,18 +110,6 @@ class PlayMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
-		scoreBG.alpha = 0.6;
-
-		scoreText.scrollFactor.set();
-		scoreBG.scrollFactor.set();
-
-		add(scoreBG);
-		add(scoreText);
-
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -178,17 +164,10 @@ class PlayMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.8)
+		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
-
-		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
-
-		if (Math.abs(lerpScore - intendedScore) <= 10)
-			lerpScore = intendedScore;
-
-		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
 		if (!selectedSomethin)
 		{
@@ -256,7 +235,9 @@ class PlayMenuState extends MusicBeatState
 									PlayState.xtraSong = false;
 						
 									PlayState.storyWeek = 1;
-									LoadingState.loadAndSwitchState(new PlayState());
+									PlayState.characteroverride = 'none';
+									PlayState.formoverride = 'none';
+									LoadingState.loadAndSwitchState(new CharacterSelectState());
 							}
 						});
 					}
@@ -312,6 +293,11 @@ class PlayMenuState extends MusicBeatState
 		bg.setGraphicSize(1280);
 		bg.updateHitbox();
 		bg.screenCenter();
+
+		#if PRELOAD_ALL
+		if(optionShit[curSelected].toLowerCase() != 'extras')
+			FlxG.sound.playMusic(Paths.inst(optionShit[curSelected]), 0);
+		#end
 	}
 	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
 	{

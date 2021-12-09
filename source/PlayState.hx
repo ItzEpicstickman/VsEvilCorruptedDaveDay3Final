@@ -59,6 +59,11 @@ class PlayState extends MusicBeatState
 	public static var curStage:String = '';
 	public static var characteroverride:String = "none";
 	public static var formoverride:String = "none";
+	//put the following in anywhere you load or leave playstate that isnt the character selector:
+	/*
+		PlayState.characteroverride = 'none';
+		PlayState.formoverride = 'none';
+	*/
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
 	public static var storyWeek:Int = 0;
@@ -899,7 +904,7 @@ class PlayState extends MusicBeatState
 				sprites.add(bg);
 				add(bg);
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin':
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
@@ -922,6 +927,9 @@ class PlayState extends MusicBeatState
 					case 'origin':
 						bg.loadGraphic(Paths.image('bambi/heaven'));
 						curStage = 'origin';
+					case 'metallic':
+						bg.loadGraphic(Paths.image('bambi/metal'));
+						curStage = 'metallic';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -2160,6 +2168,8 @@ class PlayState extends MusicBeatState
 			switch (curSong.toLowerCase())
 			{
 				default:
+					PlayState.characteroverride = 'none';
+					PlayState.formoverride = 'none';
 					FlxG.switchState(new ChartingState());
 					#if desktop
 					DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -2202,10 +2212,16 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new Charting()); */
 
 		if (FlxG.keys.justPressed.EIGHT)
+			PlayState.characteroverride = 'none';
+			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(dad.curCharacter));
 		if (FlxG.keys.justPressed.TWO)
+			PlayState.characteroverride = 'none';
+			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
 		if (FlxG.keys.justPressed.THREE)
+			PlayState.characteroverride = 'none';
+			PlayState.formoverride = 'none';
 			FlxG.switchState(new AnimationDebug(gf.curCharacter));
 		if (startingSong)
 		{
@@ -2317,6 +2333,8 @@ class PlayState extends MusicBeatState
 							FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
 							System.exit(0);
 						default:
+							PlayState.characteroverride = 'none';
+							PlayState.formoverride = 'none';
 							FlxG.switchState(new EndingState('rtxx_ending', 'badEnding'));
 					}
 				}

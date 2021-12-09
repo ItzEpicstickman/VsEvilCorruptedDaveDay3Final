@@ -131,7 +131,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'diamond-man':
 				frames = Paths.getSparrowAtlas('dave/diamondMan');
-				animation.addByPrefix('idle', 'idle', 24, true);
+				animation.addByPrefix('idle', 'idle', 24, false);
 				for (anim in ['left', 'down', 'up', 'right']) {
 					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
 				}
@@ -141,6 +141,56 @@ class Character extends FlxSprite
 				addOffset('singDOWN', 66, -248);
 				addOffset('singUP', -10, 260);
 				addOffset('singRIGHT', 2);
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'ringi':
+				frames = Paths.getSparrowAtlas('bambi/ringi');
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				for (anim in ['LEFT', 'DOWN', 'UP', 'RIGHT']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'bambom':
+				frames = Paths.getSparrowAtlas('bambi/bambom');
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				for (anim in ['LEFT', 'DOWN', 'UP', 'RIGHT']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'bendu':
+				frames = Paths.getSparrowAtlas('bambi/bendu');
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				for (anim in ['LEFT', 'DOWN', 'UP', 'RIGHT']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
+
+				antialiasing = false;
 
 				playAnim('idle');
 			case 'dave-png':

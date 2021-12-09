@@ -32,7 +32,12 @@ class HealthIcon extends FlxSprite
 		'3d-bf',
 		'RECOVERED_PROJECT',
 		'bandu-candy',
-		'bandu-origin'
+		'bandu-origin',
+		'bandu-scaredy',
+		'sart-producer',
+		'bambom',
+		'ringi',
+		'bendu'
 	];
 
 	public var charPublic:String = 'bf';
@@ -50,8 +55,16 @@ class HealthIcon extends FlxSprite
 			loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 	
 			addIcon('face', 58);
+
+			addIcon('ringi', 28);
+
+			addIcon('bambom', 30);
+
+			addIcon('bendu', 32);
 	
 			addIcon('bf', 0);
+
+			addIcon('sart-producer', 26);
 	
 			addIcon('tunnel-bf', 0);
 	
@@ -62,7 +75,7 @@ class HealthIcon extends FlxSprite
 			animation.add('bf-old-flipped', [2, 3], 0, false, true);
 	
 			addIcon('gf', 57, true);
-	
+
 			addIcon('bambi-unfair', 4);
 	
 			addIcon('bambi-piss-3d', 6);
@@ -78,6 +91,8 @@ class HealthIcon extends FlxSprite
 			addIcon('bandu-candy', 8);
 	
 			addIcon('bandu-origin', 8);
+
+			addIcon('bandu-scaredy', 8);
 	
 			addIcon('tunnel-dave', 12);
 	

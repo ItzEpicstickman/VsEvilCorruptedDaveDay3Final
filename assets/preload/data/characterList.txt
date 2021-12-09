@@ -16,3 +16,6 @@ dave-png
 RECOVERED_PROJECT
 bandu-origin
 diamond-man
+ringi
+bambom
+bendu
