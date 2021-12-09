@@ -449,7 +449,7 @@ class PlayState extends MusicBeatState
 				}
 			case 'bambi-3d' | 'bambi-piss-3d':
 				{
-					dad.y -= 125;
+					dad.y -= 250;
 					dad.x -= 185;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
