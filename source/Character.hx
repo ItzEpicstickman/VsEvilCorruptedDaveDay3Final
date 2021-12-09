@@ -129,6 +129,20 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+			case 'diamond-man':
+				frames = Paths.getSparrowAtlas('dave/diamondMan');
+				animation.addByPrefix('idle', 'idle', 24, true);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT', 468, 2);
+				addOffset('singDOWN', 66, -248);
+				addOffset('singUP', -10, 260);
+				addOffset('singRIGHT', 2);
+
+				playAnim('idle');
 			case 'dave-png':
 				frames = Paths.getSparrowAtlas('dave/dave-png');
 				animation.addByPrefix('idle', 'idle', 24, false);
