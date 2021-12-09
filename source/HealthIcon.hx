@@ -80,6 +80,8 @@ class HealthIcon extends FlxSprite
 			addIcon('gf', 57, true);
 
 			addIcon('bambi-unfair', 4);
+			
+			addIcon('unfair-junker', 4);
 	
 			addIcon('bambi-piss-3d', 6);
 			

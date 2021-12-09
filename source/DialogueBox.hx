@@ -57,7 +57,7 @@ class DialogueBox extends FlxSpriteGroup
 	{
 		super();
 
-		if (PlayState.isStoryMode) {
+		if (FlxG.save.data.freeplayCuts) {
 			switch (PlayState.SONG.song.toLowerCase())
 			{
 				case 'senpai':

@@ -69,7 +69,7 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect(['ringi'], ["Ringi"]),
 		new CharacterInSelect(['bambom'], ["Bambom"]),
 		new CharacterInSelect(['bendu'], ["Bendu"]),
-		new CharacterInSelect(['sart-producer'], ["Sart Producer"])
+		new CharacterInSelect(['sart-producer', 'sart-producer-night'], ["Sart Producer", "Sart Producer (Night)"])
 
 	];
 	public function new() 
@@ -187,12 +187,6 @@ class CharacterSelectState extends MusicBeatState
 		}
 		if (controls.ACCEPT)
 		{
-			if (!FlxG.save.data.unlockedcharacters[current])
-			{
-				FlxG.camera.shake(0.05, 0.1);
-				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
-				return;
-			}
 			if (PressedTheFunny)
 			{
 				return;
@@ -292,13 +286,6 @@ class CharacterSelectState extends MusicBeatState
 		}
 		add(char);
 		funnyIconMan.animation.play(char.curCharacter);
-		if (!FlxG.save.data.unlockedcharacters[current])
-		{
-			char.color = FlxColor.BLACK;
-			funnyIconMan.color = FlxColor.BLACK;
-			funnyIconMan.animation.curAnim.curFrame = 1;
-			characterText.text = '???';
-		}
 		characterText.screenCenter(X);
 	}
 

@@ -712,6 +712,8 @@ class PlayState extends MusicBeatState
 				credits = 'OC created by Emiko!';
 			case 'keyboard':
 				credits = 'OC created by DanWiki!';
+			case 'bambi-666-level':
+				credits = 'Bambi 666 Level';
 			default:
 				credits = '';
 		}
