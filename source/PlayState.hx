@@ -389,6 +389,7 @@ class PlayState extends MusicBeatState
 		{
 			gfVersion = 'gf-christmas';
 		}
+		if (SONG.song.toLowerCase() == 'sugar-rush') gfVersion = 'gf-only';
 		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
@@ -556,6 +557,8 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 10;
 				gf.x += 70;
 				dad.x -= 100;
+			case 'sugar':
+				gf.setPosition(811, 200);
 		}
 
 		if(darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
@@ -621,7 +624,13 @@ class PlayState extends MusicBeatState
 		doof.scrollFactor.set();
 		doof.finishThing = startCountdown;
 
+
 		Conductor.songPosition = -5000;
+
+		thunderBlack = new FlxSprite().makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
+		thunderBlack.screenCenter();
+		thunderBlack.alpha = 0;
+		add(thunderBlack);
 
 		strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
 		strumLine.scrollFactor.set();
@@ -768,18 +777,13 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		thunderBlack = new FlxSprite().makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
-		thunderBlack.screenCenter();
-		thunderBlack.alpha = 0;
-		add(thunderBlack);
-
+		thunderBlack.cameras = [camHUD];
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
-		thunderBlack.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
@@ -823,18 +827,17 @@ class PlayState extends MusicBeatState
 		{
 			case 'sugar-rush':
 				camBeatSnap = 1;
-				defaultCamZoom = 0.5;
+				defaultCamZoom = 0.85;
 				curStage = 'sugar';
-				unswagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/poop'));
-				unswagBG.scale.set(1.75, 1.75);
-				var testshader2:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-				testshader2.waveAmplitude = 0.1;
-				testshader2.waveFrequency = 5;
-				testshader2.waveSpeed = 2;
-				unswagBG.shader = testshader2.shader;
-				sprites.add(unswagBG);
-				add(unswagBG);
-				curbg = unswagBG;
+
+				var swag:FlxSprite = new FlxSprite(120, -35).loadGraphic(Paths.image('bambi/pissing_too'));
+				swag.x -= 250;
+				swag.setGraphicSize(Std.int(swag.width  * 0.521814815));
+				swag.updateHitbox();
+				swag.antialiasing = false;
+
+				add(swag);
+				
 			case 'recovered-project':
 				defaultCamZoom = 0.85;
 				curStage = 'recover';
@@ -1144,14 +1147,20 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
+		var startSpeed:Float = 1;
+
+		if (SONG.song.toLowerCase() == 'disruption') {
+			startSpeed = 0.5; // WHATN THE JUNK!!!
+		}
+
 		talking = false;
 		startedCountdown = true;
 		Conductor.songPosition = 0;
-		Conductor.songPosition -= Conductor.crochet * 5;
+		Conductor.songPosition -= Conductor.crochet * 5 * (1 / startSpeed);
 
 		var swagCounter:Int = 0;
 
-		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
+		startTimer = new FlxTimer().start(Conductor.crochet / (1000 * startSpeed), function(tmr:FlxTimer)
 		{
 			dad.dance();
 			gf.dance();
@@ -1276,6 +1285,7 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.sound.music.volume = 0;
 		}
+		if (SONG.song.toLowerCase() == 'disruption') FlxG.sound.music.volume = 1; // WEIRD BUG!!! WTF!!!
 
 		#if desktop
 		DiscordClient.changePresence(SONG.song,
@@ -1928,6 +1938,8 @@ class PlayState extends MusicBeatState
 		{
 			switch(dad.curCharacter) 
 			{
+				case 'bandu-candy':
+					dad.x += Math.sin(elapsedtime * 50) / 9;
 				case 'bandu':
 					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
@@ -2141,6 +2153,8 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
+
+		FlxG.watch.addQuick("WHAT", Conductor.songPosition);
 			
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
@@ -2190,6 +2204,7 @@ class PlayState extends MusicBeatState
 			persistentUpdate = false;
 			persistentDraw = true;
 			paused = true;
+			trace('PAULSCODE ' + paused);
 
 			// 1 / 1000 chance for Gitaroo Man easter egg
 			if (FlxG.random.bool(0.1))
@@ -2723,8 +2738,6 @@ class PlayState extends MusicBeatState
 			{
 				tweenCamIn();
 			}
-
-			if(SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.5;
 		}
 
 		if (!focusondad)
@@ -2732,8 +2745,6 @@ class PlayState extends MusicBeatState
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
 			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
-
-			if (SONG.song.toLowerCase() == 'sugar-rush') defaultCamZoom = 0.6;
 
 			if (boyfriend.curCharacter == 'bandu-scaredy') camFollow.x += 350;
 
@@ -2762,7 +2773,7 @@ class PlayState extends MusicBeatState
 			} :
 				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			case 'bandu-candy':
-				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+				camFollow.set(char.getMidpoint().x + 175, char.getMidpoint().y - 85);
 
 			case 'sart-producer':
 				camFollow.x -= 100;
