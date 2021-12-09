@@ -237,7 +237,7 @@ class PlayMenuState extends MusicBeatState
 									PlayState.storyWeek = 1;
 									PlayState.characteroverride = 'none';
 									PlayState.formoverride = 'none';
-									LoadingState.loadAndSwitchState(new CharacterSelectState());
+									LoadingState.loadAndSwitchState(new PlayState());
 							}
 						});
 					}

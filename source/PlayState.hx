@@ -449,6 +449,7 @@ class PlayState extends MusicBeatState
 			case 'bambi-3d' | 'bambi-piss-3d':
 				{
 					dad.y -= 125;
+					dad.x -= 185;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
 			case 'bambi-unfair':
@@ -1569,6 +1570,7 @@ class PlayState extends MusicBeatState
 
 				arrowJunks.push([babyArrow.x, babyArrow.y + 1000]);
 				var hi = new FlxSprite(0, babyArrow.y);
+				hi.ID = i;
 				swagThings.add(hi);
 			}
 
@@ -3622,10 +3624,14 @@ class PlayState extends MusicBeatState
 						dadmirror.playAnim('NOOMYPHONES', true);
 						dad.POOP = true; // WORK WORK WOKR< WOKRMKIEPATNOLIKSEHGO:"IKSJRHDLG"H
 						dadmirror.POOP = true; // :))))))))))
+						poopStrums.visible = true; // ??????
 						new FlxTimer().start(3.5, function(deez:FlxTimer){
 							swagThings.forEach(function(spr:FlxSprite){
-								FlxTween.tween(spr, {y: spr.y + 1010, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
+								FlxTween.tween(spr, {y: spr.y + 1010}, 1.2, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
 							});	
+							poopStrums.forEach(function(spr:FlxSprite){
+								FlxTween.tween(spr, {alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
+							});
 							FlxTween.tween(swagger, {y: swagger.y + 1000}, 1.05, {ease:FlxEase.cubeInOut});
 						});
 						unswagBG.active = unswagBG.visible = true;

@@ -131,7 +131,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'diamond-man':
 				frames = Paths.getSparrowAtlas('dave/diamondMan');
-				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('idle', 'idle', 24, true);
 				for (anim in ['left', 'down', 'up', 'right']) {
 					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
 				}
@@ -411,24 +411,25 @@ class Character extends FlxSprite
 				// BAMBI SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/bambi_pissyboy');
 				frames = tex;
-				animation.addByPrefix('idle', 'DaveAngry idle dance', 24, false);
-				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24, false);
-				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24, false);
-				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24, false);
+				animation.addByIndices('danceLeft', 'idle', [for (i in 0...13) i], "", 24, false);
+				animation.addByIndices('danceRight', 'idle', [for (i in 13...23) i], "", 24, false);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
 		
-				addOffset('idle');
-				addOffset("singUP", 20, -10);
-				addOffset("singRIGHT", 80, -20);
-				addOffset("singLEFT", 0, -10);
-				addOffset("singDOWN", 0, 10);
+				addOffset('danceLeft');
+				addOffset('danceRight');
+				addOffset("singUP", 10, 20);
+				addOffset("singRIGHT", 30, 20);
+				addOffset("singLEFT", 30);
+				addOffset("singDOWN", 0, -10);
 				globaloffset[0] = 150;
 				globaloffset[1] = 450; //this is the y
 				setGraphicSize(Std.int(width / furiosityScale));
 				updateHitbox();
 				antialiasing = false;
 		
-				playAnim('idle');
+				playAnim('danceRight');
 
 			case 'bandu':
 				frames = Paths.getSparrowAtlas('bambi/bandu');
@@ -730,7 +731,7 @@ class Character extends FlxSprite
 			var poopInPants:String = alt ? '-alt' : '';
 			switch (curCharacter)
 			{
-				case 'gf' | 'gf-christmas' | 'gf-pixel' | 'bandu-candy':
+				case 'gf' | 'gf-christmas' | 'gf-pixel' | 'bandu-candy' | 'bambi-piss-3d':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
