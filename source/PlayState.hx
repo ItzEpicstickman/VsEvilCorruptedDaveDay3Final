@@ -103,7 +103,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy', 'bandu-origin'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -693,6 +693,12 @@ class PlayState extends MusicBeatState
 				credits = 'Screw you!';
 			case 'thunderstorm':
 				credits = 'Original song made by Saruky for Vs. Shaggy!';
+			case 'metallic':
+				credits = 'OC created by Dragolii!';
+			case 'strawberry':
+				credits = 'OC created by Emiko!';
+			case 'keyboard':
+				credits = 'OC created by DanWiki!';
 			default:
 				credits = '';
 		}
@@ -1939,6 +1945,12 @@ class PlayState extends MusicBeatState
 				case 'badai':
 					dad.angle += elapsed * 10;
 					dad.y += (Math.sin(elapsedtime) * 0.6);
+				case 'ringi':
+					dad.y += (Math.sin(elapsedtime) * 0.6);
+					dad.x += (Math.sin(elapsedtime) * 0.6);
+				case 'bambom':
+					dad.y += (Math.sin(elapsedtime) * 0.75);
+					dad.x = 200 + Math.sin(elapsedtime) * 425;
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}
@@ -1993,7 +2005,17 @@ class PlayState extends MusicBeatState
 		}
 		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()) && canFloat)
 		{
-			boyfriend.y += (Math.sin(elapsedtime) * 0.6);
+			switch(boyfriend.curCharacter)
+			{
+				case 'ringi':
+					boyfriend.y += (Math.sin(elapsedtime) * 0.6);
+					boyfriend.x += (Math.sin(elapsedtime) * 0.6);
+				case 'bambom':
+					boyfriend.y += (Math.sin(elapsedtime) * 0.75);
+					boyfriend.x = 200 + Math.sin(elapsedtime) * 425;
+				default:
+					boyfriend.y += (Math.sin(elapsedtime) * 0.6);
+			}
 		}
 		/*if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 		{
