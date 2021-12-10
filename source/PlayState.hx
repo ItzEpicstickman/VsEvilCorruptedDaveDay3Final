@@ -190,6 +190,8 @@ class PlayState extends MusicBeatState
 
 	public var cameraSpeed:Float = 1;
 
+	public var camZoomIntensity:Float = 1;
+
 	private var iconP1:HealthIcon;
 	private var iconP2:HealthIcon;
 	private var BAMBICUTSCENEICONHURHURHUR:HealthIcon;
@@ -3602,10 +3604,10 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % camBeatSnap == 0)
+		if (camZooming && FlxG.camera.zoom < (1.35 * camZoomIntensity) && curBeat % camBeatSnap == 0)
 		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
+			FlxG.camera.zoom += (0.015 * camZoomIntensity);
+			camHUD.zoom += (0.03 * camZoomIntensity);
 		}
 		switch (curSong.toLowerCase())
 		{
