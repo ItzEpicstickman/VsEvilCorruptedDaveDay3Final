@@ -49,6 +49,8 @@ class TitleState extends MusicBeatState
 
 	var fun:Int;
 
+	var danced:Bool = false;
+
 	override public function create():Void
 	{
 		#if polymod
@@ -118,6 +120,7 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var titleText:FlxSprite;
 
+
 	function startIntro()
 	{
 		if (!initialized)
@@ -145,11 +148,12 @@ class TitleState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		logoBl = new FlxSprite(130, 30);
+		logoBl = new FlxSprite(-185, -430);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.animation.play('bump');
+		logoBl.animation.addByIndices('bumpLeft', 'logo bumpin', [for (i in 0...14) i], '', 24, false);
+		logoBl.animation.addByIndices('bumpRight', 'logo bumpin', [for (i in 15...29) i], '', 24, false);
+		logoBl.animation.play('bumpLeft');
 		logoBl.updateHitbox();
 
 		titleDude = new FlxSprite(-150, 1000);
@@ -343,9 +347,18 @@ class TitleState extends MusicBeatState
 
 		if(curBeat % 2 == 0)
 		{
-			logoBl.animation.play('bump', true);
+			if(danced)
+			{
+				logoBl.animation.play('bumpRight', true);
+			}
+			else
+			{
+				logoBl.animation.play('bumpLeft', true);
+			}
 			if(altIdle){titleDude.animation.play('idle-alt',true);}else{titleDude.animation.play('idle',true);}
 		}
+
+		danced = !danced;
 
 		FlxG.log.add(curBeat);
 
