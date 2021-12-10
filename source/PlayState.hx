@@ -149,11 +149,11 @@ class PlayState extends MusicBeatState
 
 	public var sunsetColor:FlxColor = FlxColor.fromRGB(255, 143, 178);
 
-	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
+	private var strumLineNotes:FlxTypedGroup<Strum>;
 
-	public var playerStrums:FlxTypedGroup<FlxSprite>;
-	public var dadStrums:FlxTypedGroup<FlxSprite>;
-	private var poopStrums:FlxTypedGroup<FlxSprite>;
+	public var playerStrums:FlxTypedGroup<Strum>;
+	public var dadStrums:FlxTypedGroup<Strum>;
+	private var poopStrums:FlxTypedGroup<Strum>;
 
 	public var idleAlt:Bool = false;
 
@@ -642,14 +642,14 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.downscroll)
 			strumLine.y = FlxG.height - 165;
 
-		strumLineNotes = new FlxTypedGroup<FlxSprite>();
+		strumLineNotes = new FlxTypedGroup<Strum>();
 		add(strumLineNotes);
 
-		playerStrums = new FlxTypedGroup<FlxSprite>();
+		playerStrums = new FlxTypedGroup<Strum>();
 
-		dadStrums = new FlxTypedGroup<FlxSprite>();
+		dadStrums = new FlxTypedGroup<Strum>();
 
-		poopStrums = new FlxTypedGroup<FlxSprite>();
+		poopStrums = new FlxTypedGroup<Strum>();
 
 		generateSong(SONG.song);
 
@@ -1432,7 +1432,7 @@ class PlayState extends MusicBeatState
 		for (i in 0...4)
 		{
 			// FlxG.log.add(i);
-			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
+			var babyArrow:Strum = new Strum(0, strumLine.y);
 
 			if (Note.CharactersWith3D.contains(dad.curCharacter) && player == 0 || Note.CharactersWith3D.contains(boyfriend.curCharacter) && player == 1)
 			{
@@ -1533,6 +1533,8 @@ class PlayState extends MusicBeatState
 
 			if (isFunnySong || SONG.song.toLowerCase() == 'disruption')
 			arrowJunks.push([babyArrow.x, babyArrow.y]);
+			
+			babyArrow.resetTrueCoords();
 		}
 
 		if (SONG.song.toLowerCase() == 'applecore') {
@@ -1541,7 +1543,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...4)
 			{
 				// FlxG.log.add(i);
-				var babyArrow:FlxSprite = new FlxSprite(0, altStrumLine.y);
+				var babyArrow:Strum = new Strum(0, altStrumLine.y);
 
 				babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -1833,19 +1835,19 @@ class PlayState extends MusicBeatState
 				if (dad.POOP) spr.angle += (Math.sin(elapsed * 2) * 0.5 + 0.5) * spr.ID == 1 ? 0.65 : -0.65;
 			});
 
-			playerStrums.forEach(function(spr:FlxSprite){
+			playerStrums.forEach(function(spr:Strum){
 				noteJunksPlayer[spr.ID] = spr.y;
 			});
-			dadStrums.forEach(function(spr:FlxSprite){
+			dadStrums.forEach(function(spr:Strum){
 				noteJunksDad[spr.ID] = spr.y;
 			});
 			if (unfairPart) {
-				playerStrums.forEach(function(spr:FlxSprite)
+				playerStrums.forEach(function(spr:Strum)
 				{
 					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID)) * 300);
 					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID)) * 300);
 				});
-				dadStrums.forEach(function(spr:FlxSprite)
+				dadStrums.forEach(function(spr:Strum)
 				{
 					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin((elapsedtime + (spr.ID )) * 2) * 300);
 					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos((elapsedtime + (spr.ID)) * 2) * 300);
@@ -1854,7 +1856,7 @@ class PlayState extends MusicBeatState
 			if (SONG.notes[Math.floor(curStep / 16)] != null) {
 				if (SONG.notes[Math.floor(curStep / 16)].altAnim && !unfairPart) {
 					var krunkThing = 60;
-					playerStrums.forEach(function(spr:FlxSprite)
+					playerStrums.forEach(function(spr:Strum)
 					{
 						spr.x = arrowJunks[spr.ID + 8][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
 						spr.y = arrowJunks[spr.ID + 8][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
@@ -1870,7 +1872,7 @@ class PlayState extends MusicBeatState
 						spr.scale.y *= 1.5;
 					});
 
-					poopStrums.forEach(function(spr:FlxSprite)
+					poopStrums.forEach(function(spr:Strum)
 					{
 						spr.x = arrowJunks[spr.ID + 4][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
 						spr.y = swagThings.members[spr.ID].y + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
@@ -2052,12 +2054,12 @@ class PlayState extends MusicBeatState
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
 		{
-			playerStrums.forEach(function(spr:FlxSprite)
+			playerStrums.forEach(function(spr:Strum)
 			{
 				spr.x += Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
 				spr.x -= Math.sin(elapsedtime) * 1.5;
 			});
-			dadStrums.forEach(function(spr:FlxSprite)
+			dadStrums.forEach(function(spr:Strum)
 			{
 				spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
 				spr.x += Math.sin(elapsedtime) * 1.5;
@@ -2066,11 +2068,11 @@ class PlayState extends MusicBeatState
 
 		if(SONG.song.toLowerCase() == 'disability')
 		{
-			playerStrums.forEach(function(spr:FlxSprite)
+			playerStrums.forEach(function(spr:Strum)
 			{
 				spr.angle += (Math.sin(elapsedtime * 2.5) + 1) * 5;
 			});
-			dadStrums.forEach(function(spr:FlxSprite)
+			dadStrums.forEach(function(spr:Strum)
 			{
 				spr.angle += (Math.sin(elapsedtime * 2.5) + 1) * 5;
 			});
@@ -2078,11 +2080,13 @@ class PlayState extends MusicBeatState
 			{
 				if(note.mustPress)
 				{
-					note.angle = playerStrums.members[note.noteData].angle;
+					if (!note.isSustainNote)
+						note.angle = playerStrums.members[note.noteData].angle;
 				}
 				else
 				{
-					note.angle = dadStrums.members[note.noteData].angle;
+					if (!note.isSustainNote)
+						note.angle = dadStrums.members[note.noteData].angle;
 				}
 			}
 		}
@@ -2108,7 +2112,7 @@ class PlayState extends MusicBeatState
 				spr.scale.x *= 1.5;
 				spr.scale.y *= 1.5;
 			});
-			dadStrums.forEach(function(spr:FlxSprite)
+			dadStrums.forEach(function(spr:Strum)
 			{
 				spr.x = arrowJunks[spr.ID][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
 				spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
@@ -2477,7 +2481,7 @@ class PlayState extends MusicBeatState
 
 						health -=  0.02 / 2.65;
 
-						poopStrums.forEach(function(sprite:FlxSprite)
+						poopStrums.forEach(function(sprite:Strum)
 						{
 							if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
 							{
@@ -2588,7 +2592,7 @@ class PlayState extends MusicBeatState
 
 					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
 					{
-						dadStrums.forEach(function(sprite:FlxSprite)
+						dadStrums.forEach(function(sprite:Strum)
 							{
 								if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
 								{
@@ -3244,7 +3248,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		playerStrums.forEach(function(spr:FlxSprite)
+		playerStrums.forEach(function(spr:Strum)
 		{
 			switch (spr.ID)
 			{
@@ -3288,6 +3292,8 @@ class PlayState extends MusicBeatState
 			}
 			else if (SONG.song.toLowerCase() != 'disability')
 				spr.centerOffsets();
+			else
+				spr.smartCenterOffsets();
 		});
 	}
 
@@ -3460,7 +3466,7 @@ class PlayState extends MusicBeatState
 					ZoomCam(false);
 			}
 
-			playerStrums.forEach(function(spr:FlxSprite)
+			playerStrums.forEach(function(spr:Strum)
 			{
 				if (Math.abs(note.noteData) == spr.ID)
 				{
@@ -3653,7 +3659,7 @@ class PlayState extends MusicBeatState
 							swagThings.forEach(function(spr:FlxSprite){
 								FlxTween.tween(spr, {y: spr.y + 1010}, 1.2, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
 							});	
-							poopStrums.forEach(function(spr:FlxSprite){
+							poopStrums.forEach(function(spr:Strum){
 								FlxTween.tween(spr, {alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * spr.ID)});
 							});
 							FlxTween.tween(swagger, {y: swagger.y + 1000}, 1.05, {ease:FlxEase.cubeInOut});
@@ -3664,7 +3670,7 @@ class PlayState extends MusicBeatState
 					case 636:
 						unfairPart = true;
 						gfSpeed = 1;
-						playerStrums.forEach(function(spr:FlxSprite){
+						playerStrums.forEach(function(spr:Strum){
 							spr.scale.set(0.7, 0.7);
 						});
 						what.forEach(function(spr:FlxSprite){
