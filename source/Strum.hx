@@ -15,7 +15,7 @@ class Strum extends FlxSprite
 
     public function resetTrueCoords():Void
     {
-        trueCoords = [x, y, width, height];
+        trueCoords = [x, y];
         size = [width, height];
     }
 
