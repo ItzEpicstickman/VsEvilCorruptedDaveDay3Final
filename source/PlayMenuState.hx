@@ -293,11 +293,6 @@ class PlayMenuState extends MusicBeatState
 		bg.setGraphicSize(1280);
 		bg.updateHitbox();
 		bg.screenCenter();
-
-		#if PRELOAD_ALL
-		if(optionShit[curSelected].toLowerCase() != 'extras')
-			FlxG.sound.playMusic(Paths.inst(optionShit[curSelected]), 0);
-		#end
 	}
 	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
 	{
