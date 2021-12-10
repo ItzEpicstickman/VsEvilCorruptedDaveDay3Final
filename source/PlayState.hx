@@ -56,6 +56,8 @@ using StringTools;
 
 class PlayState extends MusicBeatState
 {
+	public static var STRUM_X = 42;
+
 	public static var curStage:String = '';
 	public static var characteroverride:String = "none";
 	public static var formoverride:String = "none";
@@ -81,6 +83,10 @@ class PlayState extends MusicBeatState
 
 	public var camMoveAllowed:Bool = true;
 
+	var songPercent:Float = 0;
+
+	var songLength:Float = 0;
+
 	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
@@ -92,6 +98,8 @@ class PlayState extends MusicBeatState
 	public var updatevels:Bool = false;
 
 	var scoreTxtTween:FlxTween;
+
+	var timeTxtTween:FlxTween;
 
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
@@ -146,6 +154,8 @@ class PlayState extends MusicBeatState
 	private static var prevCamFollowPos:FlxObject;
 
 	public var badaiTime:Bool = false;
+
+	private var updateTime:Bool = true;
 
 	public var sunsetColor:FlxColor = FlxColor.fromRGB(255, 143, 178);
 
@@ -237,6 +247,8 @@ class PlayState extends MusicBeatState
 
 	public var thing:FlxSprite = new FlxSprite(0, 250);
 	public var splitathonExpressionAdded:Bool = false;
+
+	var timeTxt:FlxText;
 
 	public var redTunnel:FlxSprite;
 
@@ -615,7 +627,7 @@ class PlayState extends MusicBeatState
 			health = 2;
 		}
 
-		if(dadChar == 'bandu-candy')
+		if(dadChar == 'bandu-candy' || dadChar == 'bambi-piss-3d')
 		{
 			dadDanceSnap = 1;
 		}
@@ -636,6 +648,17 @@ class PlayState extends MusicBeatState
 
 		strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
 		strumLine.scrollFactor.set();
+
+		var showTime:Bool = true;
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+		timeTxt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.scrollFactor.set();
+		timeTxt.alpha = 0;
+		timeTxt.borderSize = 2;
+		timeTxt.visible = showTime;
+		if(FlxG.save.data.downscroll) timeTxt.y = FlxG.height - 44;
+
+		add(timeTxt);
 
 		if (SONG.song.toLowerCase() == 'applecore') {
 			altStrumLine = new FlxSprite(0, -100);
@@ -790,6 +813,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		kadeEngineWatermark.cameras = [camHUD];
+		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -1168,7 +1192,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 			gf.dance();
-			boyfriend.playAnim('idle', true);
+			boyfriend.dance();
 
 			if (dad.curCharacter == 'bandu' || dad.curCharacter == 'bandu-candy') {
 				// SO THEIR ANIMATIONS DONT START OFF-SYNCED
@@ -1290,6 +1314,10 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.volume = 0;
 		}
 		if (SONG.song.toLowerCase() == 'disruption') FlxG.sound.music.volume = 1; // WEIRD BUG!!! WTF!!!
+
+		songLength = FlxG.sound.music.length;
+
+		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
 		#if desktop
 		DiscordClient.changePresence(SONG.song,
@@ -2317,6 +2345,20 @@ class PlayState extends MusicBeatState
 					// Conductor.songPosition += FlxG.elapsed * 1000;
 					// trace('MISSED FRAME');
 				}
+
+				if(updateTime) 
+				{
+					var curTime:Float = Conductor.songPosition;
+					if(curTime < 0) curTime = 0;
+					songPercent = (curTime / songLength);
+
+					var songCalc:Float = (songLength - curTime);
+
+					var secondsTotal:Int = Math.floor(songCalc / 1000);
+					if(secondsTotal < 0) secondsTotal = 0;
+					
+					timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+				}
 			}
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
@@ -2792,6 +2834,8 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = false;
 		canPause = false;
+		updateTime = false;
+
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 		if (SONG.validScore)
@@ -3246,7 +3290,7 @@ class PlayState extends MusicBeatState
 		{
 			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
-				boyfriend.playAnim('idle');
+				boyfriend.dance();
 			}
 		}
 
@@ -3523,6 +3567,22 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
+		if(curBeat % camBeatSnap == 0)
+		{
+			if(timeTxtTween != null) 
+			{
+				timeTxtTween.cancel();
+			}
+
+			timeTxt.scale.x = 1.1;
+			timeTxt.scale.y = 1.1;
+			timeTxtTween = FlxTween.tween(timeTxt.scale, {x: 1, y: 1}, 0.2, {
+				onComplete: function(twn:FlxTween) {
+					timeTxtTween = null;
+				}
+			});
+		}
+
 		if (!UsingNewCam)
 		{
 			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
@@ -3600,7 +3660,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		if (swagger != null) {
-			if (swagger.holdTimer <= 0 && curBeat % dadDanceSnap == 0 && swagger.animation.finished)
+			if (swagger.holdTimer <= 0 && curBeat % 1 == 0 && swagger.animation.finished)
 				swagger.dance();
 		}
 		if (littleIdiot != null) {
@@ -3830,7 +3890,7 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance && curBeat % danceBeatSnap == 0)
 		{
-			boyfriend.playAnim('idle', true);
+			boyfriend.dance();
 			if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
 			{
 				boyfriend.color = nightColor;
