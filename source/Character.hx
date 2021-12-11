@@ -512,10 +512,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN-alt', 'ALT-DOWN', 24, false);
 				animation.addByPrefix('singLEFT-alt', 'ALT-LEFT', 24, false);
 
-				addOffset('idle');
+				addOffset('danceLeft');
+				addOffset('danceRight');
 				addOffset("singUP");
-				addOffset("singRIGHT");
-				addOffset("singLEFT");
+				addOffset("singRIGHT", 120);
+				addOffset("singLEFT", -63);
 				addOffset("singDOWN");
 				addOffset("singUP-alt");
 				addOffset("singRIGHT-alt");
