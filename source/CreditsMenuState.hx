@@ -162,6 +162,7 @@ class CreditsMenuState extends MusicBeatState
       new Person("mfhx99", CreditsType.BetaTester, "Beta Tester",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCAIeiM_Vo8emQDm4SDNyAFQ'),
+            new Social('twitter', 'https://twitter.com/dave_algebra')
          ]
       ),
       new Person("Knocks", CreditsType.BetaTester, "Beta Tester",
