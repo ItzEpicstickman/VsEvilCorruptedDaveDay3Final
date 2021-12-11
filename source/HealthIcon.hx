@@ -65,6 +65,8 @@ class HealthIcon extends FlxSprite
 	
 			addIcon('bf', 0);
 
+			addIcon('3d-bf', 34);
+
 			addIcon('sart-producer', 26);
 
 			addIcon('sart-producer-night', 26);
