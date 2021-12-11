@@ -461,12 +461,21 @@ class PlayState extends MusicBeatState
 					dad.x += 150;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
-			case 'bambi-3d' | 'bambi-piss-3d' | 'ringi' | 'bambom' | 'bendu':
+			case 'bambi-3d' | 'bambi-piss-3d':
 				{
 					dad.y -= 250;
 					dad.x -= 185;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
+			case 'ringi':
+				dad.y -= 475;
+				dad.x -= 455;
+			case 'bambom':
+				dad.y -= 375;
+				dad.x -= 500;
+			case 'bendu':
+				dad.y += 50;
+				dad.x += 10;
 			case 'bambi-unfair':
 				{
 					dad.y += 100;
@@ -969,10 +978,16 @@ class PlayState extends MusicBeatState
 						bg.loadGraphic(Paths.image('bambi/heaven'));
 						curStage = 'origin';
 					case 'metallic':
+						defaultCamZoom = 0.7;
 						bg.loadGraphic(Paths.image('bambi/metal'));
+						bg.y -= 235;
 						curStage = 'metallic';
 					case 'strawberry':
+						defaultCamZoom = 0.69;
 						bg.loadGraphic(Paths.image('bambi/strawberries'));
+						bg.scrollFactor.set(0, 0);
+						bg.y -= 200;
+						bg.x -= 100;
 						curStage = 'strawberry';
 					case 'keyboard':
 						bg.loadGraphic(Paths.image('bambi/keyboard'));
@@ -2006,7 +2021,7 @@ class PlayState extends MusicBeatState
 					dad.x += (Math.sin(elapsedtime) * 0.6);
 				case 'bambom':
 					dad.y += (Math.sin(elapsedtime) * 0.75);
-					dad.x = 200 + Math.sin(elapsedtime) * 425;
+					dad.x = -700 + Math.sin(elapsedtime) * 425;
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}

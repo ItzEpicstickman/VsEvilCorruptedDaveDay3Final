@@ -154,7 +154,14 @@ class TitleState extends MusicBeatState
 		logoBl.animation.addByIndices('bumpLeft', 'logo bumpin', [for (i in 0...14) i], '', 24, false);
 		logoBl.animation.addByIndices('bumpRight', 'logo bumpin', [for (i in 15...29) i], '', 24, false);
 		logoBl.animation.play('bumpLeft');
+		logoBl.scale.set(0.75, 0.75);
 		logoBl.updateHitbox();
+
+		logoBl.screenCenter();
+		logoBl.x += 335;
+		logoBl.y -= 75;
+
+		logoBl.scale.set(0.85, 0.85);
 
 		titleDude = new FlxSprite(-150, 1000);
 		titleDude.frames = Paths.getSparrowAtlas('golden_apple_title_guys');
@@ -163,8 +170,12 @@ class TitleState extends MusicBeatState
 		{
 			altIdle = true;
 		}
-		titleDude.animation.addByPrefix('idle-alt', 'ALT-IDLE', 24, false);
-		titleDude.animation.addByPrefix('idle', 'IDLE', 24, false);
+		titleDude.animation.addByIndices('idle-alt-false', 'ALT-IDLE', [0, 1, 2, 3, 4, 5, 6], '', 24, false);
+		titleDude.animation.addByIndices('idle-false', 'IDLE', [0, 1, 2, 3, 4, 5, 6], '', 24, false);
+
+		titleDude.animation.addByIndices('idle-alt-true', 'ALT-IDLE', [6, 5, 4, 3, 2, 1, 0], '', 24, false);
+		titleDude.animation.addByIndices('idle-true', 'IDLE', [6, 5, 4, 3, 2, 1, 0], '', 24, false);
+
 		if(altIdle){titleDude.animation.play('idle-alt');}else{titleDude.animation.play('idle');}
 		add(titleDude);
 
@@ -341,6 +352,18 @@ class TitleState extends MusicBeatState
 		textGroup.remove(textGroup.members[0], true);
 	}
 
+	override function stepHit() {
+		super.stepHit();
+		if (curStep % 2 == 0) {
+			stupid++;
+			altIdle ?
+				titleDude.animation.play('idle-alt-${stupid % 2 == 0}', true):
+				titleDude.animation.play('idle-${stupid % 2 == 0}', true);
+		}
+	}
+
+	var stupid:Int = 0;
+
 	override function beatHit()
 	{
 		super.beatHit();
@@ -355,7 +378,6 @@ class TitleState extends MusicBeatState
 			{
 				logoBl.animation.play('bumpLeft', true);
 			}
-			if(altIdle){titleDude.animation.play('idle-alt',true);}else{titleDude.animation.play('idle',true);}
 		}
 
 		danced = !danced;
