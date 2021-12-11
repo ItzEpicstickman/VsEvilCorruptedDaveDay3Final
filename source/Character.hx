@@ -418,7 +418,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 				animation.addByPrefix('stand', 'STAND', 24, false);
-				animation.addByPrefix('shocked', 'SHOCKED', 24, false);
+				animation.addByPrefix('scared', 'SHOCKED', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP");
@@ -426,7 +426,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT");
 				addOffset("singDOWN", -48, -46);
 				addOffset("stand", 20);
-				addOffset("shocked");
+				addOffset("scared");
 
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();

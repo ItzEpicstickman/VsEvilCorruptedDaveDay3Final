@@ -3996,7 +3996,7 @@ class PlayState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 1, null, true);
 	}
 	
-	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100)
+	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100, startScared:Bool = false)
 	{
 		if(physChar != null)
 		{
@@ -4004,7 +4004,17 @@ class PlayState extends MusicBeatState
 		}
 		physChar = new Character(x, y, char, false);
 		add(physChar);
-		physChar.playAnim('stand', true);
+		if(startScared)
+		{
+			physChar.playAnim('scared', true);
+			new FlxTimer().start(Conductor.crochet / 1000, function(dick:FlxTimer){
+				physChar.playAnim('stand', true);
+			});
+		}
+		else
+		{
+			physChar.playAnim('stand', true);
+		}
 	}
 
 	function snapCamFollowToPos(x:Float, y:Float) {
