@@ -3987,6 +3987,26 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function swapDad(char:String, x:Float = 100, y:Float = 100, flash:Bool = true)
+	{
+		remove(dad);
+		dad = new Character(x, y, char, false);
+		add(dad);
+		if(flash)
+			FlxG.camera.flash(FlxColor.WHITE, 1, null, true);
+	}
+	
+	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100)
+	{
+		if(physChar != null)
+		{
+			remove(physChar);
+		}
+		physChar = new Character(x, y, char, false);
+		add(physChar);
+		physChar.playAnim('stand', true);
+	}
+
 	function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
