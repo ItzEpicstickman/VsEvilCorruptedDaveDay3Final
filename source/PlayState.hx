@@ -136,7 +136,7 @@ class PlayState extends MusicBeatState
 
 	//dad.curCharacter == 'bambi-unfair' || dad.curCharacter == 'bambi-3d' || dad.curCharacter == 'bambi-piss-3d'
 
-	public static var shakingChars:Array<String> = ['bambi-unfair', 'bambi-3d', 'bambi-piss-3d', 'badai', 'unfair-junker'];
+	public static var shakingChars:Array<String> = ['bambi-unfair', 'bambi-3d', 'bambi-piss-3d', 'badai', 'unfair-junker', 'tunnel-dave'];
 
 	private var notes:FlxTypedGroup<Note>;
 	private var altNotes:FlxTypedGroup<Note>;
@@ -746,6 +746,8 @@ class PlayState extends MusicBeatState
 				credits = 'OC created by Emiko!';
 			case 'keyboard':
 				credits = 'OC created by DanWiki!';
+			case 'cycles':
+				credits = 'Original song made by Vania for Vs. Sonic.exe!';
 			case 'bambi-666-level':
 				credits = 'Bambi 666 Level';
 			default:
@@ -2839,6 +2841,9 @@ class PlayState extends MusicBeatState
 				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			case 'bandu-candy':
 				camFollow.set(char.getMidpoint().x + 175, char.getMidpoint().y - 85);
+
+			case 'bambom':
+				camFollow.y += 100;
 
 			case 'sart-producer':
 				camFollow.x -= 100;
