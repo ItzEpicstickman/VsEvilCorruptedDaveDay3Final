@@ -29,7 +29,7 @@ class MainMenuState extends MusicBeatState
 
 	var realMenuItems:Int = 4;
 
-	var optionShit:Array<String> = ['play', 'ost', 'options', 'discord', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
+	var optionShit:Array<String> = ['play', 'ost', 'credits', 'options', 'discord', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -203,6 +203,10 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
+				if(optionShit[curSelected] == '')
+				{
+					return;
+				}
 				if(optionShit[curSelected] == 'discord')
 				{
 					fancyOpenURL('https://discord.gg/UvyuaUrX');

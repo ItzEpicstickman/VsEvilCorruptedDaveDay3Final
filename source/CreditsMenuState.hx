@@ -388,7 +388,7 @@ class CreditsMenuState extends MusicBeatState
             }
 				if (back)
 				{
-					FlxG.switchState(new ExtrasMenuState());
+					FlxG.switchState(new MainMenuState());
 				}
 				if (accept && !transitioning)
 				{
