@@ -277,11 +277,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('cutscene', 'CUTSCENE', 24, false);
 		
 				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singRIGHT");
-				addOffset("singLEFT");
-				addOffset("singDOWN");
-				addOffset("cutscene");
+				addOffset("singUP", 69, -30);
+				addOffset("singRIGHT", 10, -36);
+				addOffset("singLEFT", -90, -10);
+				addOffset("singDOWN", 80, 100);
+				addOffset("cutscene", 0, -10);
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
