@@ -131,7 +131,7 @@ class Note extends FlxSprite
 		
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'cheating' | 'disruption':
+			case 'cheating':
 				switch (noteData)
 				{
 					case 0:
@@ -177,7 +177,7 @@ class Note extends FlxSprite
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'cheating' | 'unfairness' | 'applecore' | 'disruption':
+			case 'cheating' | 'unfairness' | 'applecore':
 				if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState"))
 				{
 					var state:PlayState = cast(FlxG.state,PlayState);

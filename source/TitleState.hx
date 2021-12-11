@@ -176,7 +176,7 @@ class TitleState extends MusicBeatState
 		titleDude.animation.addByIndices('idle-alt-true', 'ALT-IDLE', [6, 5, 4, 3, 2, 1, 0], '', 24, false);
 		titleDude.animation.addByIndices('idle-true', 'IDLE', [6, 5, 4, 3, 2, 1, 0], '', 24, false);
 
-		if(altIdle){titleDude.animation.play('idle-alt');}else{titleDude.animation.play('idle');}
+		if(altIdle){titleDude.animation.play('idle-alt-true');}else{titleDude.animation.play('idle-true');}
 		add(titleDude);
 
 		add(logoBl);

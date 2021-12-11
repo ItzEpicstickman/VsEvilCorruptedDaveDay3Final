@@ -61,7 +61,7 @@ class DiscordClient
 		var realDetails:String = details;
 
 		// CHANGE THIS AT RELEASE!!!
-		//realDetails = "NO LEAKS!!!";
+		realDetails = "NO LEAKS!!!";
 
 		if (endTimestamp > 0)
 		{

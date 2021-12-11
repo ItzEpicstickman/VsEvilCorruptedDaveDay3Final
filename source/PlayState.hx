@@ -419,7 +419,7 @@ class PlayState extends MusicBeatState
 		dad = new Character(100, 100, SONG.player2);
 		if(SONG.song.toLowerCase() == 'wireframe')
 		{
-			badai = new Character(-1100, -1100, 'badai');
+			badai = new Character(-1250, -1250, 'badai');
 		}
 		switch (SONG.song.toLowerCase())
 		{
@@ -505,6 +505,7 @@ class PlayState extends MusicBeatState
 				dad.setPosition(-202, 20);
 			case 'sart-producer-night':
 				dad.setPosition(732, 83);
+				dad.y -= 200;
 			case 'RECOVERED_PROJECT':
 				dad.setPosition(-307, 10);
 			case 'sart-producer':
@@ -600,13 +601,22 @@ class PlayState extends MusicBeatState
 
 		add(gf);
 
-		add(dad);
+		if (SONG.song.toLowerCase() != 'wireframe')
+			add(dad);
+		add(boyfriend);
+		add(dadmirror);
+		if (SONG.song.toLowerCase() == 'wireframe') {
+			add(dad);
+			dad.scale.set(dad.scale.x + 0.36, dad.scale.y + 0.36);
+			dad.x += 65;
+			dad.y += 175;
+			boyfriend.y -= 190;
+		}
 		if(badai != null)
 		{
 			add(badai);
+			badai.visible = false;
 		}
-		add(boyfriend);
-		add(dadmirror);
 
 		if(curStage == 'redTunnel')
 		{
@@ -1018,7 +1028,7 @@ class PlayState extends MusicBeatState
 				bg.shader = testshader.shader;
 				curbg = bg;
 			case 'wireframe':
-				defaultCamZoom = 0.825;
+				defaultCamZoom = 0.67;
 				curStage = 'redTunnel';
 				var stupidFuckingRedBg = new FlxSprite().makeGraphic(9999, 9999, FlxColor.fromRGB(42, 0, 0)).screenCenter();
 				add(stupidFuckingRedBg);
@@ -2024,6 +2034,8 @@ class PlayState extends MusicBeatState
 				case 'bambom':
 					dad.y += (Math.sin(elapsedtime) * 0.75);
 					dad.x = -700 + Math.sin(elapsedtime) * 425;
+				case 'tunnel-dave':
+					dad.y -= (Math.sin(elapsedtime) * 0.6);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}
@@ -2057,7 +2069,8 @@ class PlayState extends MusicBeatState
 					dadmirror.visible = dadFront;
 					badai.visible = !dadFront;
 				case 'badai':
-					badai.angle += elapsed * 10;
+					badai.angle = Math.sin(elapsedtime) * 15;
+					badai.x += Math.sin(elapsedtime) * 0.6;
 					badai.y += (Math.sin(elapsedtime) * 0.6);
 				default:
 					badai.y += (Math.sin(elapsedtime) * 0.6);
@@ -2643,6 +2656,7 @@ class PlayState extends MusicBeatState
 						littleIdiot.holdTimer = 0;}: {
 							if(badaiTime)
 							{
+								badai.holdTimer = 0;
 								badai.playAnim('sing' + fuckingDumbassBullshitFuckYou + altAnim, true);
 							}
 							dad.playAnim('sing' + fuckingDumbassBullshitFuckYou + altAnim, true);
@@ -2847,6 +2861,9 @@ class PlayState extends MusicBeatState
 
 			case 'sart-producer':
 				camFollow.x -= 100;
+			case 'sart-producer-night':
+				camFollow.y += 250;
+				camFollow.x -= 425;
 		}
 	}
 
@@ -3672,12 +3689,12 @@ class PlayState extends MusicBeatState
 						dad.dance(idleAlt);
 					if (dadmirror.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						dadmirror.dance(idleAlt);
-					if(badai != null)
-					{
-						if (badai.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
-							badai.dance(idleAlt);
-					}
 			}
+		}
+		if(badai != null)
+		{
+			if ((badai.animation.finished || badai.animation.curAnim.name == 'idle') && badai.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
+				badai.dance(idleAlt);
 		}
 		if (swagger != null) {
 			if (swagger.holdTimer <= 0 && curBeat % 1 == 0 && swagger.animation.finished)
@@ -3821,11 +3838,30 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.005, Conductor.crochet / 1000);
 				switch(curBeat)
 				{
+					case 254:
+						badai.visible = true;
+						new FlxTimer().start((Conductor.crochet / 1000) * 0.5, function(tmr:FlxTimer){
+							FlxTween.tween(badai, {x: -300, y: 100}, (Conductor.crochet / 1000) * 1.5, {ease: FlxEase.cubeIn});
+						});
+						//FlxTween.tween(dad, {x: 1500, y: 1500}, Conductor.crochet / 1000, {ease: FlxEase.cubeIn});
 					case 256:
 						creditsWatermark.text = 'Screw you!';
 						kadeEngineWatermark.y -= 20;
+						dad.visible = false;
+						var baldiBasic:FlxSprite = new FlxSprite(dad.x, dad.y);
+						baldiBasic.frames = daveFuckingDies.frames;
+						baldiBasic.animation.addByPrefix('HI', 'IDLE', 24, false);
+						baldiBasic.animation.play("HI");
+						baldiBasic.x = dad.getMidpoint().x - baldiBasic.width / 2;
+						baldiBasic.y = dad.getMidpoint().y - baldiBasic.height / 2;
+						add(baldiBasic);
+						FlxTween.tween(baldiBasic, {x: baldiBasic.x + 100, y: baldiBasic.y + 500}, 0.15, {ease:FlxEase.cubeOut, onComplete: function(twn:FlxTween){
+							baldiBasic.kill();
+							remove(baldiBasic);
+							baldiBasic.destroy();
+						}});
 						//this transition was lazy and dumb lets do it better
-						/*FlxG.camera.flash(FlxColor.WHITE, 1);
+						FlxG.camera.flash(FlxColor.WHITE, 1);/*
 						remove(dad);
 						//badai time
 						dad = new Character(-300, 100, 'badai', false);
@@ -3834,20 +3870,20 @@ class PlayState extends MusicBeatState
 						daveFuckingDies.visible = true;*/
 						camMoveAllowed = false;
 						badaiTime = true;
-						FlxTween.tween(badai, {x: -300, y: 100}, 0.55, {ease: FlxEase.cubeInOut});
-						FlxTween.tween(dad, {x: 1500, y: 1500}, 0.55, {ease: FlxEase.cubeInOut});
-						boyfriend.canDance = false;
-						boyfriend.playAnim('turn', true);
+						//boyfriend.canDance = false;
+						//boyfriend.playAnim('turn', true);
 						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
 							camMoveAllowed = true;
 							var position = boyfriend.getPosition();
 							var width = boyfriend.width;
+							/*
 							remove(boyfriend);
 							boyfriend = new Boyfriend(position.x, position.y, 'tunnel-bf-flipped');
 							add(boyfriend);
-							boyfriendOldIcon = 'bf-old-flipped';
-							iconP1.animation.play('tunnel-bf-flipped');
+							*/
+							//boyfriendOldIcon = 'bf-old-flipped';
+							//iconP1.animation.play('tunnel-bf-flipped');
 							iconP2.animation.play('badai');
 							iconRPC = 'icon_badai';
 							daveFuckingDies.visible = true;
@@ -3857,6 +3893,13 @@ class PlayState extends MusicBeatState
 								daveFuckingDies.inCutscene = false;
 							});
 						});
+				}
+			case 'disability':
+				switch(curBeat) {
+					case 176 | 224 | 364 | 384:
+						gfSpeed = 2;
+					case 208 | 256 | 372 | 392:
+						gfSpeed = 1;
 				}
 		}
 
