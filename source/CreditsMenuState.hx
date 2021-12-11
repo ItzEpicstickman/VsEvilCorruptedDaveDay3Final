@@ -236,11 +236,6 @@ class CreditsMenuState extends MusicBeatState
             new Social('youtube', 'https://www.youtube.com/channel/UChTTBaqjvCw5_1rFQ5cHj3g')
          ]
       ),
-      new Person("Grunf", CreditsType.BetaTester, "Beta Tester",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UChTTBaqjvCw5_1rFQ5cHj3g')
-         ]
-      ),
       new Person("Jukebox", CreditsType.BetaTester, "Beta Tester",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCwA3jnG5cu3toaVCOhc-Tqw'),
