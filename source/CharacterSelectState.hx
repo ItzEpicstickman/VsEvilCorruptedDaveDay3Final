@@ -268,7 +268,7 @@ class CharacterSelectState extends MusicBeatState
 				char.y = 100 + 270;
 			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				char.y = 100;
-			case 'bambi-3d' | 'bambi-piss-3d' | 'bandu' | 'bandu-candy':
+			case 'bambi-3d' | 'bambi-piss-3d' | 'bandu' | 'bandu-candy' | 'unfair-junker':
 				char.y = 100 + 350;
 			case 'bambi-unfair':
 				char.y = 100 + 575;

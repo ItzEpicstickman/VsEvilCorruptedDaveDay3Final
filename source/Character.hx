@@ -365,8 +365,8 @@ class Character extends FlxSprite
 				addOffset("singUP");
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
-				addOffset("singDOWN");
-				addOffset("stand");
+				addOffset("singDOWN", -86, -25);
+				addOffset("stand", -87, -29);
 
 				furiosityScale = 0.55;
 
@@ -374,8 +374,8 @@ class Character extends FlxSprite
 				updateHitbox();
 				antialiasing = false;
 
-				globaloffset[0] = -500;
-				globaloffset[1] = -350;
+				globaloffset[0] = -750;
+				globaloffset[1] = -500;
 		
 				playAnim('idle');
 
@@ -395,7 +395,7 @@ class Character extends FlxSprite
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
 				addOffset("singDOWN");
-				addOffset("stand");
+				addOffset("stand", -156, -45);
 
 				furiosityScale = 0.55;
 
@@ -403,8 +403,8 @@ class Character extends FlxSprite
 				updateHitbox();
 				antialiasing = false;
 
-				globaloffset[0] = -500;
-				globaloffset[1] = -350;
+				globaloffset[0] = -750;
+				globaloffset[1] = -500;
 		
 				playAnim('idle');
 
