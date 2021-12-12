@@ -3925,7 +3925,6 @@ class PlayState extends MusicBeatState
 				gf.visible = false;
 				if (isStoryMode)
 				{
-					camPos.x += 600;
 					tweenCamIn();
 				}
 			case "tristan" | 'tristan-beta':
@@ -3945,13 +3944,11 @@ class PlayState extends MusicBeatState
 				{
 					dad.y += 0;
 					dad.x += 150;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
 			case 'bambi-3d' | 'bambi-piss-3d':
 				{
 					dad.y -= 250;
 					dad.x -= 185;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
 			case 'ringi':
 				dad.y -= 475;
@@ -3965,7 +3962,6 @@ class PlayState extends MusicBeatState
 			case 'bambi-unfair':
 				{
 					dad.y += 100;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
 				}
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-good':
 				{
