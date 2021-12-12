@@ -432,87 +432,7 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
-		switch (SONG.player2)
-		{
-			case 'gf':
-				dad.setPosition(gf.x, gf.y);
-				gf.visible = false;
-				if (isStoryMode)
-				{
-					camPos.x += 600;
-					tweenCamIn();
-				}
-			case "tristan" | 'tristan-beta':
-				dad.y += 325;
-				dad.x += 100;
-			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
-				{
-					dad.y += 160;
-					dad.x += 250;
-				}
-			case 'dave-old':
-				{
-					dad.y += 270;
-					dad.x += 150;
-				}
-			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-				{
-					dad.y += 0;
-					dad.x += 150;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
-				}
-			case 'bambi-3d' | 'bambi-piss-3d':
-				{
-					dad.y -= 250;
-					dad.x -= 185;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
-				}
-			case 'ringi':
-				dad.y -= 475;
-				dad.x -= 455;
-			case 'bambom':
-				dad.y -= 375;
-				dad.x -= 500;
-			case 'bendu':
-				dad.y += 50;
-				dad.x += 10;
-			case 'bambi-unfair':
-				{
-					dad.y += 100;
-					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
-				}
-			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-good':
-				{
-					dad.y += 400;
-				}
-			case 'bambi-new' | 'bambi-farmer-beta':
-				{
-					dad.y += 450;
-					dad.x += 200;
-				}
-			case 'bambi-splitathon':
-				{
-					dad.x += 175;
-					dad.y += 400;
-				}
-			case 'dave-png':
-				dad.x += 81;
-				dad.y += 108;
-			case 'bambi-angey':
-				dad.y += 450;
-				dad.x += 100;
-			case 'bandu-scaredy':
-				dad.setPosition(-202, 20);
-			case 'sart-producer-night':
-				dad.setPosition(732, 83);
-				dad.y -= 200;
-			case 'RECOVERED_PROJECT':
-				dad.setPosition(-307, 10);
-			case 'sart-producer':
-				dad.x -= 750;
-				dad.y -= 360;
-		}
-
+		repositionDad();
 
 		dadmirror.y += 0;
 		dadmirror.x += 150;
@@ -3991,9 +3911,93 @@ class PlayState extends MusicBeatState
 	{
 		remove(dad);
 		dad = new Character(x, y, char, false);
+		repositionDad();
 		add(dad);
 		if(flash)
 			FlxG.camera.flash(FlxColor.WHITE, 1, null, true);
+	}
+
+	function repositionDad() {
+		switch (dad.curCharacter)
+		{
+			case 'gf':
+				dad.setPosition(gf.x, gf.y);
+				gf.visible = false;
+				if (isStoryMode)
+				{
+					camPos.x += 600;
+					tweenCamIn();
+				}
+			case "tristan" | 'tristan-beta':
+				dad.y += 325;
+				dad.x += 100;
+			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
+				{
+					dad.y += 160;
+					dad.x += 250;
+				}
+			case 'dave-old':
+				{
+					dad.y += 270;
+					dad.x += 150;
+				}
+			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+				{
+					dad.y += 0;
+					dad.x += 150;
+					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
+				}
+			case 'bambi-3d' | 'bambi-piss-3d':
+				{
+					dad.y -= 250;
+					dad.x -= 185;
+					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
+				}
+			case 'ringi':
+				dad.y -= 475;
+				dad.x -= 455;
+			case 'bambom':
+				dad.y -= 375;
+				dad.x -= 500;
+			case 'bendu':
+				dad.y += 50;
+				dad.x += 10;
+			case 'bambi-unfair':
+				{
+					dad.y += 100;
+					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
+				}
+			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-good':
+				{
+					dad.y += 400;
+				}
+			case 'bambi-new' | 'bambi-farmer-beta':
+				{
+					dad.y += 450;
+					dad.x += 200;
+				}
+			case 'bambi-splitathon':
+				{
+					dad.x += 175;
+					dad.y += 400;
+				}
+			case 'dave-png':
+				dad.x += 81;
+				dad.y += 108;
+			case 'bambi-angey':
+				dad.y += 450;
+				dad.x += 100;
+			case 'bandu-scaredy':
+				dad.setPosition(-202, 20);
+			case 'sart-producer-night':
+				dad.setPosition(732, 83);
+				dad.y -= 200;
+			case 'RECOVERED_PROJECT':
+				dad.setPosition(-307, 10);
+			case 'sart-producer':
+				dad.x -= 750;
+				dad.y -= 360;
+		}
 	}
 	
 	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100, startScared:Bool = false)
