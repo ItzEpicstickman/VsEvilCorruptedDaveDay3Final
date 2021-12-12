@@ -147,6 +147,8 @@ class ExtraSongState extends MusicBeatState
                     PlayState.storyDifficulty = 1;
                     PlayState.xtraSong = true;
 
+					PlayState.formoverride = 'none';
+
                     PlayState.storyWeek = songs[curSelected].week;
 					if(songs[curSelected].songName.toLowerCase() == 'cycles')
 					{
