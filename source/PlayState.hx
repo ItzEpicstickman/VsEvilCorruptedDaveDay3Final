@@ -404,6 +404,7 @@ class PlayState extends MusicBeatState
 			gfVersion = 'gf-christmas';
 		}
 		if (SONG.song.toLowerCase() == 'sugar-rush') gfVersion = 'gf-only';
+		if (SONG.song.toLowerCase() == 'wheels') gfVersion = 'gf-wheels';
 		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
@@ -503,6 +504,10 @@ class PlayState extends MusicBeatState
 				dad.x -= 100;
 			case 'sugar':
 				gf.setPosition(811, 200);
+			case 'wheels':
+				gf.setPosition(400, boyfriend.getMidpoint().y);
+				gf.y -= gf.height / 2;
+				gf.x += 190;
 		}
 
 		if(darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
@@ -962,6 +967,15 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.y = 1500;
 				add(daveFuckingDies);
 				daveFuckingDies.visible = false;
+			case 'wheels':
+				curStage = 'wheels';
+
+				var bg = new FlxSprite(150, 100).loadGraphic(Paths.image('dave/swag'));
+				bg.scale.set(3, 3);
+				bg.updateHitbox();
+				bg.scale.set(4.5, 4.5);
+				bg.antialiasing = false;
+				add(bg);
 			case 'sart-producer':
 				curStage = 'sart';
 				defaultCamZoom = 0.6;
@@ -2784,6 +2798,8 @@ class PlayState extends MusicBeatState
 			case 'sart-producer-night':
 				camFollow.y += 250;
 				camFollow.x -= 425;
+			case 'dave-wheels':
+				camFollow.y -= 150;
 		}
 	}
 
@@ -3972,6 +3988,9 @@ class PlayState extends MusicBeatState
 					dad.y += 450;
 					dad.x += 200;
 				}
+			case 'dave-wheels':
+				dad.x += 100;
+				dad.y += 300;
 			case 'bambi-splitathon':
 				{
 					dad.x += 175;
