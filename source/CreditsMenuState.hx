@@ -78,7 +78,7 @@ class CreditsMenuState extends MusicBeatState
             new Social('youtube', 'https://www.youtube.com/channel/UCdkHxFQnvyIKHSPcRRu-9PQ'),
          ]
       ),
-      new Person("RubysArt", CreditsType.Dev, "Charter, Concepts",
+      new Person("RubysArt", CreditsType.Dev, "Wheels Composer, Charter, Concepts",
          [
             new Social('twitter', 'https://twitter.com/RubysArt_')
          ]

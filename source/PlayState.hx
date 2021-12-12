@@ -83,6 +83,13 @@ class PlayState extends MusicBeatState
 
 	public var camMoveAllowed:Bool = true;
 
+	public var daveStand:Character;
+	public var garrettStand:Character;
+	public var hallMonitorStand:Character;
+	public var playRobotStand:Character;
+
+	public var standersGroup:FlxTypedGroup<FlxSprite>;
+
 	var songPercent:Float = 0;
 
 	var songLength:Float = 0;
@@ -416,6 +423,13 @@ class PlayState extends MusicBeatState
 		{
 			gf.visible = false;
 		}
+
+		if(SONG.song.toLowerCase() == 'algebra')
+		{
+			gf.visible = false;
+		}
+
+		add(standersGroup);
 
 		dad = new Character(100, 100, SONG.player2);
 		if(SONG.song.toLowerCase() == 'wireframe')
@@ -897,8 +911,11 @@ class PlayState extends MusicBeatState
 
 			case 'algebra':
 				curStage = 'algebra';
-				defaultCamZoom = 1.1;
+				defaultCamZoom = 0.85;
 				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('dave/algebraBg'));
+				bg.setGraphicSize(Std.int(bg.width * 1.35), Std.int(bg.height * 1.35));
+				bg.updateHitbox();
+				//this is temp until good positioning gets done
 				bg.screenCenter();
 				sprites.add(bg);
 				add(bg);
@@ -3662,6 +3679,73 @@ class PlayState extends MusicBeatState
 		}
 		switch (curSong.toLowerCase())
 		{
+			case 'algebra':
+				switch(curBeat)
+				{
+					//STANDER POSITIONING IS INCOMPLETE, FIX LATER
+					case 160:
+						//GARRETT TURN 1!!
+						swapDad('garrett');
+						algebraStander('og-dave', daveStand, 500, 100);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 416:
+						//HAPPY DAVE TURN 2!!
+						swapDad('og-dave');
+						algebraStander('garrett', garrettStand, 750, 100);
+						remove(daveStand);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 544:
+						//GARRETT TURN 2
+						swapDad('garrett');
+						algebraStander('og-dave-angey', daveStand, 500, 100);
+						remove(garrettStand);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 552:
+						//ANGEY DAVE TURN 1!!
+						swapDad('og-dave-angey');
+						algebraStander('garrett', garrettStand, 750, 100, true);
+						remove(daveStand);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 696:
+						//HALL MONITOR TURN
+						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
+						//swapDad('hall-monitor');
+						algebraStander('og-dave-angey', daveStand, 500, 100);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 1344:
+						//DIAMOND MAN TURN
+						swapDad('diamond-man');
+						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
+						//algebraStander('hall-monitor', hallMonitorStand, 250, 100);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 1696:
+						//PLAYROBOT TURN
+						//UNCOMMENT THIS WHEN PLAYROBOT SPRITES ARE DONE AND IN
+						//swapDad('playrobot');
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 1856:
+						//SCARY PLAYROBOT TURN
+						//UNCOMMENT THIS WHEN SCARY PLAYROBOT SPRITES ARE DONE AND IN
+						//swapDad('playrobot-scary');
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					case 1996:
+						//ANGEY DAVE TURN 2!!
+						swapDad('og-dave-angey');
+						//UNCOMMENT THIS WHEN PLAYROBOT SPRITES ARE DONE AND IN
+						//algebraStander('playrobot', playRobotStand, 1000, 100, true);
+						remove(daveStand);
+						if(iconP2.animation.getByName(dad.curCharacter) != null)
+							iconP2.animation.play(dad.curCharacter);
+					
+				}
 			case 'sugar-rush':
 				switch(curBeat)
 				{
@@ -4034,7 +4118,7 @@ class PlayState extends MusicBeatState
 			remove(physChar);
 		}
 		physChar = new Character(x, y, char, false);
-		add(physChar);
+		standersGroup.add(physChar);
 		if(startScared)
 		{
 			physChar.playAnim('scared', true);
