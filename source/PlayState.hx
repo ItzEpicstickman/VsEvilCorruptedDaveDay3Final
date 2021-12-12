@@ -576,6 +576,11 @@ class PlayState extends MusicBeatState
 			dadDanceSnap = 1;
 		}
 
+		if(bfChar == 'bandu-candy' || bfChar == 'bambi-piss-3d')
+		{
+			danceBeatSnap = 1;
+		}
+
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
