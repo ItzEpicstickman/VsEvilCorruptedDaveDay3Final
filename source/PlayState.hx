@@ -526,16 +526,17 @@ class PlayState extends MusicBeatState
 
 		add(gf);
 
-		if (SONG.song.toLowerCase() != 'wireframe')
+		if (SONG.song.toLowerCase() != 'wireframe' && SONG.song.toLowerCase() != 'origin')
 			add(dad);
 		add(boyfriend);
 		add(dadmirror);
-		if (SONG.song.toLowerCase() == 'wireframe') {
+		if (SONG.song.toLowerCase() == 'wireframe' || SONG.song.toLowerCase() == 'origin') {
 			add(dad);
-			dad.scale.set(dad.scale.x + 0.36, dad.scale.y + 0.36);
-			dad.x += 65;
-			dad.y += 175;
-			boyfriend.y -= 190;
+			if(SONG.song.toLowerCase() == 'wireframe')
+				dad.scale.set(dad.scale.x + 0.36, dad.scale.y + 0.36);
+				dad.x += 65;
+				dad.y += 175;
+				boyfriend.y -= 190;
 		}
 		if(badai != null)
 		{
@@ -690,6 +691,8 @@ class PlayState extends MusicBeatState
 				credits = 'Original song made by Vania for Vs. Sonic.exe!';
 			case 'bambi-666-level':
 				credits = 'Bambi 666 Level';
+			case 'wheels':
+				credits = 'this song is a joke please dont take it seriously';
 			default:
 				credits = '';
 		}
@@ -732,6 +735,10 @@ class PlayState extends MusicBeatState
 				preload('dave/redsky_insanity');
 			case 'wireframe':
 				preload('bambi/badai');
+			case 'algebra':
+				preload('dave/diamondMan');
+				preload('dave/garrett_algebra');
+				preload('dave/og_dave_angey');
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);

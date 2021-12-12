@@ -38,7 +38,8 @@ class HealthIcon extends FlxSprite
 		'sart-producer-night',
 		'bambom',
 		'ringi',
-		'bendu'
+		'bendu',
+		'dave-wheels'
 	];
 
 	public var charPublic:String = 'bf';
@@ -70,15 +71,13 @@ class HealthIcon extends FlxSprite
 			addIcon('sart-producer', 26);
 
 			addIcon('sart-producer-night', 26);
+
+			addIcon('dave-wheels', 36);
 	
 			addIcon('tunnel-bf', 0);
-	
-			animation.add('tunnel-bf-flipped', [0, 1], 0, false, true);
-	
+		
 			addIcon('bf-old', 2);
-	
-			animation.add('bf-old-flipped', [2, 3], 0, false, true);
-	
+		
 			addIcon('gf', 57, true);
 
 			addIcon('bambi-unfair', 4);
