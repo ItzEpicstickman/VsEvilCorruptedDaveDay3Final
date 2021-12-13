@@ -394,6 +394,46 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+			case 'RECOVERED_PROJECT_2':
+				tex = Paths.getSparrowAtlas('dave/recovered_project_2');
+				frames = tex;
+				animation.addByPrefix('idle', 'IDLE', 24, true);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+
+			case 'RECOVERED_PROJECT_3':
+				tex = Paths.getSparrowAtlas('dave/recovered_project_3');
+				frames = tex;
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+
 			case 'badai':
 				// BADAI SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('bambi/badai');

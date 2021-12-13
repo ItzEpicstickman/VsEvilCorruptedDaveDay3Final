@@ -65,6 +65,7 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect(['bambi-piss-3d', 'unfair-junker'], ['Angry 3D Bambi', 'Unfair Bambi Facing Forward']),
 		new CharacterInSelect(['bandu', 'badai', 'bandu-candy', 'bandu-origin'], ['Bandu', 'Badai', 'Bandu (Sugar Rush)', 'Bandu (Origin)']),
 		new CharacterInSelect(['garrett'], ["Garrett"]),
+		new CharacterInSelect(['hall-monitor'], ["Hall Monitor"]),
 		new CharacterInSelect(['diamond-man'], ["Diamond Man"]),
 		new CharacterInSelect(['playrobot', 'playrobot-crazy'], ["Playrobot", 'Playrobot (Crazy)']),
 		new CharacterInSelect(['ringi'], ["Ringi"]),

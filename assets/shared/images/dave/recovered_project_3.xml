@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="recovered_project_3.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="DOWN0000" x="5326" y="1577" width="1319" height="1557" pivotX="0" pivotY="0"/>
+	<SubTexture name="DOWN0001" x="5326" y="1577" width="1319" height="1557"/>
+	<SubTexture name="DOWN0002" x="6655" y="1577" width="1319" height="1557"/>
+	<SubTexture name="DOWN0003" x="6655" y="1577" width="1319" height="1557"/>
+	<SubTexture name="DOWN0004" x="10" y="3144" width="1319" height="1557"/>
+	<SubTexture name="DOWN0005" x="10" y="3144" width="1319" height="1557"/>
+	<SubTexture name="IDLE0000" x="10" y="10" width="1319" height="1557" pivotX="0" pivotY="0"/>
+	<SubTexture name="LEFT0000" x="1339" y="10" width="1319" height="1557" pivotX="0" pivotY="0"/>
+	<SubTexture name="LEFT0001" x="1339" y="10" width="1319" height="1557"/>
+	<SubTexture name="LEFT0002" x="2668" y="10" width="1319" height="1557"/>
+	<SubTexture name="LEFT0003" x="2668" y="10" width="1319" height="1557"/>
+	<SubTexture name="LEFT0004" x="3997" y="10" width="1319" height="1557"/>
+	<SubTexture name="LEFT0005" x="3997" y="10" width="1319" height="1557"/>
+	<SubTexture name="RIGHT0000" x="5326" y="10" width="1319" height="1557" pivotX="0" pivotY="0"/>
+	<SubTexture name="RIGHT0001" x="5326" y="10" width="1319" height="1557"/>
+	<SubTexture name="RIGHT0002" x="6655" y="10" width="1319" height="1557"/>
+	<SubTexture name="RIGHT0003" x="6655" y="10" width="1319" height="1557"/>
+	<SubTexture name="RIGHT0004" x="10" y="1577" width="1319" height="1557"/>
+	<SubTexture name="RIGHT0005" x="10" y="1577" width="1319" height="1557"/>
+	<SubTexture name="UP0000" x="1339" y="1577" width="1319" height="1557" pivotX="0" pivotY="0"/>
+	<SubTexture name="UP0001" x="1339" y="1577" width="1319" height="1557"/>
+	<SubTexture name="UP0002" x="2668" y="1577" width="1319" height="1557"/>
+	<SubTexture name="UP0003" x="2668" y="1577" width="1319" height="1557"/>
+	<SubTexture name="UP0004" x="3997" y="1577" width="1319" height="1557"/>
+	<SubTexture name="UP0005" x="3997" y="1577" width="1319" height="1557"/>
+</TextureAtlas>
