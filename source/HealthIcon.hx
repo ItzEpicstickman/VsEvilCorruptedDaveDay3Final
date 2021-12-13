@@ -31,6 +31,8 @@ class HealthIcon extends FlxSprite
 		'badai',
 		'3d-bf',
 		'RECOVERED_PROJECT',
+		'RECOVERED_PROJECT_2',
+		'RECOVERED_PROJECT_3',
 		'bandu-candy',
 		'bandu-origin',
 		'bandu-scaredy',
@@ -121,6 +123,10 @@ class HealthIcon extends FlxSprite
 			addIcon('dave-good', 22);
 			
 			addIcon('RECOVERED_PROJECT', 24);
+
+			addIcon('RECOVERED_PROJECT_2', 24);
+
+			addIcon('RECOVERED_PROJECT_3', 24);
 	
 			animation.play('face');
 		}
