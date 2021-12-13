@@ -68,6 +68,14 @@ class HealthIcon extends FlxSprite
 
 			addIcon('3d-bf', 34);
 
+			addIcon('playrobot', 38);
+
+			addIcon('playrobot-crazy', 38);
+
+			addIcon('diamond-man', 40);
+
+			addIcon('hall-monitor', 42);
+
 			addIcon('sart-producer', 26);
 
 			addIcon('sart-producer-night', 26);

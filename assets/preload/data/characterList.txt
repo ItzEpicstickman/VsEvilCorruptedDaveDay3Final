@@ -19,3 +19,6 @@ diamond-man
 ringi
 bambom
 bendu
+playrobot
+playrobot-crazy
+hall-monitor

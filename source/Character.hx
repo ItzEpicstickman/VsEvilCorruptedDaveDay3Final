@@ -156,6 +156,42 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+			case 'playrobot':
+				frames = Paths.getSparrowAtlas('dave/playrobot');
+
+				animation.addByPrefix('idle', 'Idle', 24, true);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
+
+				antialiasing = false;
+
+				playAnim('idle');
+			case 'playrobot-crazy':
+				frames = Paths.getSparrowAtlas('dave/playrobot');
+
+				animation.addByPrefix('idle', 'Idle', 24, true);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP');
+				addOffset('singRIGHT');
+
+				antialiasing = false;
+
+				playAnim('idle');
 			case 'diamond-man':
 				frames = Paths.getSparrowAtlas('dave/diamondMan');
 				animation.addByPrefix('idle', 'idle', 24, true);

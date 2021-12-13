@@ -577,6 +577,11 @@ class PlayState extends MusicBeatState
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 
+		if(bfChar == '3d-bf')
+		{
+			boyfriend.y += 75;
+		}
+
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
 		if (curStage == 'house') gf.visible = false;
 
@@ -3730,8 +3735,7 @@ class PlayState extends MusicBeatState
 							iconP2.animation.play(dad.curCharacter);
 					case 1696:
 						//PLAYROBOT TURN
-						//UNCOMMENT THIS WHEN PLAYROBOT SPRITES ARE DONE AND IN
-						//swapDad('playrobot');
+						swapDad('playrobot');
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1856:
@@ -3743,8 +3747,7 @@ class PlayState extends MusicBeatState
 					case 1996:
 						//ANGEY DAVE TURN 2!!
 						swapDad('og-dave-angey');
-						//UNCOMMENT THIS WHEN PLAYROBOT SPRITES ARE DONE AND IN
-						//algebraStander('playrobot', playRobotStand, 750, 100, true);
+						//algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
 						standersGroup.remove(daveStand);
 						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
@@ -4124,7 +4127,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
-	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100, startScared:Bool = false)
+	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100, startScared:Bool = false, idleAsStand:Bool = false)
 	{
 		if(physChar != null)
 		{
@@ -4149,7 +4152,10 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			physChar.playAnim('stand', true);
+			if(idleAsStand)
+				physChar.playAnim('idle', true);
+			else
+				physChar.playAnim('stand', true);
 			trace('standy');
 		}
 	}
