@@ -429,6 +429,7 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
+		standersGroup = new FlxTypedGroup<FlxSprite>();
 		add(standersGroup);
 
 		dad = new Character(100, 100, SONG.player2);
@@ -4121,8 +4122,11 @@ class PlayState extends MusicBeatState
 	{
 		if(physChar != null)
 		{
+			if(standersGroup.members.contains(physChar))
+				standersGroup.remove(physChar);
+				trace('remove physstander from group');
 			remove(physChar);
-			trace('remove physstander');
+			trace('remove physstander entirely');
 		}
 		physChar = new Character(x, y, char, false);
 		trace('new physstander');
