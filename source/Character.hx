@@ -166,10 +166,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 
 				addOffset('idle');
-				addOffset('singLEFT');
-				addOffset('singDOWN');
+				addOffset('singLEFT', 110, -90);
+				addOffset('singDOWN', -21, -218);
 				addOffset('singUP');
-				addOffset('singRIGHT');
+				addOffset('singRIGHT', -55, -96);
 
 				antialiasing = false;
 
@@ -184,12 +184,30 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 
 				addOffset('idle');
-				addOffset('singLEFT');
-				addOffset('singDOWN');
-				addOffset('singUP');
-				addOffset('singRIGHT');
+				addOffset('singLEFT', 255);
+				addOffset('singDOWN', 203, -50);
+				addOffset('singUP', -19);
+				addOffset('singRIGHT', -20, 38);
 
 				antialiasing = false;
+
+				playAnim('idle');
+			case 'hall-monitor':
+				frames = Paths.getSparrowAtlas('dave/HALL_MONITOR');
+				animation.addByPrefix('idle', 'gdj', 24, false);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT', 436, 401);
+				addOffset('singDOWN', 145, 25);
+				addOffset('singUP', -150, 62);
+				addOffset('singRIGHT', 201, 285);
+
+				antialiasing = false;
+				scale.set(1.5, 1.5);
+				updateHitbox();
 
 				playAnim('idle');
 			case 'diamond-man':
@@ -200,10 +218,13 @@ class Character extends FlxSprite
 				}
 
 				addOffset('idle');
-				addOffset('singLEFT', 468, 2);
-				addOffset('singDOWN', 66, -248);
-				addOffset('singUP', -10, 260);
-				addOffset('singRIGHT', 2);
+				addOffset('singLEFT', 610);
+				addOffset('singDOWN', 91, -328);
+				addOffset('singUP', -12, 338);
+				addOffset('singRIGHT', 4);
+
+				scale.set(1.3, 1.3);
+				updateHitbox();
 
 				antialiasing = false;
 
@@ -430,7 +451,7 @@ class Character extends FlxSprite
 				addOffset("singUP");
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
-				addOffset("singDOWN", -86, -25);
+				addOffset("singDOWN", -82, -24);
 				addOffset("stand", -87, -29);
 
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
@@ -482,6 +503,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -48, -46);
 				addOffset("stand", 20);
 				addOffset("scared");
+
+				furiosityScale = 1.3;
 
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="davePiss.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="GRR0000" x="0" y="0" width="362" height="624" frameX="-23" frameY="-29" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0001" x="367" y="0" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0002" x="367" y="0" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0003" x="0" y="629" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0004" x="0" y="629" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0005" x="404" y="629" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0006" x="404" y="629" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0007" x="0" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0008" x="0" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0009" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0010" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0011" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0012" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0013" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0014" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+	<SubTexture name="GRR0015" x="404" y="1258" width="399" height="624" frameX="0" frameY="0" frameWidth="399" frameHeight="653"/>
+</TextureAtlas>

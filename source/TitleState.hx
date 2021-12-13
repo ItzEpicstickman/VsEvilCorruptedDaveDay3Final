@@ -62,6 +62,16 @@ class TitleState extends MusicBeatState
 			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
 		#end
 
+		// preload all the long songs
+		var preloadSongs:Array<String> = [
+			'Algebra', 'AppleCore'
+		];
+
+		for (song in preloadSongs) {
+			FlxG.sound.cache(Paths.inst(song));
+			FlxG.sound.cache(Paths.voices(song));
+		}
+
 		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
 		{

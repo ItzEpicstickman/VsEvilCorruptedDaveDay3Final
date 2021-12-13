@@ -125,6 +125,15 @@ class PlayState extends MusicBeatState
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
 
+	private var swagSpeed:Float;
+
+	var daveJunk:FlxSprite;
+	var davePiss:FlxSprite;
+	var garrettJunk:FlxSprite;
+	var monitorJunk:FlxSprite;
+	var robotJunk:FlxSprite;
+	var diamondJunk:FlxSprite;
+
 	var boyfriendOldIcon:String = 'bf-old';
 
 	private var vocals:FlxSound;
@@ -431,6 +440,13 @@ class PlayState extends MusicBeatState
 
 		standersGroup = new FlxTypedGroup<FlxSprite>();
 		add(standersGroup);
+
+		if (SONG.song.toLowerCase() == 'algebra') {
+			algebraStander('garrett', garrettStand, 500, 225); 
+				algebraStander('og-dave-angey', daveStand, 250, 100); 
+				algebraStander('hall-monitor', hallMonitorStand, 0, 100); 
+				algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
+		}
 
 		dad = new Character(100, 100, SONG.player2);
 		if(SONG.song.toLowerCase() == 'wireframe')
@@ -756,6 +772,7 @@ class PlayState extends MusicBeatState
 			case 'wireframe':
 				preload('bambi/badai');
 			case 'algebra':
+				preload('dave/HALL_MONITOR');
 				preload('dave/diamondMan');
 				preload('dave/playrobot');
 				preload('dave/ohshit');
@@ -920,13 +937,48 @@ class PlayState extends MusicBeatState
 			case 'algebra':
 				curStage = 'algebra';
 				defaultCamZoom = 0.85;
+				swagSpeed = 1.6;
 				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('dave/algebraBg'));
 				bg.setGraphicSize(Std.int(bg.width * 1.35), Std.int(bg.height * 1.35));
 				bg.updateHitbox();
 				//this is temp until good positioning gets done
-				bg.screenCenter();
+				bg.screenCenter(); // no its not
 				sprites.add(bg);
 				add(bg);
+
+				daveJunk = new FlxSprite(424, 122).loadGraphic(bgImg('dave'));
+				davePiss = new FlxSprite(427, 94);
+				davePiss.frames = Paths.getSparrowAtlas('dave/bgJunkers/davePiss');
+				davePiss.animation.addByIndices('idle', 'GRR', [0], '', 0, false);
+				davePiss.animation.addByPrefix('d', 'GRR', 24, false);
+				davePiss.animation.play('idle');
+
+				garrettJunk = new FlxSprite(237, 59).loadGraphic(bgImg('bitch'));
+				garrettJunk.y += 45;
+
+				monitorJunk = new FlxSprite(960, 61).loadGraphic(bgImg('rubyIsAngryRN'));
+				monitorJunk.x += 275;
+				monitorJunk.y += 75;
+
+				diamondJunk = new FlxSprite(645, -16).loadGraphic(bgImg('lanceyIsGoingToMakeAFakeLeakAndPostItInGeneral'));
+				diamondJunk.x += 75;
+
+				robotJunk = new FlxSprite(-160, 225).loadGraphic(bgImg('myInternetJustWentOut'));
+				robotJunk.x -= 250;
+				robotJunk.y += 75;
+
+				for (i in [diamondJunk, garrettJunk, daveJunk, davePiss, monitorJunk, robotJunk]) {
+					//i.offset.set(i.getMidpoint().x - bg.getMidpoint().x, i.getMidpoint().y - bg.getMidpoint().y);
+					i.scale.set(1.35, 1.35);
+					//i.updateHitbox();
+					//i.x += (i.getMidpoint().x - bg.getMidpoint().x) * 0.35;
+					//i.y += (i.getMidpoint().y - bg.getMidpoint().y) * 0.35;
+					i.visible = false;
+					i.antialiasing = false;
+					sprites.add(i);
+					add(i);
+				}
+				
 
 			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
@@ -2700,6 +2752,11 @@ class PlayState extends MusicBeatState
 							else
 								daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * 1, 2)));
 						}
+					case 'algebra':
+						if (FlxG.save.data.downscroll)
+							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(swagSpeed * daNote.LocalScrollSpeed, 2)));
+						else
+							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(swagSpeed * daNote.LocalScrollSpeed, 2)));
 					default:
 						if (FlxG.save.data.downscroll)
 							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
@@ -2837,6 +2894,15 @@ class PlayState extends MusicBeatState
 				camFollow.x -= 425;
 			case 'dave-wheels':
 				camFollow.y -= 150;
+			case 'hall-monitor':
+				camFollow.x -= 200;
+				camFollow.y -= 180;
+			case 'playrobot':
+				camFollow.x -= 160;
+				camFollow.y -= boyfriend.getMidpoint().y - 100;
+			case 'playrobot-crazy':
+				camFollow.x -= 160;
+				camFollow.y -= 10;
 		}
 	}
 
@@ -3692,14 +3758,19 @@ class PlayState extends MusicBeatState
 				{
 					//STANDER POSITIONING IS INCOMPLETE, FIX LATER
 					case 160:
+						swagSpeed = SONG.speed - 0.5;
 						//GARRETT TURN 1!!
 						swapDad('garrett');
 						algebraStander('og-dave', daveStand, 250, 100);
+						daveJunk.visible = true;
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
-					case 416:
+					case 416: // 
 						//HAPPY DAVE TURN 2!!
 						swapDad('og-dave');
+						daveJunk.visible = false;
+						garrettJunk.visible = true;
+						swagSpeed = SONG.speed - 0.3;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
@@ -3707,9 +3778,11 @@ class PlayState extends MusicBeatState
 						algebraStander('garrett', garrettStand, 500, 225);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
-					case 544:
+					case 536:
 						//GARRETT TURN 2
 						swapDad('garrett');
+						davePiss.visible = true;
+						garrettJunk.visible = false;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
@@ -3720,6 +3793,8 @@ class PlayState extends MusicBeatState
 					case 552:
 						//ANGEY DAVE TURN 1!!
 						swapDad('og-dave-angey');
+						davePiss.visible = false;
+						garrettJunk.visible = true;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
@@ -3730,7 +3805,10 @@ class PlayState extends MusicBeatState
 					case 696:
 						//HALL MONITOR TURN
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
-						//swapDad('hall-monitor');
+						swapDad('hall-monitor');
+						davePiss.visible = true;
+						diamondJunk.visible = true;
+						swagSpeed = 2;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
@@ -3742,29 +3820,39 @@ class PlayState extends MusicBeatState
 					case 1344:
 						//DIAMOND MAN TURN
 						swapDad('diamond-man');
+						monitorJunk.visible = true;
+						diamondJunk.visible = false;
+						swagSpeed = SONG.speed;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
 						}
 						algebraStander('garrett', garrettStand, 500, 225, true);
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
-						//algebraStander('hall-monitor', hallMonitorStand, 0, 100);
+						algebraStander('hall-monitor', hallMonitorStand, 0, 100);
 						algebraStander('og-dave-angey', daveStand, 250, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1696:
 						//PLAYROBOT TURN
 						swapDad('playrobot');
+						swagSpeed = 1.6;
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
+					case 1852:
+						FlxTween.tween(davePiss, {x: davePiss.x - 250}, 0.5, {ease:FlxEase.quadOut});
+						davePiss.animation.play('d');
 					case 1856:
 						//SCARY PLAYROBOT TURN
-						swapDad('playrobot-scary');
+						swapDad('playrobot-crazy');
+						swagSpeed = SONG.speed;
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1996:
 						//ANGEY DAVE TURN 2!!
 						swapDad('og-dave-angey');
+						robotJunk.visible = true;
+						davePiss.visible = false;
 						for(member in standersGroup.members)
 						{
 							member.destroy();
@@ -3772,9 +3860,11 @@ class PlayState extends MusicBeatState
 						algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
 						algebraStander('garrett', garrettStand, 500, 225, true);
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
-						//algebraStander('hall-monitor', hallMonitorStand, 0, 100);
+						algebraStander('hall-monitor', hallMonitorStand, 0, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
+					case 2140:
+						swagSpeed = SONG.speed + 0.9;
 					
 				}
 			case 'sugar-rush':
@@ -4146,14 +4236,26 @@ class PlayState extends MusicBeatState
 				dad.x -= 750;
 				dad.y -= 360;
 			case 'garrett':
-				dad.y += 125;
+				dad.y += 65;
 			case 'diamond-man':
-				dad.y += 200;
+				dad.y += 25;
+			case 'og-dave' | 'og-dave-angey':
+				dad.x -= 190;
+			case 'hall-monitor':
+				dad.x += 45;
+				dad.y += 185;
+			case 'playrobot':
+				dad.y += 265;
+				dad.x += 150;
+			case 'playrobot-crazy':
+				dad.y += 365;
+				dad.x += 165;
 		}
 	}
 	
 	function algebraStander(char:String, physChar:Character, x:Float = 100, y:Float = 100, startScared:Bool = false, idleAsStand:Bool = false)
 	{
+		return;
 		if(physChar != null)
 		{
 			if(standersGroup.members.contains(physChar))
@@ -4188,6 +4290,10 @@ class PlayState extends MusicBeatState
 	function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
+	}
+
+	function bgImg(Path:String) {
+		return Paths.image('dave/bgJunkers/$Path');
 	}
 
 	public function preload(graphic:String) //preload assets
