@@ -175,7 +175,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'playrobot-crazy':
-				frames = Paths.getSparrowAtlas('dave/playrobot');
+				frames = Paths.getSparrowAtlas('dave/ohshit');
 
 				animation.addByPrefix('idle', 'Idle', 24, true);
 				animation.addByPrefix('singUP', 'Up', 24, false);
