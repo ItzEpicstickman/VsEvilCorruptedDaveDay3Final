@@ -577,10 +577,10 @@ class PlayState extends MusicBeatState
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 
-		if(bfChar == '3d-bf')
+		/*if(bfChar == '3d-bf')
 		{
 			boyfriend.y += 75;
-		}
+		}*/
 
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
 		if (curStage == 'house') gf.visible = false;
@@ -757,6 +757,8 @@ class PlayState extends MusicBeatState
 				preload('bambi/badai');
 			case 'algebra':
 				preload('dave/diamondMan');
+				preload('dave/playrobot');
+				preload('dave/ohshit');
 				preload('dave/garrett_algebra');
 				preload('dave/og_dave_angey');
 		}
