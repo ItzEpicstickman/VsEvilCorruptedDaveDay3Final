@@ -3700,39 +3700,56 @@ class PlayState extends MusicBeatState
 					case 416:
 						//HAPPY DAVE TURN 2!!
 						swapDad('og-dave');
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
 						algebraStander('garrett', garrettStand, 500, 225);
-						standersGroup.remove(daveStand);
-						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 544:
 						//GARRETT TURN 2
 						swapDad('garrett');
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
 						algebraStander('og-dave-angey', daveStand, 250, 100);
-						standersGroup.remove(garrettStand);
-						remove(garrettStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 552:
 						//ANGEY DAVE TURN 1!!
 						swapDad('og-dave-angey');
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
 						algebraStander('garrett', garrettStand, 500, 225, true);
-						standersGroup.remove(daveStand);
-						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 696:
 						//HALL MONITOR TURN
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
 						//swapDad('hall-monitor');
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
+						algebraStander('garrett', garrettStand, 500, 225, true);
 						algebraStander('og-dave-angey', daveStand, 250, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1344:
 						//DIAMOND MAN TURN
 						swapDad('diamond-man');
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
+						algebraStander('garrett', garrettStand, 500, 225, true);
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
 						//algebraStander('hall-monitor', hallMonitorStand, 0, 100);
+						algebraStander('og-dave-angey', daveStand, 250, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1696:
@@ -3742,16 +3759,21 @@ class PlayState extends MusicBeatState
 							iconP2.animation.play(dad.curCharacter);
 					case 1856:
 						//SCARY PLAYROBOT TURN
-						//UNCOMMENT THIS WHEN SCARY PLAYROBOT SPRITES ARE DONE AND IN
-						//swapDad('playrobot-scary');
+						swapDad('playrobot-scary');
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					case 1996:
 						//ANGEY DAVE TURN 2!!
 						swapDad('og-dave-angey');
-						//algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
-						standersGroup.remove(daveStand);
-						remove(daveStand);
+						for(member in standersGroup.members)
+						{
+							member.destroy();
+						}
+						algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
+						algebraStander('garrett', garrettStand, 500, 225, true);
+						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
+						//algebraStander('hall-monitor', hallMonitorStand, 0, 100);
+						algebraStander('og-dave-angey', daveStand, 250, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					
@@ -4126,6 +4148,8 @@ class PlayState extends MusicBeatState
 				dad.y -= 360;
 			case 'garrett':
 				dad.y += 125;
+			case 'diamond-man':
+				dad.y += 200;
 		}
 	}
 	
