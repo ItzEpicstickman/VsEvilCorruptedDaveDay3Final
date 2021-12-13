@@ -3694,6 +3694,7 @@ class PlayState extends MusicBeatState
 						//HAPPY DAVE TURN 2!!
 						swapDad('og-dave');
 						algebraStander('garrett', garrettStand, 750, 100);
+						standersGroup.remove(daveStand);
 						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
@@ -3701,6 +3702,7 @@ class PlayState extends MusicBeatState
 						//GARRETT TURN 2
 						swapDad('garrett');
 						algebraStander('og-dave-angey', daveStand, 500, 100);
+						standersGroup.remove(garrettStand);
 						remove(garrettStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
@@ -3708,6 +3710,7 @@ class PlayState extends MusicBeatState
 						//ANGEY DAVE TURN 1!!
 						swapDad('og-dave-angey');
 						algebraStander('garrett', garrettStand, 750, 100, true);
+						standersGroup.remove(daveStand);
 						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
@@ -3742,6 +3745,7 @@ class PlayState extends MusicBeatState
 						swapDad('og-dave-angey');
 						//UNCOMMENT THIS WHEN PLAYROBOT SPRITES ARE DONE AND IN
 						//algebraStander('playrobot', playRobotStand, 1000, 100, true);
+						standersGroup.remove(daveStand);
 						remove(daveStand);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
