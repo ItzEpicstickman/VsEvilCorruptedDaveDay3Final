@@ -4021,12 +4021,18 @@ class PlayState extends MusicBeatState
 
 	function swapDad(char:String, x:Float = 100, y:Float = 100, flash:Bool = true)
 	{
-		remove(dad);
+		if(dad != null)
+			remove(dad);
+			trace('remove dad');
 		dad = new Character(x, y, char, false);
+		trace('set dad');
 		repositionDad();
+		trace('repositioned dad');
 		add(dad);
+		trace('added dad');
 		if(flash)
 			FlxG.camera.flash(FlxColor.WHITE, 1, null, true);
+			trace('flashed');
 	}
 
 	function repositionDad() {
@@ -4116,19 +4122,25 @@ class PlayState extends MusicBeatState
 		if(physChar != null)
 		{
 			remove(physChar);
+			trace('remove physstander');
 		}
 		physChar = new Character(x, y, char, false);
+		trace('new physstander');
 		standersGroup.add(physChar);
+		trace('physstander in group');
 		if(startScared)
 		{
 			physChar.playAnim('scared', true);
+			trace('scaredy');
 			new FlxTimer().start(Conductor.crochet / 1000, function(dick:FlxTimer){
 				physChar.playAnim('stand', true);
+				trace('standy');
 			});
 		}
 		else
 		{
 			physChar.playAnim('stand', true);
+			trace('standy');
 		}
 	}
 
