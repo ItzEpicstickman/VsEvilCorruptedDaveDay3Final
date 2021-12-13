@@ -778,6 +778,9 @@ class PlayState extends MusicBeatState
 				preload('dave/ohshit');
 				preload('dave/garrett_algebra');
 				preload('dave/og_dave_angey');
+			case 'recovered-project':
+				preload('dave/recovered_project_2');
+				preload('dave/recovered_project_3');
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
@@ -3987,6 +3990,16 @@ class PlayState extends MusicBeatState
 							});
 						}});
 				}
+			case 'recovered-project':
+				switch (curBeat) {
+					case 256:
+						swapDad('RECOVERED_PROJECT_2');
+					case 480:
+						thunderBlack.alpha = 1;
+						swapDad("RECOVERED_PROJECT_3");
+					case 484:
+						FlxTween.tween(thunderBlack, {alpha: 0}, 1);
+				}
 			case 'wireframe':
 				FlxG.camera.shake(0.005, Conductor.crochet / 1000);
 				switch(curBeat)
@@ -4230,7 +4243,7 @@ class PlayState extends MusicBeatState
 			case 'sart-producer-night':
 				dad.setPosition(732, 83);
 				dad.y -= 200;
-			case 'RECOVERED_PROJECT':
+			case 'RECOVERED_PROJECT' | 'RECOVERED_PROJECT_2' | 'RECOVERED_PROJECT_3':
 				dad.setPosition(-307, 10);
 			case 'sart-producer':
 				dad.x -= 750;
