@@ -3773,7 +3773,6 @@ class PlayState extends MusicBeatState
 						algebraStander('garrett', garrettStand, 500, 225, true);
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
 						//algebraStander('hall-monitor', hallMonitorStand, 0, 100);
-						algebraStander('og-dave-angey', daveStand, 250, 100);
 						if(iconP2.animation.getByName(dad.curCharacter) != null)
 							iconP2.animation.play(dad.curCharacter);
 					
