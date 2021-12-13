@@ -1,4 +1,6 @@
+:dave:Hey there!
 :dave:Welcome to my school!
-:dave:Would you like to sing?
-:bf:BOP!
-:dave:Let's do it!
+:dave:People don't visit me that often, so I'm glad you're here!
+:bf:Beep?
+:dave:Don't worry about my disability, I can get around myself.
+:bf:Bap!
