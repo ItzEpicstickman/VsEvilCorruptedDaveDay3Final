@@ -2902,7 +2902,7 @@ class PlayState extends MusicBeatState
 				camFollow.y -= 180;
 			case 'playrobot':
 				camFollow.x -= 160;
-				camFollow.y -= boyfriend.getMidpoint().y - 100;
+				camFollow.y = boyfriend.getMidpoint().y - 100;
 			case 'playrobot-crazy':
 				camFollow.x -= 160;
 				camFollow.y -= 10;
