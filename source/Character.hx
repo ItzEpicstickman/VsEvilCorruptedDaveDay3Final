@@ -408,7 +408,7 @@ class Character extends FlxSprite
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
 				addOffset("singDOWN");
-				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				setGraphicSize(Std.int(765 * furiosityScale),Std.int(903 * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
 		
@@ -428,7 +428,7 @@ class Character extends FlxSprite
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
 				addOffset("singDOWN");
-				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				setGraphicSize(Std.int(765 * furiosityScale),Std.int(903 * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
 		

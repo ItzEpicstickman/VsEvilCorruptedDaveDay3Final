@@ -148,7 +148,7 @@ class HealthIcon extends FlxSprite
 	}
 
 	function addIcon(char:String, startFrame:Int, singleIcon:Bool = false) {
-		animation.add(char, singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
+		animation.add(char, !singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
 	}
 
 	override function update(elapsed:Float)

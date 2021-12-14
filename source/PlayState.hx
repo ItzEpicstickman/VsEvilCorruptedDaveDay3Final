@@ -2339,19 +2339,20 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			if(iconP1.charPublic != 'bandu-origin')
-				iconP1.animation.curAnim.curFrame = 1;
-		else
-			if(iconP1.charPublic != 'bandu-origin')
+		if(iconP1.charPublic != 'bandu-origin') {
+			healthBar.percent < 20 ?
+				iconP1.animation.curAnim.curFrame = 1:
 				iconP1.animation.curAnim.curFrame = 0;
+		}
 
-		if (healthBar.percent > 80)
-			if(iconP2.charPublic != 'bandu-origin')
-				iconP2.animation.curAnim.curFrame = 1;
-		else
-			if(iconP2.charPublic != 'bandu-origin')
+		if(iconP2.charPublic != 'bandu-origin') {
+			healthBar.percent > 80 ?
+				iconP2.animation.curAnim.curFrame = 1:
 				iconP2.animation.curAnim.curFrame = 0;
+		}
+
+		//iconP2.animation.curAnim.curFrame = 0;
+				
 
 		/* if (FlxG.keys.justPressed.NINE)
 			FlxG.switchState(new Charting()); */
