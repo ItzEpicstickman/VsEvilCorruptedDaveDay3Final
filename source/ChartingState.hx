@@ -1127,7 +1127,7 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		if (song.toLowerCase() == 'supernovae' || song.toLowerCase() == 'glitch' || song.toLowerCase() == 'cheating' || song.toLowerCase() == 'disruption')
+		if (song.toLowerCase() == 'recovered-project' || song.toLowerCase() == 'dave-x-bambi-shipping-cute' || song.toLowerCase() == 'cheating' || song.toLowerCase() == 'disruption')
 		{
 			FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState())); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
 		}
