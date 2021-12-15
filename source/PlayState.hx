@@ -557,17 +557,19 @@ class PlayState extends MusicBeatState
 
 		add(gf);
 
-		if (SONG.song.toLowerCase() != 'wireframe' && SONG.song.toLowerCase() != 'origin')
+		if (SONG.song.toLowerCase() != 'wireframe' && SONG.song.toLowerCase() != 'origin' && SONG.song.toLowerCase() != 'ugh')
 			add(dad);
 		add(boyfriend);
 		add(dadmirror);
-		if (SONG.song.toLowerCase() == 'wireframe' || SONG.song.toLowerCase() == 'origin') {
+		if (SONG.song.toLowerCase() == 'wireframe' || SONG.song.toLowerCase() == 'origin' || SONG.song.toLowerCase() == 'ugh') {
 			add(dad);
 			if(SONG.song.toLowerCase() == 'wireframe')
+			{
 				dad.scale.set(dad.scale.x + 0.36, dad.scale.y + 0.36);
 				dad.x += 65;
 				dad.y += 175;
 				boyfriend.y -= 190;
+			}
 		}
 		if(badai != null)
 		{
@@ -725,6 +727,8 @@ class PlayState extends MusicBeatState
 				credits = 'OC created by DanWiki!';
 			case 'cycles':
 				credits = 'Original song made by Vania for Vs. Sonic.exe!';
+			case 'ugh':
+				credits = 'Original song made by KawaiSprite for Week 7!';
 			case 'bambi-666-level':
 				credits = 'Bambi 666 Level';
 			case 'wheels':
@@ -983,7 +987,7 @@ class PlayState extends MusicBeatState
 				}
 				
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard' | 'ugh':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
@@ -1003,7 +1007,7 @@ class PlayState extends MusicBeatState
 					case 'disability':
 						bg.loadGraphic(Paths.image('dave/disabled'));
 						curStage = 'disabled';
-					case 'origin':
+					case 'origin' | 'ugh':
 						bg.loadGraphic(Paths.image('bambi/heaven'));
 						curStage = 'origin';
 					case 'metallic':
@@ -3614,6 +3618,15 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+
+		if(SONG.song.toLowerCase() == 'ugh')
+		{
+			switch(curStep)
+			{
+				case 60 | 444 | 524 | 539 | 540 | 828:
+					dad.playAnim('singFUCK', true);
+			}
+		}
 
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{

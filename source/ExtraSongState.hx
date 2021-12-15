@@ -56,14 +56,14 @@ class ExtraSongState extends MusicBeatState
 		bg.color = 0xFF4965FF;
 		add(bg);
         
-		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
+		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Ugh', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'bandu-origin', 'sart-producer']);
         addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-wheels', 'dave-good', 'RECOVERED_PROJECT']);
 		addWeek(['Sart-Producer'], 4, ['sart-producer']);
 
         grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-        swagText.setFormat(Paths.font("vcr.ttf"), 47, FlxColor.BLACK, LEFT);
+        swagText.setFormat(Paths.font("vcr.ttf"), 47, FlxColor.BLACK, CENTER);
 		swagText.screenCenter(X);
 		swagText.y += 50;
 		add(swagText);

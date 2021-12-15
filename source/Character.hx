@@ -361,6 +361,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 				animation.addByPrefix('cutscene', 'CUTSCENE', 24, false);
+				animation.addByPrefix('singFUCK', 'FUCK', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 69, -30);
@@ -368,6 +369,8 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -90, -10);
 				addOffset("singDOWN", 80, 100);
 				addOffset("cutscene", 0, -10);
+				addOffset('singFUCK', -218, -98);
+
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
