@@ -118,7 +118,7 @@ class PlayState extends MusicBeatState
 
 	var focusOnDadGlobal:Bool = true;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'unfair-junker', 'split-dave-3d', 'badai', 'tunnel-dave', 'tunnel-bf', 'tunnel-bf-flipped', 'bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'gary'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -482,49 +482,17 @@ class PlayState extends MusicBeatState
 
 		switch (boyfriend.curCharacter)
 		{
-			case "tristan" | 'tristan-beta' | 'tristan-golden':
-				boyfriend.y = 100 + 325;
-				boyfriendOldIcon = 'tristan-beta';
 			case 'dave' | 'dave-annoyed' | 'dave-splitathon' | 'dave-good':
 				boyfriend.y = 100 + 160;
-				boyfriendOldIcon = 'dave-old';
 			case 'tunnel-bf':
 				boyfriend.y = 100;
-			case 'dave-old':
-				boyfriend.y = 100 + 270;
-				boyfriendOldIcon = 'dave';
 			case 'bandu-scaredy':
 				if (SONG.song.toLowerCase() == 'cycles')
 					boyfriend.setPosition(-202, 20);
-			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-				boyfriend.y = 100;
-				switch(boyfriend.curCharacter)
-				{
-					case 'dave-angey':
-						boyfriendOldIcon = 'dave-annoyed-3d';
-					case 'dave-annoyed-3d':
-						boyfriendOldIcon = 'dave-3d-standing-bruh-what';
-					case 'dave-3d-standing-bruh-what':
-						boyfriendOldIcon = 'dave-old';
-				}
 			case 'bambi-3d' | 'bambi-piss-3d':
 				boyfriend.y = 100 + 350;
-				boyfriendOldIcon = 'bambi-old';
 			case 'bambi-unfair':
 				boyfriend.y = 100 + 575;
-				boyfriendOldIcon = 'bambi-old';
-			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
-				boyfriend.y = 100 + 400;
-				boyfriendOldIcon = 'bambi-old';
-			case 'bambi-new' | 'bambi-farmer-beta':
-				boyfriend.y = 100 + 450;
-				boyfriendOldIcon = 'bambi-old';
-			case 'bambi-splitathon':
-				boyfriend.y = 100 + 400;
-				boyfriendOldIcon = 'bambi-old';
-			case 'bambi-angey':
-				boyfriend.y = 100 + 450;
-				boyfriendOldIcon = 'bambi-old';
 		}
 
 		switch (curStage) {
@@ -800,11 +768,11 @@ class PlayState extends MusicBeatState
 		{
 			iconP1IsPlayer = false;
 		}
-		iconP1 = new HealthIcon((formoverride == "none" || formoverride == "bf") ? SONG.player1 : formoverride, iconP1IsPlayer);
+		iconP1 = new HealthIcon(boyfriend.iconName, iconP1IsPlayer);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
 
-		iconP2 = new HealthIcon(SONG.player2 == "bambi" ? "bambi-stupid" : SONG.player2, false);
+		iconP2 = new HealthIcon(dad.iconName, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
@@ -2066,6 +2034,9 @@ class PlayState extends MusicBeatState
 					dad.x = -700 + Math.sin(elapsedtime) * 425;
 				case 'tunnel-dave':
 					dad.y -= (Math.sin(elapsedtime) * 0.6);
+				case 'gary':
+					dad.y += (Math.cos(elapsedtime) * 0.75);
+					dad.x += (Math.sin(elapsedtime) * 0.65);
 				default:
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 			}
@@ -2273,12 +2244,11 @@ class PlayState extends MusicBeatState
 		{
 			if (iconP1.animation.curAnim.name == boyfriendOldIcon)
 			{
-				var isBF:Bool = formoverride == 'bf' || formoverride == 'none';
-				iconP1.animation.play(isBF ? SONG.player1 : formoverride);
+				iconP1.changeIcon(boyfriend.iconName);
 			}
 			else
 			{
-				iconP1.animation.play(boyfriendOldIcon);
+				iconP1.changeIcon(boyfriendOldIcon);
 			}
 		}
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed, 0, 1);
@@ -2911,6 +2881,9 @@ class PlayState extends MusicBeatState
 			case 'playrobot-crazy':
 				camFollow.x -= 160;
 				camFollow.y -= 10;
+			case 'RECOVERED_PROJECT_2' | 'RECOVERED_PROJECT_3':
+				camFollow.y += 400;
+				camFollow.x += 125;
 		}
 	}
 
@@ -3780,8 +3753,7 @@ class PlayState extends MusicBeatState
 						swapDad('garrett');
 						algebraStander('og-dave', daveStand, 250, 100);
 						daveJunk.visible = true;
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 416: // 
 						//HAPPY DAVE TURN 2!!
 						swapDad('og-dave');
@@ -3793,8 +3765,7 @@ class PlayState extends MusicBeatState
 							member.destroy();
 						}
 						algebraStander('garrett', garrettStand, 500, 225);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 536:
 						//GARRETT TURN 2
 						swapDad('garrett');
@@ -3805,8 +3776,7 @@ class PlayState extends MusicBeatState
 							member.destroy();
 						}
 						algebraStander('og-dave-angey', daveStand, 250, 100);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 552:
 						//ANGEY DAVE TURN 1!!
 						swapDad('og-dave-angey');
@@ -3817,8 +3787,7 @@ class PlayState extends MusicBeatState
 							member.destroy();
 						}
 						algebraStander('garrett', garrettStand, 500, 225, true);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 696:
 						//HALL MONITOR TURN
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
@@ -3832,8 +3801,7 @@ class PlayState extends MusicBeatState
 						}
 						algebraStander('garrett', garrettStand, 500, 225, true);
 						algebraStander('og-dave-angey', daveStand, 250, 100);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 1344:
 						//DIAMOND MAN TURN
 						swapDad('diamond-man');
@@ -3848,14 +3816,12 @@ class PlayState extends MusicBeatState
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
 						algebraStander('hall-monitor', hallMonitorStand, 0, 100);
 						algebraStander('og-dave-angey', daveStand, 250, 100);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 1696:
 						//PLAYROBOT TURN
 						swapDad('playrobot');
 						swagSpeed = 1.6;
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 1852:
 						FlxTween.tween(davePiss, {x: davePiss.x - 250}, 0.5, {ease:FlxEase.quadOut});
 						davePiss.animation.play('d');
@@ -3863,8 +3829,7 @@ class PlayState extends MusicBeatState
 						//SCARY PLAYROBOT TURN
 						swapDad('playrobot-crazy');
 						swagSpeed = SONG.speed;
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 1996:
 						//ANGEY DAVE TURN 2!!
 						swapDad('og-dave-angey');
@@ -3878,8 +3843,7 @@ class PlayState extends MusicBeatState
 						algebraStander('garrett', garrettStand, 500, 225, true);
 						//UNCOMMENT THIS WHEN HALL MONITOR SPRITES ARE DONE AND IN
 						algebraStander('hall-monitor', hallMonitorStand, 0, 100);
-						if(iconP2.animation.getByName(dad.curCharacter) != null)
-							iconP2.animation.play(dad.curCharacter);
+						iconP2.changeIcon(dad.iconName);
 					case 2140:
 						swagSpeed = SONG.speed + 0.9;
 					
@@ -3918,7 +3882,7 @@ class PlayState extends MusicBeatState
 						camHUD.flash(FlxColor.WHITE, 1);
 						
 						iconRPC = 'icon_the_two_dunkers';
-						iconP2.animation.play('the-two-dunkers');
+						iconP2.changeIcon('junkers');
 						dad.playAnim('NOOMYPHONES', true);
 						dadmirror.playAnim('NOOMYPHONES', true);
 						dad.POOP = true; // WORK WORK WOKR< WOKRMKIEPATNOLIKSEHGO:"IKSJRHDLG"H
@@ -3973,7 +3937,7 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(littleIdiot, {alpha: 1}, 1.4, {ease: FlxEase.circOut});
 					case 667:
 						FlxTween.tween(littleIdiot, {"scale.x": littleIdiot.scale.x + 2.1, "scale.y": littleIdiot.scale.y + 2.1}, 1.35, {ease: FlxEase.cubeInOut, onComplete: function(twn:FlxTween){
-							iconP2.animation.play('bambi-unfair');
+							iconP2.changeIcon(littleIdiot.iconName);
 							orbit = false;
 							dad.visible = dadmirror.visible = swagger.visible = false;
 							var derez = new FlxSprite(dad.getMidpoint().x, dad.getMidpoint().y).loadGraphic(Paths.image('bambi/monkey_guy'));
@@ -4064,7 +4028,7 @@ class PlayState extends MusicBeatState
 							*/
 							//boyfriendOldIcon = 'bf-old-flipped';
 							//iconP1.animation.play('tunnel-bf-flipped');
-							iconP2.animation.play('badai');
+							iconP2.changeIcon(badai.iconName);
 							iconRPC = 'icon_badai';
 							daveFuckingDies.visible = true;
 							FlxTween.tween(daveFuckingDies, {y: -300}, 2.5, {ease: FlxEase.cubeInOut});
@@ -4257,8 +4221,12 @@ class PlayState extends MusicBeatState
 			case 'sart-producer-night':
 				dad.setPosition(732, 83);
 				dad.y -= 200;
-			case 'RECOVERED_PROJECT' | 'RECOVERED_PROJECT_2' | 'RECOVERED_PROJECT_3':
+			case 'RECOVERED_PROJECT':
 				dad.setPosition(-307, 10);
+			case 'RECOVERED_PROJECT_2' | 'RECOVERED_PROJECT_3':
+				dad.setPosition(-307, 10);
+				dad.y -= 400;
+				dad.x -= 125;
 			case 'sart-producer':
 				dad.x -= 750;
 				dad.y -= 360;
