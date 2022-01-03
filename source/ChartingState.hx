@@ -1061,7 +1061,7 @@ class ChartingState extends MusicBeatState
 	{
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i[0] == note.strumTime && i[1] % (keyAmmo[_song.mania]) == note.noteData)
+			if (i[0] == note.strumTime && i[1] % (Main.dataJump[_song.mania]) == note.noteData)
 			{
 				FlxG.log.add('FOUND EVIL NUMBER');
 				_song.notes[curSection].sectionNotes.remove(i);
