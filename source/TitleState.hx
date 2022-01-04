@@ -47,7 +47,7 @@ class TitleState extends MusicBeatState
 
 	var altIdle:Bool = false;
 
-	var fun:Int;
+	//var fun:Int; fuck you
 
 	var danced:Bool = false;
 
@@ -72,11 +72,11 @@ class TitleState extends MusicBeatState
 			FlxG.sound.cache(Paths.voices(song));
 		}
 
-		fun = FlxG.random.int(0, 999);
+		/*fun = FlxG.random.int(0, 999); //fuck you programmer
 		if(fun == 1)
 		{
 			LoadingState.loadAndSwitchState(new SusState());
-		}
+		}*/
 
 		PlayerSettings.init();
 
