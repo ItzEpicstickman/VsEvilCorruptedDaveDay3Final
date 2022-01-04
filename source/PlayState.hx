@@ -2336,72 +2336,91 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-
+		/*if (SONG.song.toLowerCase() == 'disruption')
+		{
+			poop.alpha = Math.sin(elapsedtime) / 2.5 + 0.4;
+		}*/
 		if (SONG.song.toLowerCase() == 'disruption') // deez all day
 		{
+			var fuckingnum:Float = 1.5;
+			if (mania == 1) fuckingnum = 1.4;
+			if (mania == 2) fuckingnum = 1.25;
+			if (mania == 3) fuckingnum = 1.35;
+			var deeznum:Float = 0.2;
+			if (mania == 1) deeznum = 0.15;
+			if (mania == 2) deeznum = 0.075;
+			if (mania == 3) deeznum = 0.125;
+			var AAAAAAA:Float = 2;
+			if (mania == 1) AAAAAAA = 3;
+			if (mania == 2) AAAAAAA = 6;
+			if (mania == 3) AAAAAAA = 4;
+			var BBBBBBB:Int = 4;
+			if (mania == 1) BBBBBBB = 6;
+			if (mania == 2) BBBBBBB = 9;
+			if (mania == 3) BBBBBBB = 7;	
 			var krunkThing = 60;
 
 			poop.alpha = Math.sin(elapsedtime) / 2.5 + 0.4;
 
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.x = arrowJunks[spr.ID + 9][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
-				spr.y = arrowJunks[spr.ID + 9][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
+				spr.x = arrowJunks[spr.ID + (BBBBBBB)][0] + (Math.sin(elapsedtime) * ((spr.ID % (AAAAAAA)) == 0 ? 1 : -1)) * krunkThing;
+				spr.y = arrowJunks[spr.ID + (BBBBBBB)][1] + Math.sin(elapsedtime - 5) * ((spr.ID % (AAAAAAA)) == 0 ? 1 : -1) * krunkThing;
 
-				spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1)) / 4;
+				spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % AAAAAAA) == 0 ? 1 : -1)) / BBBBBBB;
 
-				spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) / 2);
+				spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.ID % AAAAAAA) == 0 ? 1 : -1)) / AAAAAAA);
 
-				spr.scale.x += 0.2;
-				spr.scale.y += 0.2;
+				spr.scale.x += deeznum;
+				spr.scale.y += deeznum;
 
-				spr.scale.x *= 1.5;
-				spr.scale.y *= 1.5;
+				spr.scale.x *= fuckingnum;
+				spr.scale.y *= fuckingnum;
 			});
 			dadStrums.forEach(function(spr:FlxSprite)
 			{
-				spr.x = arrowJunks[spr.ID][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
-				spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
+				spr.x = arrowJunks[spr.ID][0] + (Math.sin(elapsedtime) * ((spr.ID % (AAAAAAA)) == 0 ? 1 : -1)) * krunkThing;
+				spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5) * ((spr.ID % (AAAAAAA)) == 0 ? 1 : -1) * krunkThing;
 				
-				spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1)) / 4;
+				spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % AAAAAAA) == 0 ? 1 : -1)) / BBBBBBB;
 
-				spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) / 2);
+				spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.ID % AAAAAAA) == 0 ? 1 : -1)) / AAAAAAA);
 
-				spr.scale.x += 0.2;
-				spr.scale.y += 0.2;
+				spr.scale.x += deeznum;
+				spr.scale.y += deeznum;
 
-				spr.scale.x *= 1.5;
-				spr.scale.y *= 1.5;
+				spr.scale.x *= fuckingnum;
+				spr.scale.y *=fuckingnum;
 			});
 
 			notes.forEachAlive(function(spr:Note){
 				if (spr.mustPress) {
-					spr.x = arrowJunks[spr.noteData + 9][0] + (Math.sin(elapsedtime) * ((spr.noteData % 2) == 0 ? 1 : -1)) * krunkThing;
-					spr.y = arrowJunks[spr.noteData + 9][1] + Math.sin(elapsedtime - 5) * ((spr.noteData % 2) == 0 ? 1 : -1) * krunkThing;
+					spr.x = arrowJunks[spr.noteData + (BBBBBBB)][0] + (Math.sin(elapsedtime) * ((spr.noteData % (AAAAAAA)) == 0 ? 1 : -1)) * krunkThing;
+					spr.y = arrowJunks[spr.noteData + (BBBBBBB)][1] + Math.sin(elapsedtime - 5) * ((spr.noteData % (AAAAAAA)) == 0 ? 1 : -1) * krunkThing;
 
-					spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.noteData % 2) == 0 ? 1 : -1)) / 4;
+					spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.noteData % AAAAAAA) == 0 ? 1 : -1)) / BBBBBBB;
 
-					spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.noteData % 2) == 0 ? 1 : -1)) / 2);
+					spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.noteData % AAAAAAA) == 0 ? 1 : -1)) / AAAAAAA);
 
-					spr.scale.x += 0.2;
-					spr.scale.y += 0.2;
+					spr.scale.x += deeznum;
+					spr.scale.y += deeznum;
 
-					spr.scale.x *= 1.5;
-					spr.scale.y *= 1.5;
+					spr.scale.x *= fuckingnum;
+					spr.scale.y *= fuckingnum;
 				}
 				else {
-					spr.x = arrowJunks[spr.noteData][0] + (Math.sin(elapsedtime) * ((spr.noteData % 2) == 0 ? 1 : -1)) * krunkThing;
-					spr.y = arrowJunks[spr.noteData][1] + Math.sin(elapsedtime - 5) * ((spr.noteData % 2) == 0 ? 1 : -1) * krunkThing;
+					spr.x = arrowJunks[spr.noteData][0] + (Math.sin(elapsedtime) * ((spr.noteData % (AAAAAAA)) == 0 ? 1 : -1)) * krunkThing;
+					spr.y = arrowJunks[spr.noteData][1] + Math.sin(elapsedtime - 5) * ((spr.noteData % (AAAAAAA)) == 0 ? 1 : -1) * krunkThing;
 
-					spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.noteData % 2) == 0 ? 1 : -1)) / 4;
+					spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.noteData % AAAAAAA) == 0 ? 1 : -1)) / BBBBBBB;
 
-					spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.noteData % 2) == 0 ? 1 : -1)) / 2);
+					spr.scale.y = Math.abs((Math.sin(elapsedtime) * ((spr.noteData % AAAAAAA) == 0 ? 1 : -1)) / AAAAAAA);
 
-					spr.scale.x += 0.2;
-					spr.scale.y += 0.2;
+					spr.scale.x += deeznum;
+					spr.scale.y += deeznum;
 
-					spr.scale.x *= 1.5;
-					spr.scale.y *= 1.5;
+					spr.scale.x *= fuckingnum;
+					spr.scale.y *= fuckingnum;
 				}
 			});
 		}
