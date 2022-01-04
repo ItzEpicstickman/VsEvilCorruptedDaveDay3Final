@@ -76,6 +76,12 @@ class Note extends FlxSprite
 			noteScale = 0.46;
 			mania = 2;
 		}
+		else if (PlayState.SONG.mania == 3)
+		{
+			swagWidth = 100 * 0.7;
+			noteScale = 0.55;
+			mania = 3;
+		}
 		super();
 
 		if (prevNote == null)
@@ -85,6 +91,7 @@ class Note extends FlxSprite
 		isSustainNote = sustainNote;
 
 		x += 50;
+		y += 13.5;
 		if (PlayState.SONG.mania == 2)
 		{
 			x -= tooMuch;
@@ -199,8 +206,9 @@ class Note extends FlxSprite
 		var frameN:Array<String> = ['purple', 'blue', 'green', 'red'];
 		if (mania == 1) frameN = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
 		else if (mania == 2) frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
+		else if (mania == 3) frameN = ['purple', 'green', 'red', 'white', 'yellow', 'blue', 'dark'];
 		
-		if (PlayState.SONG.song.toLowerCase() == 'cheating' && !FlxG.save.data.modchart)
+		if (PlayState.SONG.song.toLowerCase() == 'cheating' && !FlxG.save.data.modchart) //siete ca update
 		{
 			if (mania == 0) {
 				switch (noteData)
@@ -252,7 +260,7 @@ class Note extends FlxSprite
 						animation.play('darkScroll');
 				}
 			}
-			else {
+			else if (mania == 2) {
 				switch (noteData)
 				{
 					case 0:
@@ -290,6 +298,39 @@ class Note extends FlxSprite
 					case 8:
 						notetolookfor = 4;
 						x += swagWidth * 4;
+						animation.play('darkScroll');
+				}
+			}
+			else {
+				switch (noteData)
+				{
+					case 0:
+						x += swagWidth * 6;
+						notetolookfor = 6;
+						animation.play('purpleScroll');
+					case 1:
+						x += swagWidth * 4;
+						notetolookfor = 4;
+						animation.play('greenScroll');
+					case 2:
+						notetolookfor = 1;
+						x += swagWidth * 1;
+						animation.play('redScroll');
+					case 3:
+						notetolookfor = 3;
+						x += swagWidth * 3;
+						animation.play('whiteScroll');
+					case 4:
+						notetolookfor = 2;
+						x += swagWidth * 2;
+						animation.play('yellowScroll');
+					case 5:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						animation.play('blueScroll');
+					case 6:
+						x += swagWidth * 5;
+						notetolookfor = 5;
 						animation.play('darkScroll');
 				}
 			}

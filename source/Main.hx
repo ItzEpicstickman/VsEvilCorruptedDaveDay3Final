@@ -19,8 +19,8 @@
 		var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 		public static var editor:Bool = false;
 		public static var woops:Bool = false;
-		public static var keyAmmo:Array<Int> = [4, 6, 9];
-		public static var dataJump:Array<Int> = [8, 12, 18];
+		public static var keyAmmo:Array<Int> = [4, 6, 9, 7];
+		public static var dataJump:Array<Int> = [8, 12, 18, 14];
 
 		// You can pretty much ignore everything from here on - your code should go in your states.
 

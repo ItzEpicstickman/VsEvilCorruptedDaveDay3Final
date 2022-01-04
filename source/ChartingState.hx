@@ -87,7 +87,7 @@ class ChartingState extends MusicBeatState
 
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
-	var keyAmmo:Array<Int> = [4, 6, 9];
+	var keyAmmo:Array<Int> = [4, 6, 9, 7];
 
 	var currType:Int = 0;
 
@@ -144,7 +144,7 @@ class ChartingState extends MusicBeatState
 				bpm: 150,
 				needsVoices: true,
 				player1: 'bf',
-				player2: 'dad',
+				player2: 'gf',
 				speed: 1,
 				mania: 0,
 				validScore: false
@@ -242,6 +242,17 @@ class ChartingState extends MusicBeatState
 			}
 			trace('vos sos puto otra vez no weí');
 		};
+		var m_check3 = new FlxUICheckBox(70, 45, null, null, "7", 100);
+		m_check3.checked = (_song.mania == 3);
+		m_check3.callback = function()
+		{
+			_song.mania = 0;
+			if (m_check3.checked)
+			{
+				_song.mania = 3;
+			}
+			trace('siete ca loco');
+		};
 
 		var check_mute_inst = new FlxUICheckBox(10, 200, null, null, "Mute Instrumental (in editor)", 100);
 		check_mute_inst.checked = false;
@@ -307,6 +318,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(check_voices);
 		tab_group_song.add(m_check);
 		tab_group_song.add(m_check2);
+		tab_group_song.add(m_check3);
 		tab_group_song.add(check_mute_inst);
 		tab_group_song.add(saveButton);
 		tab_group_song.add(loadButton);
@@ -558,6 +570,12 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
+		if (_song.mania == 3 && gridBG.width != S_GRID_SIZE * 14)
+		{
+			remove(gridBG);
+			gridBG = FlxGridOverlay.create(S_GRID_SIZE, GRID_SIZE, S_GRID_SIZE * 14, GRID_SIZE * 16);
+			add(gridBG);
+		}
 		if (_song.mania == 2 && gridBG.width != S_GRID_SIZE * 18)
 		{
 			remove(gridBG);
@@ -588,7 +606,7 @@ class ChartingState extends MusicBeatState
 		else strumLine.x = 0;
 
 		/*
-		curRenderedNotes.forEach(function(note:Note)
+		curRenderedNotes.forEach(function(note:Note) //SIETA CA LOCO SIETE CA
 		{
 			if (FlxG.sound.music.playing)
 			{
