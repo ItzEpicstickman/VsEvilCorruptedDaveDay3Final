@@ -1640,11 +1640,11 @@ class PlayState extends MusicBeatState
 	var hudArrYPos:Array<Float>;
 	private function generateStaticArrows(player:Int):Void
 	{
-		if (player == 1)
+		/*if (player == 1)
 		{
 			hudArrXPos = [];
 			hudArrYPos = [];
-		}
+		}*/
 		for (i in 0...keyAmmo[mania])
 		{
 			// FlxG.log.add(i);
@@ -1734,8 +1734,8 @@ class PlayState extends MusicBeatState
 
 			if (player == 1)
 			{
-				hudArrXPos.push(babyArrow.x);
-				hudArrYPos.push(babyArrow.y);
+				//hudArrXPos.push(babyArrow.x);
+				//hudArrYPos.push(babyArrow.y);
 				playerStrums.add(babyArrow);
 			}
 			else
@@ -1746,6 +1746,7 @@ class PlayState extends MusicBeatState
 
 			if (isFunnySong || SONG.song.toLowerCase() == 'disruption')
 			arrowJunks.push([babyArrow.x, babyArrow.y]);
+			
 			
 			babyArrow.resetTrueCoords();
 		}
@@ -1788,9 +1789,11 @@ class PlayState extends MusicBeatState
 
 				babyArrow.updateHitbox();
 
-				babyArrow.y -= 10;
-				babyArrow.alpha = 0;
-				babyArrow.y -= 1000;
+				if (!isStoryMode){
+					babyArrow.y -= 10;
+					babyArrow.alpha = 0;
+					babyArrow.y -= 1000;
+				}
 
 				babyArrow.ID = i;
 
@@ -1978,7 +1981,7 @@ class PlayState extends MusicBeatState
 				shad.uTime.value[0] += elapsed;
 			}
 		}
-		if ((SONG.song.toLowerCase() != 'cheating' && SONG.song.toLowerCase() != 'unfairness' && SONG.song.toLowerCase() != 'applecore') || (SONG.song.toLowerCase() == 'cheating') || (SONG.song.toLowerCase() == 'unfairness') || (SONG.song.toLowerCase() == 'applecore')) {
+		/*if ((SONG.song.toLowerCase() != 'cheating' && SONG.song.toLowerCase() != 'unfairness' && SONG.song.toLowerCase() != 'applecore') || (SONG.song.toLowerCase() == 'cheating') || (SONG.song.toLowerCase() == 'unfairness') || (SONG.song.toLowerCase() == 'applecore')) {
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
 				spr.x = hudArrXPos[spr.ID];//spr.offset.set(spr.frameWidth / 2, spr.frameHeight / 2);
@@ -1990,7 +1993,7 @@ class PlayState extends MusicBeatState
 					spr.y = hudArrYPos[spr.ID] + jj[mania];
 				}
 			});
-		}
+		}*/
 
 		//dvd screensaver lookin ass
 		if(daveFuckingDies != null && redTunnel != null && !daveFuckingDies.inCutscene)
@@ -2152,8 +2155,8 @@ class PlayState extends MusicBeatState
 					if (mania == 3) whatafa = 14;	
 					playerStrums.forEach(function(spr:FlxSprite)
 					{
-						spr.x = arrowJunks[spr.ID + (BBBBBBB)][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
-						spr.y = arrowJunks[spr.ID + (BBBBBBB)][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
+						spr.x = arrowJunks[spr.ID + (whatafa)][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
+						spr.y = arrowJunks[spr.ID + (whatafa)][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
 
 						spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1)) / BBBBBBB;
 
@@ -2168,8 +2171,8 @@ class PlayState extends MusicBeatState
 
 					poopStrums.forEach(function(spr:Strum)
 					{
-						spr.x = arrowJunks[spr.ID][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
-						spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
+						spr.x = arrowJunks[spr.ID + (BBBBBBB)][0] + (Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1)) * krunkThing;
+						spr.y = swagThings.members[spr.ID].y + Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1) * krunkThing;
 				
 						spr.scale.x = Math.abs(Math.sin(elapsedtime - 5) * ((spr.ID % 2) == 0 ? 1 : -1)) / BBBBBBB;
 
@@ -2985,13 +2988,13 @@ class PlayState extends MusicBeatState
 							dad.holdTimer = 0;
 							dadmirror.holdTimer = 0;
 						}
-						var time:Float = 0.15;
+						/*var time:Float = 0.15;
 						if(daNote.isSustainNote && !daNote.animation.curAnim.name.endsWith('end')) {
 						time += 0.15;
 						}
-						StrumPlayAnim(true, Std.int(Math.abs(daNote.noteData)) % keyAmmo[mania], time);
+						StrumPlayAnim(true, Std.int(Math.abs(daNote.noteData)) % keyAmmo[mania], time);*/
 
-					/*if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
+					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
 					{
 						dadStrums.forEach(function(sprite:Strum)
 							{
@@ -3032,7 +3035,7 @@ class PlayState extends MusicBeatState
 		
 								}
 							});
-					}*/
+					}
 
 					if (UsingNewCam)
 					{

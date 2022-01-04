@@ -353,7 +353,7 @@ class Note extends FlxSprite
 					InPlayState = true;
 					if (musthit)
 					{
-						state.playerStrums.forEach(function(spr:FlxSprite)
+						state.playerStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -364,7 +364,7 @@ class Note extends FlxSprite
 					}
 					else
 					{
-						state.dadStrums.forEach(function(spr:FlxSprite)
+						state.dadStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -455,7 +455,7 @@ class Note extends FlxSprite
 				var state:PlayState = cast(FlxG.state,PlayState);
 				if (mustPress)
 					{
-						state.playerStrums.forEach(function(spr:FlxSprite)
+						state.playerStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -467,7 +467,7 @@ class Note extends FlxSprite
 					}
 					else
 					{
-						state.dadStrums.forEach(function(spr:FlxSprite)
+						state.dadStrums.forEach(function(spr:Strum)
 							{
 								if (spr.ID == notetolookfor)
 								{
