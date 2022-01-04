@@ -208,7 +208,7 @@ class Note extends FlxSprite
 		else if (mania == 2) frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
 		else if (mania == 3) frameN = ['purple', 'green', 'red', 'white', 'yellow', 'blue', 'dark'];
 		
-		if (PlayState.SONG.song.toLowerCase() == 'cheating' && !FlxG.save.data.modchart) //siete ca update
+		if (PlayState.SONG.song.toLowerCase() == 'cheating') //siete ca update
 		{
 			if (mania == 0) {
 				switch (noteData)
@@ -353,7 +353,7 @@ class Note extends FlxSprite
 					InPlayState = true;
 					if (musthit)
 					{
-						state.playerStrums.forEach(function(spr:StrumNote)
+						state.playerStrums.forEach(function(spr:FlxSprite)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -455,7 +455,7 @@ class Note extends FlxSprite
 				var state:PlayState = cast(FlxG.state,PlayState);
 				if (mustPress)
 					{
-						state.playerStrums.forEach(function(spr:StrumNote)
+						state.playerStrums.forEach(function(spr:FlxSprite)
 						{
 							if (spr.ID == notetolookfor)
 							{
