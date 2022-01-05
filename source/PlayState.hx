@@ -260,6 +260,8 @@ class PlayState extends MusicBeatState
 	public static var daPixelZoom:Float = 6;
 
 	public static var theFunne:Bool = true;
+	public static var sussyasscpustrums:Bool = true;
+	public static var epicmodcharts:Bool = true;
 
 	var funneEffect:FlxSprite;
 	var inCutscene:Bool = false;
@@ -300,6 +302,9 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
+
+		sussyasscpustrums = FlxG.save.data.cpustrum; // WITH MY OWN HANDS!!!
+		epicmodcharts = FlxG.save.data.modchart; // WITH MY OWN HANDS!!!
 
 		sicks = 0;
 		bads = 0;
@@ -699,7 +704,7 @@ class PlayState extends MusicBeatState
 				credits = 'Original song made by Saruky for Vs. Shaggy!';
 			case 'metallic':
 				credits = 'OC created by Dragolii!';
-			case 'strawberry':
+			case 'strawberry' | 'old-strawberry':
 				credits = 'OC created by Emiko!';
 			case 'keyboard':
 				credits = 'OC created by DanWiki!';
@@ -965,7 +970,7 @@ class PlayState extends MusicBeatState
 				}
 				
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard' | 'ugh':
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'old-strawberry' | 'keyboard' | 'ugh':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
@@ -993,7 +998,7 @@ class PlayState extends MusicBeatState
 						bg.loadGraphic(Paths.image('bambi/metal'));
 						bg.y -= 235;
 						curStage = 'metallic';
-					case 'strawberry':
+					case 'strawberry' | 'old-strawberry':
 						defaultCamZoom = 0.69;
 						bg.loadGraphic(Paths.image('bambi/strawberries'));
 						bg.scrollFactor.set(0, 0);
@@ -1640,11 +1645,11 @@ class PlayState extends MusicBeatState
 	var hudArrYPos:Array<Float>;
 	private function generateStaticArrows(player:Int):Void
 	{
-		/*if (player == 1)
+		if (player == 1)
 		{
 			hudArrXPos = [];
 			hudArrYPos = [];
-		}*/
+		}
 		for (i in 0...keyAmmo[mania])
 		{
 			// FlxG.log.add(i);
@@ -1734,8 +1739,8 @@ class PlayState extends MusicBeatState
 
 			if (player == 1)
 			{
-				//hudArrXPos.push(babyArrow.x);
-				//hudArrYPos.push(babyArrow.y);
+				hudArrXPos.push(babyArrow.x);
+				hudArrYPos.push(babyArrow.y);
 				playerStrums.add(babyArrow);
 			}
 			else
@@ -1981,7 +1986,7 @@ class PlayState extends MusicBeatState
 				shad.uTime.value[0] += elapsed;
 			}
 		}
-		/*if ((SONG.song.toLowerCase() != 'cheating' && SONG.song.toLowerCase() != 'unfairness' && SONG.song.toLowerCase() != 'applecore') || (SONG.song.toLowerCase() == 'cheating') || (SONG.song.toLowerCase() == 'unfairness') || (SONG.song.toLowerCase() == 'applecore')) {
+		if ((SONG.song.toLowerCase() != 'cheating' && SONG.song.toLowerCase() != 'unfairness' && SONG.song.toLowerCase() != 'applecore') || (SONG.song.toLowerCase() == 'cheating') || (SONG.song.toLowerCase() == 'unfairness') || (SONG.song.toLowerCase() == 'applecore')) {
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
 				spr.x = hudArrXPos[spr.ID];//spr.offset.set(spr.frameWidth / 2, spr.frameHeight / 2);
@@ -1993,7 +1998,7 @@ class PlayState extends MusicBeatState
 					spr.y = hudArrYPos[spr.ID] + jj[mania];
 				}
 			});
-		}*/
+		}
 
 		//dvd screensaver lookin ass
 		if(daveFuckingDies != null && redTunnel != null && !daveFuckingDies.inCutscene)
@@ -2006,7 +2011,7 @@ class PlayState extends MusicBeatState
 				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
 				daveFuckingDies.dance();
 			}
-			else if(daveFuckingDies.x <= (redTunnel.x + 100) || daveFuckingDies.y <= (redTunnel.y + 100))
+			else if(daveFuckingDies.x <= (redTunnel.x + 100) || daveFuckingDies.y <= (redTunnel.y + 100)) //i agree
 			{
 				daveFuckingDies.bounceAnimState = 2;
 				daveFuckingDies.bounceMultiplier = FlxG.random.float(0.75, 1.15);
@@ -2114,7 +2119,7 @@ class PlayState extends MusicBeatState
 					noteJunksDad3[spr.ID] = spr.y;
 				}
 			});
-			if (unfairPart) {
+			if (unfairPart && !epicmodcharts) {
 				var num:Float = 1;
 				if (mania == 1) num = 1.5;
 				if (mania == 2) num = 2.25;
@@ -2131,7 +2136,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 			if (SONG.notes[Math.floor(curStep / 16)] != null) {
-				if (SONG.notes[Math.floor(curStep / 16)].altAnim && !unfairPart) {
+				if (SONG.notes[Math.floor(curStep / 16)].altAnim && !unfairPart && !epicmodcharts) {
 					var krunkThing = 60;
 					var fuckingnum:Float = 1.5;
 					if (mania == 1) fuckingnum = 1.4;
@@ -2141,10 +2146,6 @@ class PlayState extends MusicBeatState
 					if (mania == 1) deeznum = 0.15;
 					if (mania == 2) deeznum = 0.075;
 					if (mania == 3) deeznum = 0.125;
-					/*var AAAAAAA:Float = 2; //i am brain dead
-					if (mania == 1) AAAAAAA = 2;
-					if (mania == 2) AAAAAAA = 2;
-					if (mania == 3) AAAAAAA = 2;*/
 					var BBBBBBB:Int = 4;
 					if (mania == 1) BBBBBBB = 6;
 					if (mania == 2) BBBBBBB = 9;
@@ -2355,7 +2356,7 @@ class PlayState extends MusicBeatState
 			gf.y += (Math.sin(elapsedtime) * 0.6);
 		}
 
-		if (SONG.song.toLowerCase() == 'cheating') // fuck you
+		if (SONG.song.toLowerCase() == 'cheating' && !epicmodcharts) // fuck you
 		{
 			var num:Float = 1.5;
 			if (mania == 1) num = 1.4;
@@ -2373,7 +2374,7 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if(SONG.song.toLowerCase() == 'disability')
+		if(SONG.song.toLowerCase() == 'disability' && !epicmodcharts)
 		{
 			playerStrums.forEach(function(spr:Strum)
 			{
@@ -2397,11 +2398,11 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-		/*if (SONG.song.toLowerCase() == 'disruption')
+		if (SONG.song.toLowerCase() == 'disruption')
 		{
 			poop.alpha = Math.sin(elapsedtime) / 2.5 + 0.4;
-		}*/
-		if (SONG.song.toLowerCase() == 'disruption') // deez all day
+		}
+		if (SONG.song.toLowerCase() == 'disruption' && !epicmodcharts) // deez all day
 		{
 			var fuckingnum:Float = 1.5;
 			if (mania == 1) fuckingnum = 1.4;
@@ -2411,17 +2412,11 @@ class PlayState extends MusicBeatState
 			if (mania == 1) deeznum = 0.15;
 			if (mania == 2) deeznum = 0.075;
 			if (mania == 3) deeznum = 0.125;
-			/*var AAAAAAA:Float = 2; //i am brain dead
-			if (mania == 1) AAAAAAA = 2;
-			if (mania == 2) AAAAAAA = 2;
-			if (mania == 3) AAAAAAA = 2;*/
 			var BBBBBBB:Int = 4;
 			if (mania == 1) BBBBBBB = 6;
 			if (mania == 2) BBBBBBB = 9;
 			if (mania == 3) BBBBBBB = 7;	
 			var krunkThing = 60;
-
-			poop.alpha = Math.sin(elapsedtime) / 2.5 + 0.4;
 
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
@@ -2994,7 +2989,7 @@ class PlayState extends MusicBeatState
 						}
 						StrumPlayAnim(true, Std.int(Math.abs(daNote.noteData)) % keyAmmo[mania], time);*/
 
-					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
+					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns' && !sussyasscpustrums)
 					{
 						dadStrums.forEach(function(sprite:Strum)
 							{
@@ -3008,18 +3003,18 @@ class PlayState extends MusicBeatState
 										sprite.offset.y -= 13;
 										if (mania == 1) //amongos
 										{
-											sprite.offset.x -= 1;
-											sprite.offset.y -= 1;
+											sprite.offset.x -= 3;
+											sprite.offset.y -= 3;
 										}
 										else if (mania == 2) //amongos
 										{
-											sprite.offset.x -= 3;
-											sprite.offset.y -= 3;
+											sprite.offset.x -= 8;
+											sprite.offset.y -= 8;
 										}
 										else if (mania == 3) //amongos
 										{
-											sprite.offset.x -= 3;
-											sprite.offset.y -= 3;
+											sprite.offset.x -= 5;
+											sprite.offset.y -= 5;
 										}
 									}
 									else if (SONG.song.toLowerCase() != 'disability')
@@ -4221,18 +4216,18 @@ class PlayState extends MusicBeatState
 				spr.offset.y -= 13;
 				if (mania == 1) //amongos
 				{
-					spr.offset.x -= 1;
-					spr.offset.y -= 1;
+					spr.offset.x -= 3;
+					spr.offset.y -= 3;
 				}
 				else if (mania == 2) //amongos
 				{
-					spr.offset.x -= 3;
-					spr.offset.y -= 3;
+					spr.offset.x -= 8;
+					spr.offset.y -= 8;
 				}
 				else if (mania == 3) //amongos
 				{
-					spr.offset.x -= 3;
-					spr.offset.y -= 3;
+					spr.offset.x -= 5;
+					spr.offset.y -= 5;
 				}
 			}
 			else if (SONG.song.toLowerCase() != 'disability')

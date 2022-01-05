@@ -208,7 +208,7 @@ class Note extends FlxSprite
 		else if (mania == 2) frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
 		else if (mania == 3) frameN = ['purple', 'green', 'red', 'white', 'yellow', 'blue', 'dark'];
 		
-		if (PlayState.SONG.song.toLowerCase() == 'cheating') //siete ca update
+		if (PlayState.SONG.song.toLowerCase() == 'cheating' && !FlxG.save.data.modchart) //siete ca update
 		{
 			if (mania == 0) {
 				switch (noteData)
@@ -347,7 +347,7 @@ class Note extends FlxSprite
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'cheating' | 'unfairness' | 'applecore':
-				if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState"))
+				if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState")  && !FlxG.save.data.modchart)
 				{
 					var state:PlayState = cast(FlxG.state,PlayState);
 					InPlayState = true;
@@ -375,7 +375,7 @@ class Note extends FlxSprite
 					}
 				}
 		}
-		if (PlayState.SONG.song.toLowerCase() == 'unfairness' || PlayState.SONG.song.toLowerCase() == 'applecore')
+		if (PlayState.SONG.song.toLowerCase() == 'unfairness' || PlayState.SONG.song.toLowerCase() == 'applecore' && !FlxG.save.data.modchart)
 		{
 			var rng:FlxRandom = new FlxRandom();
 			if (rng.int(0,120) == 1)
@@ -450,7 +450,7 @@ class Note extends FlxSprite
 		}
 		else
 		{
-			if (InPlayState && !isAlt)
+			if (InPlayState && !isAlt && !FlxG.save.data.modchart)
 			{
 				var state:PlayState = cast(FlxG.state,PlayState);
 				if (mustPress)
