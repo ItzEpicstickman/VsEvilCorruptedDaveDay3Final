@@ -48,7 +48,7 @@ import Shaders
 import Discord.DiscordClient;
 #end
 
-#if windows
+#if sys
 import sys.io.File;
 import sys.io.Process;
 #end
