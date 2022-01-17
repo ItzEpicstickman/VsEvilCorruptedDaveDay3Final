@@ -31,12 +31,23 @@ class Note extends FlxSprite
 
 
 	public var noteScore:Float = 1;
+	public var mania:Int = 0;
+
+	public static var noteyOff1:Array<Float> = [4, 0, 0, 0, 0, 0];
+	public static var noteyOff2:Array<Float> = [0, 0, 0, 0, 0, 0];
+	public static var noteyOff3:Array<Float> = [0, 0, 0, 0, 0, 0];
+
+	public static var scales:Array<Float> = [0.7, 0.6, 0.55, 0.46];
+
 
 	public static var swagWidth:Float = 160 * 0.7;
+	public static var noteScale:Float;
 	public static var PURP_NOTE:Int = 0;
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
+	
+	public static var tooMuch:Float = 30;
 
 	private var notetolookfor = 0;
 
@@ -50,6 +61,27 @@ class Note extends FlxSprite
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal") //had to add a new variable to this because FNF dumb
 	{
+		swagWidth = 160 * 0.7; //factor not the same as noteScale
+		noteScale = 0.7;
+		mania = 0;
+		if (PlayState.SONG.mania == 1)
+		{
+			swagWidth = 120 * 0.7;
+			noteScale = 0.6;
+			mania = 1;
+		}
+		else if (PlayState.SONG.mania == 2)
+		{
+			swagWidth = 90 * 0.7;
+			noteScale = 0.46;
+			mania = 2;
+		}
+		else if (PlayState.SONG.mania == 3)
+		{
+			swagWidth = 100 * 0.7;
+			noteScale = 0.55;
+			mania = 3;
+		}
 		super();
 
 		if (prevNote == null)
@@ -59,10 +91,20 @@ class Note extends FlxSprite
 		isSustainNote = sustainNote;
 
 		x += 50;
+		y += 13.5;
+		if (PlayState.SONG.mania == 2)
+		{
+			x -= tooMuch;
+		}
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		y -= 2000;
 		this.strumTime = strumTime + FlxG.save.data.offset;
 
+		var addto = FlxG.save.data.offset;
+		if (Main.editor) //xd
+		{
+			addto = 0;
+		}
 		if (this.strumTime < 0 )
 			this.strumTime = 0;
 
@@ -77,18 +119,34 @@ class Note extends FlxSprite
 				animation.addByPrefix('redScroll', 'red0');
 				animation.addByPrefix('blueScroll', 'blue0');
 				animation.addByPrefix('purpleScroll', 'purple0');
+				animation.addByPrefix('whiteScroll', 'white0');
+				animation.addByPrefix('yellowScroll', 'yellow0');
+				animation.addByPrefix('violetScroll', 'violet0');
+				animation.addByPrefix('blackScroll', 'black0');
+				animation.addByPrefix('darkScroll', 'dark0');
+
 
 				animation.addByPrefix('purpleholdend', 'pruple end hold');
 				animation.addByPrefix('greenholdend', 'green hold end');
 				animation.addByPrefix('redholdend', 'red hold end');
 				animation.addByPrefix('blueholdend', 'blue hold end');
+				animation.addByPrefix('whiteholdend', 'white hold end');
+				animation.addByPrefix('yellowholdend', 'yellow hold end');
+				animation.addByPrefix('violetholdend', 'violet hold end');
+				animation.addByPrefix('blackholdend', 'black hold end');
+				animation.addByPrefix('darkholdend', 'dark hold end');
 
 				animation.addByPrefix('purplehold', 'purple hold piece');
 				animation.addByPrefix('greenhold', 'green hold piece');
 				animation.addByPrefix('redhold', 'red hold piece');
 				animation.addByPrefix('bluehold', 'blue hold piece');
+				animation.addByPrefix('whitehold', 'white hold piece');
+				animation.addByPrefix('yellowhold', 'yellow hold piece');
+				animation.addByPrefix('violethold', 'violet hold piece');
+				animation.addByPrefix('blackhold', 'black hold piece');
+				animation.addByPrefix('darkhold', 'dark hold piece');
 
-				setGraphicSize(Std.int(width * 0.7));
+				setGraphicSize(Std.int(width * noteScale));
 				updateHitbox();
 				antialiasing = true;
 		}
@@ -112,79 +170,190 @@ class Note extends FlxSprite
 					animation.addByPrefix('redScroll', 'red0');
 					animation.addByPrefix('blueScroll', 'blue0');
 					animation.addByPrefix('purpleScroll', 'purple0');
-
+					animation.addByPrefix('whiteScroll', 'white0');
+					animation.addByPrefix('yellowScroll', 'yellow0');
+					animation.addByPrefix('violetScroll', 'violet0');
+					animation.addByPrefix('blackScroll', 'black0');
+					animation.addByPrefix('darkScroll', 'dark0');
+	
+	
 					animation.addByPrefix('purpleholdend', 'pruple end hold');
 					animation.addByPrefix('greenholdend', 'green hold end');
 					animation.addByPrefix('redholdend', 'red hold end');
 					animation.addByPrefix('blueholdend', 'blue hold end');
-
+					animation.addByPrefix('whiteholdend', 'white hold end');
+					animation.addByPrefix('yellowholdend', 'yellow hold end');
+					animation.addByPrefix('violetholdend', 'violet hold end');
+					animation.addByPrefix('blackholdend', 'black hold end');
+					animation.addByPrefix('darkholdend', 'dark hold end');
+	
 					animation.addByPrefix('purplehold', 'purple hold piece');
 					animation.addByPrefix('greenhold', 'green hold piece');
 					animation.addByPrefix('redhold', 'red hold piece');
 					animation.addByPrefix('bluehold', 'blue hold piece');
+					animation.addByPrefix('whitehold', 'white hold piece');
+					animation.addByPrefix('yellowhold', 'yellow hold piece');
+					animation.addByPrefix('violethold', 'violet hold piece');
+					animation.addByPrefix('blackhold', 'black hold piece');
+					animation.addByPrefix('darkhold', 'dark hold piece');
 
-					setGraphicSize(Std.int(width * 0.7));
+					setGraphicSize(Std.int(width * noteScale));
 					updateHitbox();
 					antialiasing = true;
 			}
 		}
-		
-		switch (PlayState.SONG.song.toLowerCase())
-		{
-			case 'cheating':
-				switch (noteData)
-				{
-					case 0:
-						x += swagWidth * 3;
-						notetolookfor = 3;
-						animation.play('purpleScroll');
-					case 1:
-						x += swagWidth * 1;
-						notetolookfor = 1;
-						animation.play('blueScroll');
-					case 2:
-						x += swagWidth * 0;
-						notetolookfor = 0;
-						animation.play('greenScroll');
-					case 3:
-						notetolookfor = 2;
-						x += swagWidth * 2;
-						animation.play('redScroll');
-				}
-				flipY = (Math.round(Math.random()) == 0); //fuck you
-				flipX = (Math.round(Math.random()) == 1);
 
-			default:
+		var frameN:Array<String> = ['purple', 'blue', 'green', 'red'];
+		if (mania == 1) frameN = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
+		else if (mania == 2) frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
+		else if (mania == 3) frameN = ['purple', 'green', 'red', 'white', 'yellow', 'blue', 'dark'];
+		
+		if (PlayState.SONG.song.toLowerCase() == 'cheating' && !FlxG.save.data.modchart) //siete ca update
+		{
+			if (mania == 0) {
 				switch (noteData)
 				{
 					case 0:
-						x += swagWidth * 0;
-						notetolookfor = 0;
+						x += swagWidth * 3;
+						notetolookfor = 3;
 						animation.play('purpleScroll');
 					case 1:
-						notetolookfor = 1;
 						x += swagWidth * 1;
+						notetolookfor = 1;
 						animation.play('blueScroll');
 					case 2:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						animation.play('greenScroll');
+					case 3:
 						notetolookfor = 2;
 						x += swagWidth * 2;
+						animation.play('redScroll');
+				}
+			}
+			else if (mania == 1) {
+				switch (noteData)
+				{
+					case 0:
+						x += swagWidth * 5;
+						notetolookfor = 5;
+						animation.play('purpleScroll');
+					case 1:
+						x += swagWidth * 3;
+						notetolookfor = 3;
+						animation.play('greenScroll');
+					case 2:
+						notetolookfor = 1;
+						x += swagWidth * 1;
+						animation.play('redScroll');
+					case 3:
+						notetolookfor = 2;
+						x += swagWidth * 2;
+						animation.play('yellowScroll');
+					case 4:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						animation.play('blueScroll');
+					case 5:
+						x += swagWidth * 4;
+						notetolookfor = 4;
+						animation.play('darkScroll');
+				}
+			}
+			else if (mania == 2) {
+				switch (noteData)
+				{
+					case 0:
+						x += swagWidth * 5;
+						notetolookfor = 5;
+						animation.play('purpleScroll');
+					case 1:
+						x += swagWidth * 1;
+						notetolookfor = 1;
+						animation.play('blueScroll');
+					case 2:
+						x += swagWidth * 7;
+						notetolookfor = 7;
 						animation.play('greenScroll');
 					case 3:
 						notetolookfor = 3;
 						x += swagWidth * 3;
 						animation.play('redScroll');
+					case 4:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						animation.play('whiteScroll');
+					case 5:
+						x += swagWidth * 2;
+						notetolookfor = 2;
+						animation.play('yellowScroll');
+					case 6:
+						x += swagWidth * 8;
+						notetolookfor = 8;
+						animation.play('violetScroll');
+					case 7:
+						x += swagWidth * 6;
+						notetolookfor = 6;
+						animation.play('blackScroll');
+					case 8:
+						notetolookfor = 4;
+						x += swagWidth * 4;
+						animation.play('darkScroll');
 				}
+			}
+			else {
+				switch (noteData)
+				{
+					case 0:
+						x += swagWidth * 6;
+						notetolookfor = 6;
+						animation.play('purpleScroll');
+					case 1:
+						x += swagWidth * 4;
+						notetolookfor = 4;
+						animation.play('greenScroll');
+					case 2:
+						notetolookfor = 1;
+						x += swagWidth * 1;
+						animation.play('redScroll');
+					case 3:
+						notetolookfor = 3;
+						x += swagWidth * 3;
+						animation.play('whiteScroll');
+					case 4:
+						notetolookfor = 2;
+						x += swagWidth * 2;
+						animation.play('yellowScroll');
+					case 5:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						animation.play('blueScroll');
+					case 6:
+						x += swagWidth * 5;
+						notetolookfor = 5;
+						animation.play('darkScroll');
+				}
+			}
+	
+			flipY = (Math.round(Math.random()) == 0); //fuck you
+			flipX = (Math.round(Math.random()) == 1);
+		}
+		else
+		{
+			x += swagWidth * (noteData % Main.keyAmmo[mania]);
+			notetolookfor = noteData % Main.keyAmmo[mania];
+			animation.play(frameN[noteData % Main.keyAmmo[mania]] + 'Scroll');
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'cheating' | 'unfairness' | 'applecore':
-				if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState"))
+				if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState")  && !FlxG.save.data.modchart)
 				{
 					var state:PlayState = cast(FlxG.state,PlayState);
 					InPlayState = true;
 					if (musthit)
 					{
-						state.playerStrums.forEach(function(spr:FlxSprite)
+						state.playerStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -195,7 +364,7 @@ class Note extends FlxSprite
 					}
 					else
 					{
-						state.dadStrums.forEach(function(spr:FlxSprite)
+						state.dadStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -206,7 +375,7 @@ class Note extends FlxSprite
 					}
 				}
 		}
-		if (PlayState.SONG.song.toLowerCase() == 'unfairness' || PlayState.SONG.song.toLowerCase() == 'applecore')
+		if (PlayState.SONG.song.toLowerCase() == 'unfairness' || PlayState.SONG.song.toLowerCase() == 'applecore' && !FlxG.save.data.modchart)
 		{
 			var rng:FlxRandom = new FlxRandom();
 			if (rng.int(0,120) == 1)
@@ -232,19 +401,18 @@ class Note extends FlxSprite
 		{
 			noteScore * 0.2;
 			alpha = 0.6;
+			if (FlxG.save.data.downscroll)
+			{
+				scale.y *= -1;
+			}
 
 			x += width / 2;
 
+			animation.play(frameN[noteData % Main.keyAmmo[mania]] + 'holdend');
 			switch (noteData)
 			{
-				case 2:
-					animation.play('greenholdend');
-				case 3:
-					animation.play('redholdend');
-				case 1:
-					animation.play('blueholdend');
 				case 0:
-					animation.play('purpleholdend');
+				//nada
 			}
 
 			updateHitbox();
@@ -259,16 +427,10 @@ class Note extends FlxSprite
 				switch (prevNote.noteData)
 				{
 					case 0:
-						prevNote.animation.play('purplehold');
-					case 1:
-						prevNote.animation.play('bluehold');
-					case 2:
-						prevNote.animation.play('greenhold');
-					case 3:
-						prevNote.animation.play('redhold');
+					//nada
 				}
-
-				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.8 * PlayState.SONG.speed;
+				prevNote.animation.play(frameN[prevNote.noteData] + 'hold');
+				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * PlayState.SONG.speed * (0.7 / noteScale);
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
 			}
@@ -288,12 +450,12 @@ class Note extends FlxSprite
 		}
 		else
 		{
-			if (InPlayState && !isAlt)
+			if (InPlayState && !isAlt && !FlxG.save.data.modchart)
 			{
 				var state:PlayState = cast(FlxG.state,PlayState);
 				if (mustPress)
 					{
-						state.playerStrums.forEach(function(spr:FlxSprite)
+						state.playerStrums.forEach(function(spr:Strum)
 						{
 							if (spr.ID == notetolookfor)
 							{
@@ -305,7 +467,7 @@ class Note extends FlxSprite
 					}
 					else
 					{
-						state.dadStrums.forEach(function(spr:FlxSprite)
+						state.dadStrums.forEach(function(spr:Strum)
 							{
 								if (spr.ID == notetolookfor)
 								{

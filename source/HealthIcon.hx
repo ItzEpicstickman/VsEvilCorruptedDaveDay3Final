@@ -13,35 +13,26 @@ class HealthIcon extends FlxSprite
 	public var isPlayer:Bool = false;
 
 	
+	//LIST ICON NAME HERE NOT CHARACTER
 	public var noAaChars:Array<String> = [
-		'dave-angey',
-		'dave-annoyed-3d',
-		'bambi-3d',
-		'bf-pixel',
-		'gf-pixel',
-		'bambi-unfair',
-		'bambi-piss-3d',
+		'unfair',
+		'disrupt',
 		'bandu',
-		'the-two-dunkers',
-		'tunnel-dave',
-		'split-dave-3d',
+		'junkers',
+		'decdave',
+		'disability',
 		'og-dave',
-		'og-dave-angey',
 		'garrett',
 		'badai',
 		'3d-bf',
-		'RECOVERED_PROJECT',
-		'RECOVERED_PROJECT_2',
-		'RECOVERED_PROJECT_3',
-		'bandu-candy',
+		'recovered',
 		'bandu-origin',
-		'bandu-scaredy',
 		'sart-producer',
-		'sart-producer-night',
 		'bambom',
 		'ringi',
 		'bendu',
-		'dave-wheels'
+		'wheels',
+		'gary'
 	];
 
 	public var charPublic:String = 'bf';
@@ -52,10 +43,27 @@ class HealthIcon extends FlxSprite
 
 		this.isPlayer = isPlayer;
 
+		changeIcon(char);
+
+		scrollFactor.set();
+	}
+
+	function addIcon(char:String, startFrame:Int, singleIcon:Bool = false) {
+		animation.add(char, !singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
+	}
+
+	public function changeIcon(char:String = 'face')
+	{
 		charPublic = char;
 
 		if(char != 'bandu-origin')
 		{
+			loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+
+			addIcon(char, 0);
+
+			//old shit, for reference
+			/*
 			loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 	
 			addIcon('face', 58);
@@ -130,7 +138,7 @@ class HealthIcon extends FlxSprite
 
 			addIcon('RECOVERED_PROJECT_3', 24);
 	
-			animation.play('face');
+			animation.play('face');*/
 		}
 		else
 		{
@@ -138,19 +146,9 @@ class HealthIcon extends FlxSprite
 			animation.addByPrefix(char, char, 24, false, isPlayer, false);
 		}
 
-		antialiasing = true;
+		antialiasing = !noAaChars.contains(char);
 
 		animation.play(char);
-
-		if (noAaChars.contains(char))
-		{
-			antialiasing = false;
-		}
-		scrollFactor.set();
-	}
-
-	function addIcon(char:String, startFrame:Int, singleIcon:Bool = false) {
-		animation.add(char, !singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
 	}
 
 	override function update(elapsed:Float)

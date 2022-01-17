@@ -96,8 +96,8 @@ class FreeplayState extends MusicBeatState
 		switch (AllPossibleSongs[CurrentPack].toLowerCase())
 		{
 			default:
-				addWeek(['Disruption', 'AppleCore'], 2, ['bambi-piss-3d', 'bandu']);
-				addWeek(['Disability', 'Wireframe', 'Algebra'], 1,['split-dave-3d', 'tunnel-dave', 'og-dave']);
+				addWeek(['Disruption', 'AppleCore'], 2, ['disrupt', 'bandu']);
+				addWeek(['Disability', 'Wireframe', 'Algebra'], 1,['disability', 'decdave', 'og-dave']);
 		}
 	}
 
