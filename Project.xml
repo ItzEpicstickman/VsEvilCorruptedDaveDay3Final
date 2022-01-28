@@ -91,9 +91,7 @@
 	<haxelib name="newgrounds"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="polymod"/>
-	#if desktop
 	<haxelib name="discord_rpc" if="desktop"/>
-	#end
 	<setenv name="next" />
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 
