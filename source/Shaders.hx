@@ -1,6 +1,6 @@
 package;
 
-import flixel.system.FlxAssets.FlxShader;
+import flixel.system.FlxAssets;
 
 class GlitchEffect
 {
