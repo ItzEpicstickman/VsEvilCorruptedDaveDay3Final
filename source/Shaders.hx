@@ -4,12 +4,10 @@ import flixel.system.FlxAssets;
 
 class GlitchEffect
 {
-    public var shader(default,null):GlitchShader = new GlitchShader();
-
-    public var waveSpeed(default, set):Float = 0;
+        public var shader(default,null):GlitchShader = new GlitchShader();
+        public var waveSpeed(default, set):Float = 0;
 	public var waveFrequency(default, set):Float = 0;
 	public var waveAmplitude(default, set):Float = 0;
-
 	public function new():Void
 	{
 		shader.uTime.value = [0];
@@ -46,9 +44,8 @@ class GlitchEffect
 
 class DistortBGEffect
 {
-    public var shader(default,null):DistortBGShader = new DistortBGShader();
-
-    public var waveSpeed(default, set):Float = 0;
+        public var shader(default,null):DistortBGShader = new DistortBGShader();
+        public var waveSpeed(default, set):Float = 0;
 	public var waveFrequency(default, set):Float = 0;
 	public var waveAmplitude(default, set):Float = 0;
 
@@ -89,13 +86,11 @@ class DistortBGEffect
 
 class PulseEffect
 {
-    public var shader(default,null):PulseShader = new PulseShader();
-
-    public var waveSpeed(default, set):Float = 0;
+        public var shader(default,null):PulseShader = new PulseShader();
+        public var waveSpeed(default, set):Float = 0;
 	public var waveFrequency(default, set):Float = 0;
 	public var waveAmplitude(default, set):Float = 0;
-    public var Enabled(default, set):Bool = false;
-
+        public var Enabled(default, set):Bool = false;
 	public function new():Void
 	{
 		shader.uTime.value = [0];
