@@ -20,6 +20,8 @@ class Character extends FlxSprite
 	public var furiosityScale:Float = 1.02;
 	public var canDance:Bool = true;
 
+	public var iconName:String = 'face';
+
 	public var nativelyPlayable:Bool = false;
 
 	public var globaloffset:Array<Float> = [0,0];
@@ -67,6 +69,8 @@ class Character extends FlxSprite
 
 				addOffset('scared', -2, -17);
 
+				iconName = 'gf';
+
 				playAnim('danceRight');
 			case 'gf-only':
 				frames = Paths.getSparrowAtlas('bambi/GF_ONLY');
@@ -77,6 +81,8 @@ class Character extends FlxSprite
 				addOffset('sad');
 				addOffset('danceLeft');
 				addOffset('danceRight');
+
+				iconName = 'gf';
 
 				playAnim('danceRight');
 			case '3d-bf':
@@ -96,6 +102,8 @@ class Character extends FlxSprite
 				nativelyPlayable = flipX = true;
 
 				antialiasing = false;
+
+				iconName = '3d-bf';
 
 				playAnim('idle');
 			case 'bandu-scaredy':
@@ -117,6 +125,8 @@ class Character extends FlxSprite
 
 				setGraphicSize(1009);
 				updateHitbox();
+
+				iconName = 'bandu';
 
 				playAnim('idle');
 			case 'sart-producer-night':
@@ -140,6 +150,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'sart-producer';
 			case 'sart-producer':
 				frames = Paths.getSparrowAtlas('sart/sart-producer');
 				animation.addByPrefix('idle', 'idle', 24, false);
@@ -156,6 +168,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'sart-producer';
 			case 'playrobot':
 				frames = Paths.getSparrowAtlas('dave/playrobot');
 
@@ -174,10 +188,12 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'playrobot';
 			case 'playrobot-crazy':
 				frames = Paths.getSparrowAtlas('dave/ohshit');
 
-				animation.addByPrefix('idle', 'Idle', 24, true);
+				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
@@ -192,6 +208,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'playrobot';
 			case 'hall-monitor':
 				frames = Paths.getSparrowAtlas('dave/HALL_MONITOR');
 				animation.addByPrefix('idle', 'gdj', 24, false);
@@ -210,6 +228,8 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				playAnim('idle');
+
+				iconName = 'hall-monitor';
 			case 'diamond-man':
 				frames = Paths.getSparrowAtlas('dave/diamondMan');
 				animation.addByPrefix('idle', 'idle', 24, true);
@@ -229,6 +249,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'diamond';
 			case 'dave-wheels':
 				frames = Paths.getSparrowAtlas('dave/cool');
 				animation.addByIndices('danceLeft', 'idle', [0, 1, 2, 3, 4, 5, 6], '', 24, false);
@@ -248,6 +270,8 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				playAnim('danceRight');
+
+				iconName = 'wheels';
 			case 'gf-wheels':
 				loadGraphic(Paths.image('best_gf'), true, 241, 231);
 				animation.add('idle', [0], 0, false);
@@ -258,6 +282,8 @@ class Character extends FlxSprite
 				
 				
 				playAnim('idle');
+
+				iconName = 'gf';
 			case 'ringi':
 				frames = Paths.getSparrowAtlas('bambi/ringi');
 				animation.addByPrefix('idle', 'IDLE', 24, false);
@@ -277,6 +303,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'ringi';
 			case 'bambom':
 				frames = Paths.getSparrowAtlas('bambi/bambom');
 				animation.addByPrefix('idle', 'IDLE', 24, false);
@@ -298,6 +326,29 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'bambom';
+			case 'gary':
+				frames = Paths.getSparrowAtlas('bambi/gary');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right']) {
+					animation.addByPrefix('sing${anim.toUpperCase()}', anim, 24, false);
+				}
+
+				addOffset('idle');
+				addOffset('singLEFT', 68, -81);
+				addOffset('singDOWN', 30, -135);
+				addOffset('singUP', 22, -57);
+				addOffset('singRIGHT', 25, -92);
+
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
+				updateHitbox();
+
+				antialiasing = false;
+
+				playAnim('idle');
+
+				iconName = 'gary';
 			case 'bendu':
 				frames = Paths.getSparrowAtlas('bambi/bendu');
 				animation.addByPrefix('idle', 'IDLE', 24, false);
@@ -317,6 +368,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+
+				iconName = 'bendu';
 			case 'dave-png':
 				frames = Paths.getSparrowAtlas('dave/dave-png');
 				animation.addByPrefix('idle', 'idle', 24, false);
@@ -331,6 +384,8 @@ class Character extends FlxSprite
 				addOffset('singRIGHT', 1);
 
 				playAnim('idle');
+
+				iconName = 'dave';
 			case 'split-dave-3d':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/split_dave_3d');
@@ -352,6 +407,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'disability';
+
 			case 'bandu-origin':
 				tex = Paths.getSparrowAtlas('bambi/bandu_origin');
 				frames = tex;
@@ -361,6 +418,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 				animation.addByPrefix('cutscene', 'CUTSCENE', 24, false);
+				animation.addByPrefix('singFUCK', 'FUCK', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 69, -30);
@@ -368,9 +426,13 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -90, -10);
 				addOffset("singDOWN", 80, 100);
 				addOffset("cutscene", 0, -10);
+				addOffset('singFUCK', -218, -98);
+
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'bandu-origin';
 		
 				playAnim('idle');
 
@@ -394,6 +456,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'recovered';
+
 			case 'RECOVERED_PROJECT_2':
 				tex = Paths.getSparrowAtlas('dave/recovered_project_2');
 				frames = tex;
@@ -414,6 +478,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'recovered';
+
 			case 'RECOVERED_PROJECT_3':
 				tex = Paths.getSparrowAtlas('dave/recovered_project_3');
 				frames = tex;
@@ -433,6 +499,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 		
 				playAnim('idle');
+
+				iconName = 'recovered';
 
 			case 'badai':
 				// BADAI SHITE ANIMATION LOADING CODE
@@ -455,6 +523,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'badai';
+
 			case 'tunnel-dave':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/tunnel_chase_dave');
@@ -475,6 +545,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 		
 				playAnim('idle');
+
+				iconName = 'decdave';
 
 			case 'og-dave':
 				// DAVE SHITE ANIMATION LOADING CODE
@@ -500,6 +572,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'og-dave';
+
 			case 'og-dave-angey':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/og_dave_angey');
@@ -523,6 +597,8 @@ class Character extends FlxSprite
 				antialiasing = false;
 		
 				playAnim('idle');
+
+				iconName = 'og-dave';
 
 			case 'garrett':
 				// DAVE SHITE ANIMATION LOADING CODE
@@ -552,6 +628,8 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 
+				iconName = 'garrett';
+
 			case 'bambi-piss-3d':
 				// BAMBI SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/bambi_pissyboy');
@@ -573,6 +651,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width / furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'disrupt';
 		
 				playAnim('danceRight');
 
@@ -615,6 +695,8 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 
+				iconName = 'bandu';
+
 				playAnim('idle');
 			case 'bandu-candy':
 				frames = Paths.getSparrowAtlas('bambi/bandu_crazy');
@@ -646,6 +728,8 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 
+				iconName = 'bandu';
+
 				playAnim('danceLeft');
 			case 'bambi-unfair':
 				// BAMBI SHITE ANIMATION LOADING CODE
@@ -667,6 +751,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'unfair';
 		
 				playAnim('idle');
 			case 'bambi-good':
@@ -685,6 +771,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -5, -43);
 
 				playAnim('idle');
+
+				iconName = 'bambi';
 			case 'dave-good':
 				// allso uh placeholder
 				tex = Paths.getSparrowAtlas('dave/PLACEHOLDER_DAVE');
@@ -702,6 +790,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -5, 2);
 
 				playAnim('idle');
+
+				iconName = 'dave';
 			case 'unfair-junker':
 				frames = Paths.getSparrowAtlas('bambi/UNFAIR_GUY_FAICNG_FORWARD');
 				animation.addByPrefix('idle', 'idle', 24, false);
@@ -722,6 +812,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'unfair';
 		
 				playAnim('idle');
 			case 'bf':
@@ -766,6 +858,8 @@ class Character extends FlxSprite
 
 				flipX = true;
 
+				iconName = 'bf';
+
 			case 'tunnel-bf':
 				var tex = Paths.getSparrowAtlas('dave/tunnel_bf');
 				frames = tex;
@@ -789,28 +883,8 @@ class Character extends FlxSprite
 				flipX = true;
 
 				nativelyPlayable = true;
-			//tunnel-bf-flipped cuz im STUPID
-			case 'tunnel-bf-flipped':
-				var tex = Paths.getSparrowAtlas('dave/tunnel_bf');
-				frames = tex;
 
-				animation.addByPrefix('idle', 'IDLE', 24, false);
-				animation.addByPrefix('singUP', 'UP', 24, false);
-				animation.addByPrefix('singRIGHT', 'LEFT', 24, false);
-				animation.addByPrefix('singLEFT', 'RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
-				animation.addByPrefix('turn', 'TURN', 24, false);
-
-				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singLEFT");
-				addOffset("singRIGHT", 13);
-				addOffset("singDOWN");
-				addOffset('turn');
-
-				playAnim('idle');
-
-				nativelyPlayable = true;
+				iconName = 'bf';
 		}
 		dance();
 

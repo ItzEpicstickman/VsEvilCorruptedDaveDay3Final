@@ -47,9 +47,9 @@ class MusicPlayerState extends MusicBeatState
   
     override function create()
     {
-        var initSonglist = ['internal,disruption,bambi-piss-3d,good', 'internal,applecore,bandu,good', 'internal,disability,split-dave-3d,good', 'internal,wireframe,tunnel-dave,good', 'internal,algebra,og-dave,good', 'internal,sugar-rush,bandu-candy,good', 'internal,origin,bandu-origin,good', 'internal,metallic,ringi,good', 'internal,strawberry,bambom,good', 'internal,keyboard,bendu,good']; //ah yeah dj song list
-        if(FlxG.save.data.shipUnlocked){initSonglist.push('internal,dave-x-bambi-shipping-cute,dave-good,good');};
-        if(FlxG.save.data.foundRecoveredProject){initSonglist.push('internal,recovered-project,RECOVERED_PROJECT,bad');};
+        var initSonglist = ['internal,disruption,disrupt,good', 'internal,applecore,bandu,good', 'internal,disability,disability,good', 'internal,wireframe,decdave,good', 'internal,algebra,og-dave,good', 'internal,sugar-rush,bandu,good', 'internal,origin,bandu-origin,good', 'internal,metallic,ringi,good', 'internal,strawberry,bambom,good', 'internal,keyboard,bendu,good', 'internal,wheels,wheels,good']; //ah yeah dj song list
+        if(FlxG.save.data.shipUnlocked){initSonglist.push('internal,dave-x-bambi-shipping-cute,dave,good');};
+        if(FlxG.save.data.foundRecoveredProject){initSonglist.push('internal,recovered-project,recovered,bad');};
         for (i in 0...initSonglist.length)
         {
             var splitstring:Array<String> = initSonglist[i].split(",");

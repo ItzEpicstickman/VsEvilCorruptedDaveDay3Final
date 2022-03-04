@@ -34,7 +34,7 @@ class ExtraSongState extends MusicBeatState
     var songColors:Array<FlxColor> = [
     	0xFFca1f6f, // GF
 		0xFF4965FF, // DAVE
-		0xFF00B515, // MISTER BAMBI r slur (i cant reclaim)
+		0xFF00B515, // MISTER BAMBI r slur (i cant reclaim) //MISTER BAMBI RETARD (i can though)
 		0xFF00FFFF, //SPLIT THE THONNNNN
 		0xFF000000 // sart.
     ];
@@ -56,14 +56,15 @@ class ExtraSongState extends MusicBeatState
 		bg.color = 0xFF4965FF;
 		add(bg);
         
-		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
-        addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-wheels', 'dave-good', 'RECOVERED_PROJECT']);
+		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Ugh', 'Cycles'], 2, ['bandu', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'bandu-origin', 'sart-producer']);
+        addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave', 'wheels', 'dave', 'recovered']);
 		addWeek(['Sart-Producer'], 4, ['sart-producer']);
+		addWeek(['Old-Strawberry'], 2, ['bambom']);
 
         grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-        swagText.setFormat(Paths.font("vcr.ttf"), 47, FlxColor.BLACK, LEFT);
+        swagText.setFormat(Paths.font("vcr.ttf"), 47, FlxColor.BLACK, CENTER);
 		swagText.screenCenter(X);
 		swagText.y += 50;
 		add(swagText);

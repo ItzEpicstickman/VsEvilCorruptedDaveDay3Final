@@ -83,11 +83,14 @@ class CharacterSelectState extends MusicBeatState
 	{
 		super.create();
 		Conductor.changeBPM(110);
+
+		currentSelectedCharacter = characters[current];
+
 		if(PlayState.SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute')
 		{
-			characters = [new CharacterInSelect(['dave-good','split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Dave (Dave x Bambi)', 'Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)'])];
+			characters = [new CharacterInSelect(['dave-good', 'split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey', 'dave-wheels'], ['Dave (Dave x Bambi)', 'Disability Dave', 'Decimated Dave', 'Algebra Dave', 'Algebra Dave (Angry)', 'Dave but Awesome'])];
+			currentSelectedCharacter = characters[0];
 		}
-		currentSelectedCharacter = characters[current];
 
 		FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone hi
 

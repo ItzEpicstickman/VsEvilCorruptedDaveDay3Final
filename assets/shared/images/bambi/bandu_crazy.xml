@@ -26,12 +26,12 @@
 	<SubTexture name="ALT-UP0003" x="10" y="966" width="750" height="946"/>
 	<SubTexture name="ALT-UP0004" x="770" y="966" width="750" height="946"/>
 	<SubTexture name="ALT-UP0005" x="770" y="966" width="750" height="946"/>
-	<SubTexture name="DOWN0000" x="6850" y="1922" width="750" height="946" pivotX="0" pivotY="0"/>
-	<SubTexture name="DOWN0001" x="6850" y="1922" width="750" height="946"/>
-	<SubTexture name="DOWN0002" x="10" y="2878" width="750" height="946"/>
-	<SubTexture name="DOWN0003" x="10" y="2878" width="750" height="946"/>
-	<SubTexture name="DOWN0004" x="770" y="2878" width="750" height="946"/>
-	<SubTexture name="DOWN0005" x="770" y="2878" width="750" height="946"/>
+	<SubTexture name="DOWN0000" x="1530" y="966" width="750" height="946" pivotX="0" pivotY="0"/>
+	<SubTexture name="DOWN0001" x="1530" y="966" width="750" height="946"/>
+	<SubTexture name="DOWN0002" x="2290" y="966" width="750" height="946"/>
+	<SubTexture name="DOWN0003" x="2290" y="966" width="750" height="946"/>
+	<SubTexture name="DOWN0004" x="3050" y="966" width="750" height="946"/>
+	<SubTexture name="DOWN0005" x="3050" y="966" width="750" height="946"/>
 	<SubTexture name="IDLE0000" x="3810" y="966" width="750" height="946" pivotX="0" pivotY="0"/>
 	<SubTexture name="IDLE0001" x="3810" y="966" width="750" height="946"/>
 	<SubTexture name="IDLE0002" x="4570" y="966" width="750" height="946"/>
@@ -51,16 +51,16 @@
 	<SubTexture name="RIGHT0000" x="2290" y="1922" width="750" height="946" pivotX="0" pivotY="0"/>
 	<SubTexture name="RIGHT0001" x="3050" y="1922" width="750" height="946"/>
 	<SubTexture name="RIGHT0002" x="3810" y="1922" width="750" height="946"/>
-	<SubTexture name="SPIT0000" x="1530" y="966" width="750" height="946" pivotX="-232" pivotY="0"/>
-	<SubTexture name="SPIT0001" x="1530" y="966" width="750" height="946"/>
-	<SubTexture name="SPIT0002" x="2290" y="966" width="750" height="946"/>
-	<SubTexture name="SPIT0003" x="2290" y="966" width="750" height="946"/>
-	<SubTexture name="SPIT0004" x="3050" y="966" width="750" height="946"/>
-	<SubTexture name="SPIT0005" x="3050" y="966" width="750" height="946"/>
-	<SubTexture name="UP0000" x="4570" y="1922" width="750" height="946" pivotX="0" pivotY="0"/>
-	<SubTexture name="UP0001" x="4570" y="1922" width="750" height="946"/>
-	<SubTexture name="UP0002" x="5330" y="1922" width="750" height="946"/>
-	<SubTexture name="UP0003" x="5330" y="1922" width="750" height="946"/>
-	<SubTexture name="UP0004" x="6090" y="1922" width="750" height="946"/>
-	<SubTexture name="UP0005" x="6090" y="1922" width="750" height="946"/>
+	<SubTexture name="SPIT0000" x="4570" y="1922" width="750" height="946" pivotX="-232" pivotY="0"/>
+	<SubTexture name="SPIT0001" x="4570" y="1922" width="750" height="946"/>
+	<SubTexture name="SPIT0002" x="5330" y="1922" width="750" height="946"/>
+	<SubTexture name="SPIT0003" x="5330" y="1922" width="750" height="946"/>
+	<SubTexture name="SPIT0004" x="6090" y="1922" width="750" height="946"/>
+	<SubTexture name="SPIT0005" x="6090" y="1922" width="750" height="946"/>
+	<SubTexture name="UP0000" x="6850" y="1922" width="750" height="946" pivotX="0" pivotY="0"/>
+	<SubTexture name="UP0001" x="6850" y="1922" width="750" height="946"/>
+	<SubTexture name="UP0002" x="10" y="2878" width="750" height="946"/>
+	<SubTexture name="UP0003" x="10" y="2878" width="750" height="946"/>
+	<SubTexture name="UP0004" x="770" y="2878" width="750" height="946"/>
+	<SubTexture name="UP0005" x="770" y="2878" width="750" height="946"/>
 </TextureAtlas>
