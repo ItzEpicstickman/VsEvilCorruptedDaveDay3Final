@@ -430,9 +430,13 @@ class DialogueBox extends FlxSpriteGroup
 				shad.waveSpeed = 1;
 				shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
 				shad.shader.uampmul.value[0] = 1;*/
+                                #if !android
 				PlayState.screenshader.Enabled = true;
+                                #end
 			case 'undistort':
+                                #if !android
 				PlayState.screenshader.Enabled = false;
+                                #end
 			case 'distortbg':
 				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
 				curshader = shad;
