@@ -144,6 +144,11 @@ class CharacterSelectState extends MusicBeatState
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.5));
 		tutorialThing.antialiasing = true;
 		add(tutorialThing);
+
+                #if android
+	        addVirtualPad(FULL, A_B);
+                addPadCamera();
+                #end
 	}
 
 	override public function update(elapsed:Float):Void 
@@ -151,7 +156,7 @@ class CharacterSelectState extends MusicBeatState
 		super.update(elapsed);
 		//FlxG.camera.focusOn(FlxG.ce);
 
-		if (FlxG.keys.justPressed.ESCAPE)
+		if (controls.BACK)
 		{
 			LoadingState.loadAndSwitchState(new PlayMenuState());
 		}
