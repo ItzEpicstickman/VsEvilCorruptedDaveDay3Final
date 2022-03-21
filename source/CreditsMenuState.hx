@@ -55,6 +55,11 @@ class CreditsMenuState extends MusicBeatState
    var peopleInCredits:Array<Person> = 
    [
       //devs
+      new Person("Saw (M.A. Jigsaw)", CreditsType.Dev, "Android Port",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ'),
+         ]
+      ),
       new Person("Grantare", CreditsType.Dev, "Director, Programmer, Composer, Animator, Charter",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCKbKOSJPbP4u81cpBpoSntw'),
@@ -360,6 +365,10 @@ class CreditsMenuState extends MusicBeatState
          var scaledY = FlxMath.remapToRange(creditsText.selectionId, 0, 1, 0, 1.3);
          creditsText.text.y = scaledY * 75 + (FlxG.height * 0.5);
       }
+
+                #if android
+	        addVirtualPad(UP_DOWN, A_B);
+                #end
 
 		super.create();
 	}
