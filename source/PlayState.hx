@@ -111,7 +111,9 @@ class PlayState extends MusicBeatState
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	public var curbg:FlxSprite;
+        #if !android
 	public static var screenshader:Shaders.PulseEffect = new PulseEffect();
+        #end
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
@@ -402,10 +404,13 @@ class PlayState extends MusicBeatState
 		}
 		var gfVersion:String = 'gf';
 
+                #if !android
 		screenshader.waveAmplitude = 1;
 		screenshader.waveFrequency = 2;
 		screenshader.waveSpeed = 1;
 		screenshader.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000, 100000);
+                #end
+
 		var charoffsetx:Float = 0;
 		var charoffsety:Float = 0;
 		if (formoverride == "bf-pixel"
@@ -2247,7 +2252,8 @@ class PlayState extends MusicBeatState
 		}
 
 		FlxG.watch.addQuick("WHAT", Conductor.songPosition);
-			
+
+                #if !android
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
 		{
@@ -2264,6 +2270,7 @@ class PlayState extends MusicBeatState
 			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
 		}
 		screenshader.Enabled = shakeCam && eyesoreson;
+                #end
 
 		if (FlxG.keys.justPressed.NINE && iconP1.charPublic != 'bandu-origin')
 		{
