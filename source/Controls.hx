@@ -298,7 +298,7 @@ class Controls extends FlxActionSet
 			case UP_DOWN:
 				inline forEachBound(Control.UP, (action, state) -> addbutton(action, virtualPad.buttonUp, state));
 				inline forEachBound(Control.DOWN, (action, state) -> addbutton(action, virtualPad.buttonDown, state));
-			case LEFT_RIGHT
+			case LEFT_RIGHT:
 				inline forEachBound(Control.LEFT, (action, state) -> addbutton(action, virtualPad.buttonLeft, state));
 				inline forEachBound(Control.RIGHT, (action, state) -> addbutton(action, virtualPad.buttonRight, state));
 			case UP_LEFT_RIGHT:
