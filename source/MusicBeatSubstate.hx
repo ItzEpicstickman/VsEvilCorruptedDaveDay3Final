@@ -52,8 +52,7 @@ class MusicBeatSubstate extends FlxSubState
 	
 	override function destroy() {
 		#if android
-		controls.removeFlxInput(trackedinputsUI);
-		controls.removeFlxInput(trackedinputsNOTES);	
+		controls.removeFlxInput(trackedinputs);
 		#end	
 		
 		super.destroy();
