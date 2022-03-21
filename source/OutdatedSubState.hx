@@ -37,14 +37,7 @@ class OutdatedSubState extends MusicBeatState
 		add(txt);
 
                 #if android
-		if (FlxG.save.data.begin_thing)
-		{
-			addVirtualPad(NONE, A_B_C);
-		}
-		else
-		{
-			addVirtualPad(NONE, A);
-		}         
+		addVirtualPad(NONE, A_B_C);         
                 #end
 	}
 
@@ -55,14 +48,14 @@ class OutdatedSubState extends MusicBeatState
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.B #if android || android.FlxVirtualPad.buttonB.justPressed #end && FlxG.save.data.begin_thing != true)
+		if (FlxG.keys.justPressed.B #if android || _virtualpad.buttonB.justPressed #end && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = true;
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.C #if android || android.FlxVirtualPad.buttonC.justPressed #end && FlxG.save.data.begin_thing != true)
+		if (FlxG.keys.justPressed.C #if android || _virtualpad.buttonC.justPressed #end && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = false;
