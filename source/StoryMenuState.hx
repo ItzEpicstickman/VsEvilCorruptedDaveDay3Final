@@ -237,6 +237,10 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
+                #if android
+	        addVirtualPad(FULL, A_B);
+                #end
+
 		super.create();
 
 		if (dofunnytristan)
