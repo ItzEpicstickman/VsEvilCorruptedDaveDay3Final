@@ -33,7 +33,7 @@ class OptionsMenu extends MusicBeatState
 		DiscordClient.changePresence("In the Options Menu", null);
 		#end
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-		controlsStrings = CoolUtil.coolStringFile((FlxG.save.data.dfjk ? 'DFJK' : 'WASD') + "\n" + (FlxG.save.data.newInput ? "Ghost Tapping" : "No Ghost Tapping") + "\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + "\nAccuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled') + "\n" + (FlxG.save.data.donoteclick ? "Hitsounds On" : "Hitsounds Off") + "\n" + (FlxG.save.data.freeplayCuts ? "Cutscenes On" : "Cutscenes Off"));
+		controlsStrings = CoolUtil.coolStringFile("Android Controls" + "\n" + (FlxG.save.data.dfjk ? 'DFJK' : 'WASD') + "\n" + (FlxG.save.data.newInput ? "Ghost Tapping" : "No Ghost Tapping") + "\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + "\nAccuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled') + "\n" + (FlxG.save.data.donoteclick ? "Hitsounds On" : "Hitsounds Off") + "\n" + (FlxG.save.data.freeplayCuts ? "Cutscenes On" : "Cutscenes Off"));
 		
 		trace(controlsStrings);
 
@@ -96,6 +96,9 @@ class OptionsMenu extends MusicBeatState
 				switch(curSelected)
 				{
 					case 0:
+						trace('switch');
+						FlxG.switchState(new android.AndroidControlsMenu());
+					case 1:
 						FlxG.save.data.dfjk = !FlxG.save.data.dfjk;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.dfjk ? 'DFJK' : 'WASD'), true, false);
 						ctrl.isMenuItem = true;
@@ -106,37 +109,37 @@ class OptionsMenu extends MusicBeatState
 						else
 							controls.setKeyboardScheme(KeyboardScheme.Duo(true), true);
 						
-					case 1:
+					case 2:
 						FlxG.save.data.newInput = !FlxG.save.data.newInput;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.newInput ? "Ghost Tapping" : "No Ghost Tapping"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 1;
 						grpControls.add(ctrl);
-					case 2:
+					case 3:
 						FlxG.save.data.downscroll = !FlxG.save.data.downscroll;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll'), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 2;
 						grpControls.add(ctrl);
-					case 3:
+					case 4:
 						FlxG.save.data.accuracyDisplay = !FlxG.save.data.accuracyDisplay;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Accuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 3;
 						grpControls.add(ctrl);
-					case 4:
+					case 5:
 						FlxG.save.data.eyesores = !FlxG.save.data.eyesores;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled'), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 4;
 						grpControls.add(ctrl);
-					case 5:
+					case 6:
 						FlxG.save.data.donoteclick = !FlxG.save.data.donoteclick;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.donoteclick ? "Hitsounds On" : "Hitsounds Off"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 5;
 						grpControls.add(ctrl);
-					case 6:
+					case 7:
 						FlxG.save.data.freeplayCuts = !FlxG.save.data.freeplayCuts;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.freeplayCuts ? "Cutscenes On" : "Cutscenes Off"), true, false);
 						ctrl.isMenuItem = true;
