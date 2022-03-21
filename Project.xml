@@ -84,18 +84,19 @@
 	<haxelib name="hscript" />
 
 	<haxelib name="actuate" />
-<haxelib name="extension-webm" if="desktop" />
+        <haxelib name="extension-webm" />
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
-	<haxelib name="newgrounds"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="polymod"/>
-	#if desktop
 	<haxelib name="discord_rpc" if="desktop"/>
-	#end
-	<setenv name="next" />
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
+        <haxelib name="extension-webview" if="android"/>
+        <haxelib name="AndroidTools" if="android"/>
+
+        <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
+        <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
@@ -134,6 +135,10 @@
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+
+	<!-- Akways enable Null Object Reference check -->
+	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
+	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
