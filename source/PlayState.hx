@@ -2973,7 +2973,6 @@ class PlayState extends MusicBeatState
 
 				if (SONG.validScore)
 				{
-					NGio.unlockMedal(60961);
 					Highscore.saveWeekScore(storyWeek, campaignScore,
 						storyDifficulty, characteroverride == "none" || characteroverride == "bf" ? "bf" : characteroverride);
 				}
@@ -3041,13 +3040,7 @@ class PlayState extends MusicBeatState
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 		FlxG.sound.music.stop();
 		
-		switch (curSong.toLowerCase())
-		{
-			case 'corn-theft':
-				LoadingState.loadAndSwitchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()), false);
-			default:
-				LoadingState.loadAndSwitchState(new PlayState());
-		}
+		LoadingState.loadAndSwitchState(new PlayState());
 	}
 	private function popUpScore(strumtime:Float, notedata:Int):Void
 	{
