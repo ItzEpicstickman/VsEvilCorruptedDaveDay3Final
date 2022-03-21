@@ -2472,8 +2472,10 @@ class PlayState extends MusicBeatState
 				vocals.stop();
 				FlxG.sound.music.stop();
 	
+                                #if !android
 				screenshader.shader.uampmul.value[0] = 0;
 				screenshader.Enabled = false;
+                                #end
 			}
 
 			if(shakeCam)
