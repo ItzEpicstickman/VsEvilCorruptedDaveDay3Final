@@ -20,7 +20,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 #if desktop
@@ -53,24 +52,14 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		#if polymod
-		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
 		
 		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "\\assets\\replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
+		if (!sys.FileSystem.exists(SUtil.getPath() + "assets/replays"))
+			sys.FileSystem.createDirectory(SUtil.getPath() + "assets/replays");
 		#end
-
-		// preload all the long songs
-		var preloadSongs:Array<String> = [
-			'Algebra', 'AppleCore'
-		];
-
-		for (song in preloadSongs) {
-			FlxG.sound.cache(Paths.inst(song));
-			FlxG.sound.cache(Paths.voices(song));
-		}
 
 		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
@@ -89,11 +78,6 @@ class TitleState extends MusicBeatState
 		#end
 
 		super.create();
-
-		#if ng
-		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
-		trace('NEWGROUNDS LOL');
-		#end
 			
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
@@ -129,7 +113,6 @@ class TitleState extends MusicBeatState
 
 	var logoBl:FlxSprite;
 	var titleText:FlxSprite;
-
 
 	function startIntro()
 	{
@@ -291,14 +274,6 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
-			#if !switch
-			NGio.unlockMedal(60960);
-
-			// If it's Friday according to da clock
-			if (Date.now().getDay() == 5)
-				NGio.unlockMedal(61034);
-			#end
-
 			titleText.animation.play('press');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
