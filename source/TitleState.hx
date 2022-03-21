@@ -55,11 +55,6 @@ class TitleState extends MusicBeatState
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
-		
-		#if sys
-		if (!sys.FileSystem.exists(SUtil.getPath() + "assets/replays"))
-			sys.FileSystem.createDirectory(SUtil.getPath() + "assets/replays");
-		#end
 
 		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
