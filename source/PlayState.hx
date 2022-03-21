@@ -821,6 +821,10 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
+                #if android
+	        addAndroidControls();
+                #end
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1225,6 +1229,9 @@ class PlayState extends MusicBeatState
 		inCutscene = false;
 
 		camHUD.visible = true;
+	        #if android
+	        androidc.visible = true;
+	        #end
 
 		boyfriend.canDance = true;
 		dad.canDance = true;
@@ -2298,7 +2305,7 @@ class PlayState extends MusicBeatState
 		{
 			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
 		}
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2925,6 +2932,9 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+	        #if android
+	        androidc.visible = false;
+	        #end
 		if (SONG.validScore)
 		{
 			trace("score is valid");
