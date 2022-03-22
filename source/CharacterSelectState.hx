@@ -147,7 +147,6 @@ class CharacterSelectState extends MusicBeatState
 
                 #if android
 	        addVirtualPad(FULL, A_B);
-                addPadCamera();
                 #end
 	}
 
@@ -161,37 +160,6 @@ class CharacterSelectState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new PlayMenuState());
 		}
 
-		if(controls.LEFT_P && !PressedTheFunny)
-		{
-			if(!char.nativelyPlayable)
-			{
-				char.playAnim('singRIGHT', true);
-			}
-			else
-			{
-				char.playAnim('singLEFT', true);
-			}
-
-		}
-		if(controls.RIGHT_P && !PressedTheFunny)
-		{
-			if(!char.nativelyPlayable)
-			{
-				char.playAnim('singLEFT', true);
-			}
-			else
-			{
-				char.playAnim('singRIGHT', true);
-			}
-		}
-		if(controls.UP_P && !PressedTheFunny)
-		{
-			char.playAnim('singUP', true);
-		}
-		if(controls.DOWN_P && !PressedTheFunny)
-		{
-			char.playAnim('singDOWN', true);
-		}
 		if (controls.ACCEPT)
 		{
 			if (PressedTheFunny)
@@ -209,7 +177,7 @@ class CharacterSelectState extends MusicBeatState
 			FlxG.sound.play(Paths.music('gameOverEnd'));
 			new FlxTimer().start(1.9, endIt);
 		}
-		if (FlxG.keys.justPressed.LEFT && !selectedCharacter)
+		if (controls.LEFT_P && !selectedCharacter)
 		{
 			curForm = 0;
 			current--;
@@ -221,7 +189,7 @@ class CharacterSelectState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
-		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter)
+		if (controls.RIGHT_P && !selectedCharacter)
 		{
 			curForm = 0;
 			current++;
@@ -232,7 +200,7 @@ class CharacterSelectState extends MusicBeatState
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
-		if (FlxG.keys.justPressed.DOWN && !selectedCharacter)
+		if (controls.DOWN_P && !selectedCharacter)
 		{
 			curForm--;
 			if (curForm < 0)
@@ -243,7 +211,7 @@ class CharacterSelectState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
-		if (FlxG.keys.justPressed.UP && !selectedCharacter)
+		if (controls.UP_P && !selectedCharacter)
 		{
 			curForm++;
 			if (curForm > characters[current].names.length - 1)
