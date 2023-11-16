@@ -4,7 +4,10 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import lime.app.Application;
 
 class OutdatedSubState extends MusicBeatState
@@ -12,53 +15,81 @@ class OutdatedSubState extends MusicBeatState
 	public static var leftState:Bool = false;
 
 	public static var needVer:String = "IDFK LOL";
+	public static var currChanges:String = "dk";
+	
+	private var bgColors:Array<String> = [
+		'#314d7f',
+		'#4e7093',
+		'#70526e',
+		'#594465'
+	];
+	private var colorRotation:Int = 1;
 
 	override function create()
 	{
 		super.create();
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('week54prototype', 'shared'));
+		bg.scale.x *= 1.55;
+		bg.scale.y *= 1.55;
+		bg.screenCenter();
 		add(bg);
-		var txt:FlxText = null;
-		if (FlxG.save.data.begin_thing)
-		{
-			txt = new FlxText(0, 0, FlxG.width,
-				"Hello! \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \nturn off the Eyesores option in the options menu. \nPress Enter to continue.",
-				32);
-		}
-		else
-		{
-			txt = new FlxText(0, 0, FlxG.width,
-				"Hello! \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \npress B, otherwise press C. You can change this in options.",
-				32);
-		}
-		txt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		
+		var kadeLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('KadeEngineLogo'));
+		kadeLogo.scale.y = 0.3;
+		kadeLogo.scale.x = 0.3;
+		kadeLogo.x -= kadeLogo.frameHeight;
+		kadeLogo.y -= 180;
+		kadeLogo.alpha = 0.8;
+		add(kadeLogo);
+		
+		var txt:FlxText = new FlxText(0, 0, FlxG.width,
+			"Your Kade Engine is outdated!\nYou are on "
+			+ MainMenuState.kadeEngineVer
+			+ "\nwhile the most recent version is " + needVer + "."
+			+ "\n\nWhat's new:\n\n"
+			+ currChanges
+			+ "\n& more changes and bugfixes in the full changelog"
+			+ "\n\nPress Space to view the full changelog and update\nor ESCAPE to ignore this",
+			32);
+		
+		txt.setFormat("VCR OSD Mono", 32, FlxColor.fromRGB(200, 200, 200), CENTER);
+		txt.borderColor = FlxColor.BLACK;
+		txt.borderSize = 3;
+		txt.borderStyle = FlxTextBorderStyle.OUTLINE;
 		txt.screenCenter();
-		txt.antialiasing = true;
 		add(txt);
-
-                #if android
-		addVirtualPad(NONE, A_B_C);         
-                #end
+		
+		FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+		FlxTween.angle(kadeLogo, kadeLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
+		
+		new FlxTimer().start(2, function(tmr:FlxTimer)
+		{
+			FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+			if(colorRotation < (bgColors.length - 1)) colorRotation++;
+			else colorRotation = 0;
+		}, 0);
+		
+		new FlxTimer().start(2, function(tmr:FlxTimer)
+		{
+			if(kadeLogo.angle == -10) FlxTween.angle(kadeLogo, kadeLogo.angle, 10, 2, {ease: FlxEase.quartInOut});
+			else FlxTween.angle(kadeLogo, kadeLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
+		}, 0);
+		
+		new FlxTimer().start(0.8, function(tmr:FlxTimer)
+		{
+			if(kadeLogo.alpha == 0.8) FlxTween.tween(kadeLogo, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
+			else FlxTween.tween(kadeLogo, {alpha: 0.8}, 0.8, {ease: FlxEase.quartInOut});
+		}, 0);
 	}
 
 	override function update(elapsed:Float)
 	{
-		if (controls.ACCEPT && FlxG.save.data.begin_thing == true)
+		if (controls.ACCEPT)
 		{
-			leftState = true;
-			FlxG.switchState(new MainMenuState());
+			fancyOpenURL("https://kadedev.github.io/Kade-Engine/changelogs/changelog-" + needVer);
 		}
-		if (FlxG.keys.justPressed.B #if android || _virtualpad.buttonB.justPressed #end && FlxG.save.data.begin_thing != true)
+		if (controls.BACK)
 		{
-			FlxG.save.data.begin_thing = true;
-			FlxG.save.data.eyesores = true;
-			leftState = true;
-			FlxG.switchState(new MainMenuState());
-		}
-		if (FlxG.keys.justPressed.C #if android || _virtualpad.buttonC.justPressed #end && FlxG.save.data.begin_thing != true)
-		{
-			FlxG.save.data.begin_thing = true;
-			FlxG.save.data.eyesores = false;
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}

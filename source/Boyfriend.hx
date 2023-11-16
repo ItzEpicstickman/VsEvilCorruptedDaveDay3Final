@@ -11,17 +11,11 @@ class Boyfriend extends Character
 {
 	public var stunned:Bool = false;
 
+	public var sprTracker:FlxSprite;
+
 	public function new(x:Float, y:Float, ?char:String = 'bf')
 	{
-		switch (char)
-		{
-			case "dave" | "dave-old" | "dave-annoyed" | 'dave-splitathon':
-				super(x, y - 40, char, true);
-			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
-				super(x, y - 225, char, true);
-			default:
-				super(x, y, char, true);
-		}
+		super(x, y, char, true);
 	}
 
 	override function update(elapsed:Float)
@@ -47,5 +41,12 @@ class Boyfriend extends Character
 		}
 
 		super.update(elapsed);
+
+		// LOLOLOLOLOLOL
+		if (sprTracker != null)
+		{
+			x = (sprTracker.y * 2) + 90 - 350;
+			y = FlxG.height / 3 - 68;
+		}
 	}
 }

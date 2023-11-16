@@ -1,6 +1,5 @@
 package;
 
-import flixel.math.FlxMath;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
@@ -15,39 +14,24 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
-	public function new(x:Float, y:Float,char:String)
+	public function new(x:Float, y:Float)
 	{
 		var daStage = PlayState.curStage;
 		var daBf:String = '';
-		switch (char)
+		switch (PlayState.SONG.player1)
 		{
 			case 'bf-pixel':
 				stageSuffix = '-pixel';
+				daBf = 'bf-pixel-dead';
 			default:
-				daBf = 'bf-death';
-		}
-		if (char == "bf-pixel")
-		{
-			char = "bf-pixel-dead";
-		}
-		if (char == "what-lmao")
-		{
-			char = "bambi-bevel";
-		}
-		if (char == "bf-car")
-		{
-			char = "bf-death";
+				daBf = 'bf';
 		}
 
 		super();
 
 		Conductor.songPosition = 0;
 
-		bf = new Boyfriend(x, y, char);
-		if(bf.animation.getByName('firstDeath') == null)
-		{
-			bf = new Boyfriend(x, y, "bf");
-		}
+		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
@@ -64,15 +48,12 @@ class GameOverSubstate extends MusicBeatSubstate
 		bf.playAnim('firstDeath');
 
                 #if android
-	        addVirtualPad(NONE, A_B);
-                addPadCamera();
+                addVirtualPad(NONE, A_B);
                 #end
 	}
 
 	override function update(elapsed:Float)
 	{
-		FlxG.camera.zoom = FlxMath.lerp(1, FlxG.camera.zoom, 0.95);
-
 		super.update(elapsed);
 
 		if (controls.ACCEPT)
@@ -84,24 +65,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			FlxG.sound.music.stop();
 
-			if (PlayState.SONG.song.toLowerCase() == 'disability') {
-				trace("WUH OH!!!");
-
-				FlxG.save.data.foundRecoveredProject = true;
-
-				var poop:String = Highscore.formatSong('recovered-project', 1);
-
-				trace(poop);
-
-				PlayState.SONG = Song.loadFromJson(poop, 'recovered-project');
-				PlayState.isStoryMode = false;
-				PlayState.storyDifficulty = 1;
-
-				PlayState.storyWeek = 1;
-				LoadingState.loadAndSwitchState(new PlayState());
-			}
+			if (PlayState.isStoryMode)
+				FlxG.switchState(new StoryMenuState());
 			else
-				FlxG.switchState(new MainMenuState());
+				FlxG.switchState(new FreeplayState());
+			PlayState.loadRep = false;
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
@@ -134,18 +102,16 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (!isEnding)
 		{
 			isEnding = true;
-			
-				bf.playAnim('deathConfirm', true);
-				FlxG.sound.music.stop();
-				FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
-				new FlxTimer().start(0.7, function(tmr:FlxTimer)
+			bf.playAnim('deathConfirm', true);
+			FlxG.sound.music.stop();
+			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+			new FlxTimer().start(0.7, function(tmr:FlxTimer)
+			{
+				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
-					FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
-					{
-						LoadingState.loadAndSwitchState(new PlayState());
-					});
+					LoadingState.loadAndSwitchState(new PlayState());
 				});
-			
+			});
 		}
 	}
 }

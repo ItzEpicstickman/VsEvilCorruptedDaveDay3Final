@@ -17,9 +17,9 @@ import Discord.DiscordClient;
 
 using StringTools;
 
-class FreeplayState extends MusicBeatState
+class FreeplayModsState extends MusicBeatState
 {
-	var songs:Array<SongMetadata> = [];
+	var songs:Array<SongMetadata2> = [];
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -37,12 +37,12 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplayModsSonglist'));
 
 		for (i in 0...initSonglist.length)
 		{
 			var data:Array<String> = initSonglist[i].split(':');
-			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
+			songs.push(new SongMetadata2(data[0], Std.parseInt(data[2]), data[1]));
 		}
 
 		/* 
@@ -55,7 +55,7 @@ class FreeplayState extends MusicBeatState
 
 		 #if windows
 		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
+		 DiscordClient.changePresence("In the FreeplayMods Menu", null);
 		 #end
 
 		var isDebug:Bool = false;
@@ -147,7 +147,7 @@ class FreeplayState extends MusicBeatState
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter));
+		songs.push(new SongMetadata2(songName, weekNum, songCharacter));
 	}
 
 	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
@@ -297,7 +297,7 @@ class FreeplayState extends MusicBeatState
 	}
 }
 
-class SongMetadata
+class SongMetadata2
 {
 	public var songName:String = "";
 	public var week:Int = 0;

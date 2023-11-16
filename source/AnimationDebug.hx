@@ -12,7 +12,7 @@ import flixel.util.FlxColor;
 /**
 	*DEBUG MODE
  */
-class AnimationDebug extends MusicBeatState
+class AnimationDebug extends FlxState
 {
 	var bf:Boyfriend;
 	var dad:Character;
@@ -34,8 +34,6 @@ class AnimationDebug extends MusicBeatState
 	override function create()
 	{
 		FlxG.sound.music.stop();
-
-		FlxG.mouse.visible = true;
 
 		var gridBG:FlxSprite = FlxGridOverlay.create(10, 10);
 		gridBG.scrollFactor.set(0.5, 0.5);
@@ -114,16 +112,6 @@ class AnimationDebug extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		textAnim.text = char.animation.curAnim.name;
-
-		if(FlxG.keys.justPressed.ESCAPE)
-		{
-			FlxG.switchState(new MainMenuState());
-		}
-
-		if(FlxG.keys.justPressed.F)
-		{
-			char.flipX = !char.flipX;
-		}
 
 		if (FlxG.keys.justPressed.E)
 			FlxG.camera.zoom += 0.25;

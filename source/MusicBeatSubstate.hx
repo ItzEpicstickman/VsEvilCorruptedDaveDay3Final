@@ -18,7 +18,7 @@ class MusicBeatSubstate extends FlxSubState
 	private var lastBeat:Float = 0;
 	private var lastStep:Float = 0;
 
-	public static var curStep:Int = 0;
+	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 	private var controls(get, never):Controls;
 
@@ -52,7 +52,7 @@ class MusicBeatSubstate extends FlxSubState
 	
 	override function destroy() {
 		#if android
-		controls.removeFlxInput(trackedinputs);
+		controls.removeFlxInput(trackedinputs);	
 		#end	
 		
 		super.destroy();

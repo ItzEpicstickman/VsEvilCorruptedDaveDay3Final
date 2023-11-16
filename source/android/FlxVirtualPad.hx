@@ -43,8 +43,29 @@ class FlxVirtualPad extends FlxSpriteGroup
 
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();
+
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
+
+                buttonA = new FlxButton(0, 0);
+                buttonB = new FlxButton(0, 0);
+                buttonC = new FlxButton(0, 0);
+                buttonD = new FlxButton(0, 0);
+                buttonE = new FlxButton(0, 0);
+                buttonV = new FlxButton(0, 0);
+                buttonX = new FlxButton(0, 0);
+                buttonY = new FlxButton(0, 0);
+                buttonZ = new FlxButton(0, 0);
+
+                buttonLeft = new FlxButton(0, 0);
+                buttonUp = new FlxButton(0, 0);
+                buttonRight = new FlxButton(0, 0);
+                buttonDown = new FlxButton(0, 0);
+
+                buttonLeft2 = new FlxButton(0, 0);
+                buttonUp2 = new FlxButton(0, 0);
+                buttonRight2 = new FlxButton(0, 0);
+                buttonDown2 = new FlxButton(0, 0);
 
 		switch (DPad)
 		{

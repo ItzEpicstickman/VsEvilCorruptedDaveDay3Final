@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.math.FlxMath;
 
 class HealthIcon extends FlxSprite
 {
@@ -9,155 +8,70 @@ class HealthIcon extends FlxSprite
 	 * Used for FreeplayState! If you use it elsewhere, prob gonna annoying
 	 */
 	public var sprTracker:FlxSprite;
-
-	public var isPlayer:Bool = false;
-
-	
-	public var noAaChars:Array<String> = [
-		'dave-angey',
-		'dave-annoyed-3d',
-		'bambi-3d',
-		'bf-pixel',
-		'gf-pixel',
-		'bambi-unfair',
-		'bambi-piss-3d',
-		'bandu',
-		'the-two-dunkers',
-		'tunnel-dave',
-		'split-dave-3d',
-		'og-dave',
-		'og-dave-angey',
-		'garrett',
-		'badai',
-		'3d-bf',
-		'RECOVERED_PROJECT',
-		'RECOVERED_PROJECT_2',
-		'RECOVERED_PROJECT_3',
-		'bandu-candy',
-		'bandu-origin',
-		'bandu-scaredy',
-		'sart-producer',
-		'sart-producer-night',
-		'bambom',
-		'ringi',
-		'bendu',
-		'dave-wheels'
-	];
-
-	public var charPublic:String = 'bf';
+	public var char:String;
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
-
-		this.isPlayer = isPlayer;
-
-		charPublic = char;
-
-		if(char != 'bandu-origin')
-		{
-			loadGraphic(Paths.image('iconGrid'), true, 150, 150);
-	
-			addIcon('face', 58);
-
-			addIcon('ringi', 28);
-
-			addIcon('bambom', 30);
-
-			addIcon('bendu', 32);
-	
-			addIcon('bf', 0);
-
-			addIcon('3d-bf', 34);
-
-			addIcon('playrobot', 38);
-
-			addIcon('playrobot-crazy', 38);
-
-			addIcon('diamond-man', 40);
-
-			addIcon('hall-monitor', 42);
-
-			addIcon('bambi-good', 44);
-
-			addIcon('sart-producer', 26);
-
-			addIcon('sart-producer-night', 26);
-
-			addIcon('dave-wheels', 36);
-	
-			addIcon('tunnel-bf', 0);
 		
-			addIcon('bf-old', 2);
-		
-			addIcon('gf', 57, true);
-
-			addIcon('bambi-unfair', 4);
-			
-			addIcon('unfair-junker', 4);
-	
-			addIcon('bambi-piss-3d', 6);
-			
-			addIcon('split-dave-3d', 16);
-	
-			addIcon('garrett', 20);
-	
-			addIcon('badai', 18);
-	
-			addIcon('bandu', 8);
-	
-			addIcon('bandu-candy', 8);
-	
-			addIcon('bandu-origin', 8);
-
-			addIcon('bandu-scaredy', 8);
-	
-			addIcon('tunnel-dave', 12);
-	
-			addIcon('og-dave', 14);
-	
-			addIcon('og-dave-angey', 14);
-	
-			addIcon('the-two-dunkers', 10);
-	
-			addIcon('dave-png', 22);
-	
-			addIcon('dave-good', 22);
-			
-			addIcon('RECOVERED_PROJECT', 24);
-
-			addIcon('RECOVERED_PROJECT_2', 24);
-
-			addIcon('RECOVERED_PROJECT_3', 24);
-	
-			animation.play('face');
-		}
-		else
-		{
-			frames = Paths.getSparrowAtlas('bandu_origin_icon');
-			animation.addByPrefix(char, char, 24, false, isPlayer, false);
-		}
+		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 
 		antialiasing = true;
-
+		animation.add('bf', [0, 1], 0, false, isPlayer);
+		animation.add('bf-bside', [0, 1], 0, false, isPlayer);
+		animation.add('bf-car', [0, 1], 0, false, isPlayer);
+		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
+		animation.add('bf-pixel', [21, 21], 0, false, isPlayer);
+		animation.add('spooky', [2, 3], 0, false, isPlayer);
+		animation.add('pico', [4, 5], 0, false, isPlayer);
+		animation.add('mom', [6, 7], 0, false, isPlayer);
+		animation.add('mom-car', [6, 7], 0, false, isPlayer);
+		animation.add('tankman', [8, 9], 0, false, isPlayer);
+		animation.add('face', [10, 11], 0, false, isPlayer);
+                animation.add('core', [37, 38], 0, false, isPlayer);
+                animation.add('principal', [39, 40], 0, false, isPlayer);
+                animation.add('baldi', [39, 40], 0, false, isPlayer);
+		animation.add('wide', [10, 11], 0, false, isPlayer); // W I D E
+		animation.add('dad', [12, 13], 0, false, isPlayer);
+		animation.add('senpai', [22, 22], 0, false, isPlayer);
+		animation.add('senpai-angry', [22, 22], 0, false, isPlayer);
+		animation.add('spirit', [23, 23], 0, false, isPlayer);
+		animation.add('bf-old', [14, 15], 0, false, isPlayer);
+		animation.add('gf', [16], 0, false, isPlayer);
+		animation.add('gf-whitty', [16], 0, false, isPlayer);
+		animation.add('gf-whitty-zoom', [16], 0, false, isPlayer);
+		animation.add('gf-whitty-bside', [16], 0, false, isPlayer);
+		animation.add('gf-crucified', [16], 0, false, isPlayer);
+		animation.add('whitty', [24, 25], 0, false, isPlayer);
+		animation.add('whittyBSide', [24, 25], 0, false, isPlayer);
+		animation.add('whittyBSideCrazy', [26, 27], 0, false, isPlayer);
+		animation.add('whittyCrazy', [26, 27], 0, false, isPlayer);
+		animation.add('sky', [28, 29], 0, false, isPlayer);
+		animation.add('sky-annoyed', [28, 29], 0, false, isPlayer);
+		animation.add('sky-mad', [30], 0, false, isPlayer);
+		animation.add('garcello', [31, 32], 0, false, isPlayer);
+		animation.add('garcellotired', [33, 34], 0, false, isPlayer);
+		animation.add('garcellodead', [35, 36], 0, false, isPlayer);
+		animation.add('garcelloghosty', [36], 0, false, isPlayer);
+		animation.add('gf-christmas', [16], 0, false, isPlayer);
+		animation.add('gf-pixel', [16], 0, false, isPlayer);
+		animation.add('parents-christmas', [17, 18], 0, false, isPlayer);
+		animation.add('monster', [19, 20], 0, false, isPlayer);
+		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
 		animation.play(char);
 
-		if (noAaChars.contains(char))
+		switch(char)
 		{
-			antialiasing = false;
+			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel':
+				antialiasing = false;
 		}
-		scrollFactor.set();
-	}
 
-	function addIcon(char:String, startFrame:Int, singleIcon:Bool = false) {
-		animation.add(char, !singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
+		scrollFactor.set();
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		offset.set(Std.int(FlxMath.bound(width - 150,0)),Std.int(FlxMath.bound(height - 150,0)));
 
 		if (sprTracker != null)
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);

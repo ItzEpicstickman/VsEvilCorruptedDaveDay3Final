@@ -1,5 +1,10 @@
 package;
 
+import openfl.display.BlendMode;
+import openfl.text.TextFormat;
+import openfl.display.Application;
+import flixel.util.FlxColor;
+import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
@@ -7,6 +12,7 @@ import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import lime.system.System;
 
 class Main extends Sprite
 {
@@ -18,18 +24,23 @@ class Main extends Sprite
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
+	public static var watermarks = true; // Whether to put Kade Engine liteartly anywhere
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
+	
+	public static var path:String = System.applicationStorageDirectory;
 
 	public static function main():Void
 	{
+
+		// quick checks 
+
 		Lib.current.addChild(new Main());
 	}
 
 	public function new()
 	{
 		super();
-
- 	        SUtil.gameCrashCheck();
 
 		if (stage != null)
 		{
@@ -65,9 +76,44 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		SUtil.doTheCheck();
+		#if !debug
+		initialState = TitleState;
+		#end
 
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
-		addChild(new FPS(10, 3, 0xFFFFFF));
+		game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
+
+		addChild(game);
+
+		fpsCounter = new FPS(10, 3, 0xFFFFFF);
+		addChild(fpsCounter);
+		toggleFPS(FlxG.save.data.fps);
+	}
+
+	var game:FlxGame;
+
+	var fpsCounter:FPS;
+
+	public function toggleFPS(fpsEnabled:Bool):Void {
+		fpsCounter.visible = fpsEnabled;
+	}
+
+	public function changeFPSColor(color:FlxColor)
+	{
+		fpsCounter.textColor = color;
+	}
+
+	public function setFPSCap(cap:Float)
+	{
+		openfl.Lib.current.stage.frameRate = cap;
+	}
+
+	public function getFPSCap():Float
+	{
+		return openfl.Lib.current.stage.frameRate;
+	}
+
+	public function getFPS():Float
+	{
+		return fpsCounter.currentFPS;
 	}
 }

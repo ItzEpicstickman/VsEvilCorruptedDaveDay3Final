@@ -55,9 +55,29 @@ class Paths
 		return getPath(file, type, library);
 	}
 
+	inline static public function lua(key:String,?library:String)
+	{
+		return Main.path + getPath('data/$key.lua', TEXT, library);
+	}
+
+	inline static public function luaAsset(key:String,?library:String)
+		{
+			return getPath('data/$key.lua', TEXT, library);
+		}
+
+	inline static public function luaImage(key:String, ?library:String)
+	{
+		return Main.path + getPath('data/$key.png', IMAGE, library);
+	}
+
 	inline static public function txt(key:String, ?library:String)
 	{
 		return getPath('data/$key.txt', TEXT, library);
+	}
+
+	inline static public function txtOffsets(key:String, ?library:String)
+	{
+		return getPath('images/$key.txt', TEXT, library);
 	}
 
 	inline static public function xml(key:String, ?library:String)
@@ -87,17 +107,14 @@ class Paths
 
 	inline static public function voices(song:String)
 	{
+		song = StringTools.replace(song," ", "-");
 		return 'songs:assets/songs/${song.toLowerCase()}/Voices.$SOUND_EXT';
 	}
 
 	inline static public function inst(song:String)
 	{
+		song = StringTools.replace(song," ", "-");
 		return 'songs:assets/songs/${song.toLowerCase()}/Inst.$SOUND_EXT';
-	}
-
-	inline static public function externmusic(song:String)
-	{
-		return 'songs:assets/songs/extern/${song.toLowerCase()}.$SOUND_EXT';
 	}
 
 	inline static public function image(key:String, ?library:String)
